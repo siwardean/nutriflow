@@ -31,73 +31,144 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		?>
 	<?php else : ?>
 		<!-- Hero Section with Peppers Background -->
-		<section class="nf-accomp-hero" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/services/peppers-bg.jpg');">
-			<h1 class="nf-accomp-hero__title">Je t'accompagne pour</h1>
+		<?php 
+		$hero_bg = function_exists('get_field') ? get_field('hero_background') : false;
+		$hero_bg_url = $hero_bg ? $hero_bg['url'] : get_template_directory_uri() . '/assets/images/services/peppers-bg.jpg';
+		?>
+		<section class="nf-accomp-hero" style="background-image: url('<?php echo esc_url( $hero_bg_url ); ?>');">
+			<h1 class="nf-accomp-hero__title">
+				<?php 
+				if ( function_exists('get_field') ) {
+					echo get_field('hero_title') ?: 'Je t\'accompagne pour';
+				} else {
+					echo 'Je t\'accompagne pour';
+				}
+				?>
+			</h1>
 			<div class="nf-accomp-hero__grid">
-				<article class="nf-accomp-card nf-accomp-card--filled">
-					<h3 class="nf-accomp-card__title">Rééquilibrage alimentaire</h3>
-					<p class="nf-accomp-card__description">Rééquilibrer ton alimentation et/ou perdre du poids.</p>
-				</article>
-				<article class="nf-accomp-card nf-accomp-card--filled">
-					<h3 class="nf-accomp-card__title">Troubles hormonaux</h3>
-					<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
-				</article>
-				<article class="nf-accomp-card nf-accomp-card--filled">
-					<h3 class="nf-accomp-card__title">Nutrition & performances sportives</h3>
-					<p class="nf-accomp-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
-				</article>
-				<article class="nf-accomp-card nf-accomp-card--filled">
-					<h3 class="nf-accomp-card__title">Troubles digestifs</h3>
-					<p class="nf-accomp-card__description">Prendre soin de ton microbiote mais également pour soulager les troubles digestifs chroniques (SII, MICI, SIBO,..).</p>
-				</article>
+				<?php 
+				if ( function_exists('have_rows') && have_rows('hero_cards') ) :
+					while ( have_rows('hero_cards') ) : the_row(); ?>
+						<article class="nf-accomp-card nf-accomp-card--filled">
+							<h3 class="nf-accomp-card__title"><?php echo esc_html( get_sub_field('card_title') ); ?></h3>
+							<p class="nf-accomp-card__description"><?php echo esc_html( get_sub_field('card_description') ); ?></p>
+						</article>
+					<?php endwhile;
+				else : ?>
+					<article class="nf-accomp-card nf-accomp-card--filled">
+						<h3 class="nf-accomp-card__title">Rééquilibrage alimentaire</h3>
+						<p class="nf-accomp-card__description">Rééquilibrer ton alimentation et/ou perdre du poids.</p>
+					</article>
+					<article class="nf-accomp-card nf-accomp-card--filled">
+						<h3 class="nf-accomp-card__title">Troubles hormonaux</h3>
+						<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
+					</article>
+					<article class="nf-accomp-card nf-accomp-card--filled">
+						<h3 class="nf-accomp-card__title">Nutrition & performances sportives</h3>
+						<p class="nf-accomp-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
+					</article>
+					<article class="nf-accomp-card nf-accomp-card--filled">
+						<h3 class="nf-accomp-card__title">Troubles digestifs</h3>
+						<p class="nf-accomp-card__description">Prendre soin de ton microbiote mais également pour soulager les troubles digestifs chroniques (SII, MICI, SIBO,..).</p>
+					</article>
+				<?php endif; ?>
 			</div>
 		</section>
 
 		<!-- Comment Section - Pricing -->
 		<section class="nf-pricing">
-			<h2 class="nf-pricing__title">Comment ?</h2>
+			<h2 class="nf-pricing__title">
+				<?php 
+				if ( function_exists('get_field') ) {
+					echo get_field('pricing_title') ?: 'Comment ?';
+				} else {
+					echo 'Comment ?';
+				}
+				?>
+			</h2>
 			<div class="nf-pricing__grid">
-				<article class="nf-pricing-card">
-					<h3 class="nf-pricing-card__title">Première consultation de +- 1h15</h3>
-					<p class="nf-pricing-card__price">- 70 euros -</p>
-					<ul class="nf-pricing-card__list">
-						<li><strong>Questionnaire</strong> préparatoire</li>
-						<li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li>
-						<li>Etablissement des <strong>objectifs</strong></li>
-						<li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li>
-					</ul>
-				</article>
-				<article class="nf-pricing-card">
-					<h3 class="nf-pricing-card__title">Consultation de suivi de 30 à 45 minutes</h3>
-					<p class="nf-pricing-card__price">- 40 euros -</p>
-					<ul class="nf-pricing-card__list">
-						<li>Premier retour d'expérience et <strong>questions</strong> - réponses</li>
-						<li>Evaluation des <strong>résultats et adaptation</strong> de l'accompagnement si nécessaire</li>
-					</ul>
-				</article>
-				<article class="nf-pricing-card">
-					<h3 class="nf-pricing-card__title">Pack 'Accompagnement sur 3 mois'</h3>
-					<p class="nf-pricing-card__price"><del>-190</del> 175 euros -</p>
-					<ul class="nf-pricing-card__list">
-						<li>Total de <strong>4 consultations</strong></li>
-						<li>Pour un <strong>changement ancré</strong> sur du long terme</li>
-						<li>Payable en plusieurs fois</li>
-						<li>Echanges sur whatsapp entre les consultations</li>
-					</ul>
-				</article>
+				<?php 
+				if ( function_exists('have_rows') && have_rows('pricing_cards') ) :
+					while ( have_rows('pricing_cards') ) : the_row(); ?>
+						<article class="nf-pricing-card">
+							<h3 class="nf-pricing-card__title"><?php echo esc_html( get_sub_field('pricing_card_title') ); ?></h3>
+							<p class="nf-pricing-card__price"><?php echo wp_kses_post( get_sub_field('pricing_card_price') ); ?></p>
+							<ul class="nf-pricing-card__list">
+								<?php 
+								if ( have_rows('pricing_card_items') ) :
+									while ( have_rows('pricing_card_items') ) : the_row(); ?>
+										<li><?php echo wp_kses_post( get_sub_field('pricing_item') ); ?></li>
+									<?php endwhile;
+								endif; ?>
+							</ul>
+						</article>
+					<?php endwhile;
+				else : ?>
+					<article class="nf-pricing-card">
+						<h3 class="nf-pricing-card__title">Première consultation de +- 1h15</h3>
+						<p class="nf-pricing-card__price">- 70 euros -</p>
+						<ul class="nf-pricing-card__list">
+							<li><strong>Questionnaire</strong> préparatoire</li>
+							<li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li>
+							<li>Etablissement des <strong>objectifs</strong></li>
+							<li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li>
+						</ul>
+					</article>
+					<article class="nf-pricing-card">
+						<h3 class="nf-pricing-card__title">Consultation de suivi de 30 à 45 minutes</h3>
+						<p class="nf-pricing-card__price">- 40 euros -</p>
+						<ul class="nf-pricing-card__list">
+							<li>Premier retour d'expérience et <strong>questions</strong> - réponses</li>
+							<li>Evaluation des <strong>résultats et adaptation</strong> de l'accompagnement si nécessaire</li>
+						</ul>
+					</article>
+					<article class="nf-pricing-card">
+						<h3 class="nf-pricing-card__title">Pack 'Accompagnement sur 3 mois'</h3>
+						<p class="nf-pricing-card__price"><del>-190</del> 175 euros -</p>
+						<ul class="nf-pricing-card__list">
+							<li>Total de <strong>4 consultations</strong></li>
+							<li>Pour un <strong>changement ancré</strong> sur du long terme</li>
+							<li>Payable en plusieurs fois</li>
+							<li>Echanges sur whatsapp entre les consultations</li>
+						</ul>
+					</article>
+				<?php endif; ?>
 			</div>
 		</section>
 
 		<!-- Nutrition du Sportif Section -->
 		<section class="nf-sportif">
-			<h2 class="nf-sportif__title">Tu souhaites un accompagnement spécial " Nutrition du sportif " ?</h2>
+			<h2 class="nf-sportif__title">
+				<?php 
+				if ( function_exists('get_field') ) {
+					echo get_field('sportif_title') ?: 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
+				} else {
+					echo 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
+				}
+				?>
+			</h2>
 			<div class="nf-sportif__wrapper">
 				<article class="nf-sportif__card">
-					<h3 class="nf-sportif__card-title">Accompagnement sur mesure</h3>
+					<h3 class="nf-sportif__card-title">
+						<?php 
+						if ( function_exists('get_field') ) {
+							echo get_field('sportif_card_title') ?: 'Accompagnement sur mesure';
+						} else {
+							echo 'Accompagnement sur mesure';
+						}
+						?>
+					</h3>
 					<ul class="nf-sportif__list">
-						<li>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un sportif et adapter ton alimentation</li>
-						<li>Pour te <strong>préparer à un challenge sportif</strong> ou <strong>compétition</strong></li>
-						<li><strong>Bilan nutritionnel</strong> sur mesure</li>
+						<?php 
+						if ( function_exists('have_rows') && have_rows('sportif_items') ) :
+							while ( have_rows('sportif_items') ) : the_row(); ?>
+								<li><?php echo wp_kses_post( get_sub_field('sportif_item') ); ?></li>
+							<?php endwhile;
+						else : ?>
+							<li>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un sportif et adapter ton alimentation</li>
+							<li>Pour te <strong>préparer à un challenge sportif</strong> ou <strong>compétition</strong></li>
+							<li><strong>Bilan nutritionnel</strong> sur mesure</li>
+						<?php endif; ?>
 					</ul>
 				</article>
 				<div class="nf-sportif__circles">
@@ -111,12 +182,27 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<section class="nf-location">
 			<div class="nf-location__wrapper">
 				<div class="nf-location__content">
-					<h2 class="nf-location__title">Où se passent mes consultations ?</h2>
+					<h2 class="nf-location__title">
+						<?php 
+						if ( function_exists('get_field') ) {
+							echo get_field('location_title') ?: 'Où se passent mes consultations ?';
+						} else {
+							echo 'Où se passent mes consultations ?';
+						}
+						?>
+					</h2>
 					<div class="nf-location__info">
-						<p>A <strong>Ixelles</strong> ou en visio</p>
-						<p>Le <strong>vendredi</strong> de 8h à 18h30 et le <strong>samedi</strong> de 10h à 18h30</p>
-						<p><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></p>
-						<p><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></p>
+						<?php 
+						$location_info = function_exists('get_field') ? get_field('location_info') : false;
+						if ( $location_info ) {
+							echo wp_kses_post( $location_info );
+						} else {
+							echo '<p>A <strong>Ixelles</strong> ou en visio</p>';
+							echo '<p>Le <strong>vendredi</strong> de 8h à 18h30 et le <strong>samedi</strong> de 10h à 18h30</p>';
+							echo '<p><a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a></p>';
+							echo '<p><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></p>';
+						}
+						?>
 					</div>
 					<div class="nf-location__social">
 						<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" aria-label="Instagram">
@@ -128,7 +214,13 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</div>
 				</div>
 				<div class="nf-location__image">
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/location/cooking.jpg" alt="Préparation culinaire" />
+					<?php 
+					$location_image = function_exists('get_field') ? get_field('location_image') : false;
+					if ( $location_image ) : ?>
+						<img src="<?php echo esc_url( $location_image['url'] ); ?>" alt="<?php echo esc_attr( $location_image['alt'] ); ?>" />
+					<?php else : ?>
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/location/cooking.jpg" alt="Préparation culinaire" />
+					<?php endif; ?>
 				</div>
 			</div>
 		</section>
