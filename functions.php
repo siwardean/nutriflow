@@ -194,6 +194,11 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * ACF Field Groups
+ */
+require get_template_directory() . '/inc/acf-fields.php';
+
+/**
  * Register block pattern category for Nutriflow
  */
 function nutriflow_register_block_pattern_category() {
