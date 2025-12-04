@@ -1,0 +1,177 @@
+/**
+ * Nutriflow Editor Styles
+ * 
+ * These styles are applied to the WordPress block editor
+ * to match the front-end appearance of the theme.
+ */
+
+/* Custom Font - Sergio Trendy */
+@font-face {
+	font-family: 'Sergio Trendy';
+	src: url('../fonts/sergio-trendy.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0020, U+0030-0039, U+0041-005A, U+0061-007A; /* Space, numbers, A-Z, a-z only */
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* CSS Variables for Nutriflow */
+:root {
+	--nf-dark-blue: #1a237e;
+	--nf-light-green: #c8e63e;
+	--nf-cream: #f5f0e8;
+	--nf-light-bg: #f8f5f0;
+	--nf-text-dark: #333333;
+	--nf-text-gray: #666666;
+	--nf-white: #ffffff;
+	--font-title: 'Sergio Trendy', 'Abril Fatface', cursive;
+	--font-body: 'Montserrat', sans-serif;
+}
+
+/* Editor Body */
+.editor-styles-wrapper {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--nf-text-dark);
+	background-color: var(--nf-cream);
+}
+
+/* Headings */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+	font-family: var(--font-title);
+	font-weight: 400;
+	color: var(--nf-dark-blue);
+	line-height: 1.2;
+}
+
+.editor-styles-wrapper h1 {
+	font-size: 3rem;
+}
+
+.editor-styles-wrapper h2 {
+	font-size: 2rem;
+}
+
+.editor-styles-wrapper h3 {
+	font-size: 1.5rem;
+}
+
+.editor-styles-wrapper h4 {
+	font-size: 1.25rem;
+}
+
+/* Paragraphs */
+.editor-styles-wrapper p {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--nf-text-dark);
+}
+
+/* Links */
+.editor-styles-wrapper a {
+	color: var(--nf-dark-blue);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper a:hover {
+	color: var(--nf-light-green);
+}
+
+/* Buttons */
+.editor-styles-wrapper .wp-block-button__link {
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.9rem;
+	padding: 0.8rem 2rem;
+	border-radius: 50px;
+	background-color: var(--nf-light-green);
+	color: var(--nf-dark-blue);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	border: none;
+	cursor: pointer;
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.editor-styles-wrapper .wp-block-button__link:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(200, 230, 62, 0.3);
+}
+
+/* Images */
+.editor-styles-wrapper img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 0;
+}
+
+/* Quotes */
+.editor-styles-wrapper blockquote {
+	font-family: var(--font-title);
+	font-style: italic;
+	color: var(--nf-dark-blue);
+	border-left: 4px solid var(--nf-light-green);
+	padding-left: 1.5rem;
+	margin: 2rem 0;
+}
+
+/* Lists */
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+	font-family: var(--font-body);
+	color: var(--nf-text-dark);
+	line-height: 1.8;
+}
+
+/* Separator */
+.editor-styles-wrapper hr,
+.editor-styles-wrapper .wp-block-separator {
+	border: none;
+	border-top: 2px solid var(--nf-dark-blue);
+	margin: 2rem 0;
+}
+
+/* Groups with backgrounds */
+.editor-styles-wrapper .has-dark-blue-background-color {
+	background-color: var(--nf-dark-blue);
+}
+
+.editor-styles-wrapper .has-cream-background-color {
+	background-color: var(--nf-cream);
+}
+
+.editor-styles-wrapper .has-light-green-background-color {
+	background-color: var(--nf-light-green);
+}
+
+.editor-styles-wrapper .has-white-background-color {
+	background-color: var(--nf-white);
+}
+
+/* Text colors */
+.editor-styles-wrapper .has-dark-blue-color {
+	color: var(--nf-dark-blue);
+}
+
+.editor-styles-wrapper .has-cream-color {
+	color: var(--nf-cream);
+}
+
+.editor-styles-wrapper .has-light-green-color {
+	color: var(--nf-light-green);
+}
+
+.editor-styles-wrapper .has-white-color {
+	color: var(--nf-white);
+}
+

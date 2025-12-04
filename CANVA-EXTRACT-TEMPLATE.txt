@@ -1,0 +1,109 @@
+# Canva Site Information Extraction Template
+# Fill this out with information from https://nutriflow-florence.my.canva.site/
+
+## HERO SECTION
+Hero Image URL/Filename: _________________________
+Main Headline: _________________________
+Subheadline/Description: _________________________
+Button 1 Text: _________________________
+Button 2 Text: _________________________
+Stats (if any):
+  - Stat 1: _________________________
+  - Stat 2: _________________________
+  - Stat 3: _________________________
+
+## COLORS (Hex Codes)
+Primary Color: #______
+Secondary Color: #______
+Accent Color: #______
+Background Color: #______
+Text Color: #______
+Link Color: #______
+
+## TYPOGRAPHY
+Heading Font: _________________________
+Body Font: _________________________
+Heading Size (example): _________________________
+Body Size (example): _________________________
+
+## SERVICES SECTION
+Section Title: _________________________
+Section Subtitle: _________________________
+
+Service 1:
+  - Title: _________________________
+  - Description: _________________________
+  - Image: _________________________
+
+Service 2:
+  - Title: _________________________
+  - Description: _________________________
+  - Image: _________________________
+
+Service 3:
+  - Title: _________________________
+  - Description: _________________________
+  - Image: _________________________
+
+## PROGRAMS SECTION
+Section Title: _________________________
+Section Subtitle: _________________________
+
+Program 1:
+  - Name: _________________________
+  - Tagline: _________________________
+  - Description: _________________________
+  - Features: _________________________
+  - Image: _________________________
+
+Program 2:
+  - Name: _________________________
+  - Tagline: _________________________
+  - Description: _________________________
+  - Features: _________________________
+  - Image: _________________________
+
+Program 3:
+  - Name: _________________________
+  - Tagline: _________________________
+  - Description: _________________________
+  - Features: _________________________
+  - Image: _________________________
+
+## TESTIMONIALS SECTION
+Testimonial 1:
+  - Quote: _________________________
+  - Author: _________________________
+  - Image/Avatar: _________________________
+
+Testimonial 2:
+  - Quote: _________________________
+  - Author: _________________________
+  - Image/Avatar: _________________________
+
+## CONTACT SECTION
+Email: _________________________
+Phone: _________________________
+Address/Location: _________________________
+Contact Form (if any): _________________________
+
+## ADDITIONAL SECTIONS
+List any other sections on the Canva site:
+1. _________________________
+2. _________________________
+3. _________________________
+
+## LAYOUT NOTES
+Max content width: _________________________px
+Section padding: _________________________px
+Card border radius: _________________________px
+Grid gap: _________________________px
+
+## IMAGES NEEDED
+List all images that need to be exported:
+1. _________________________
+2. _________________________
+3. _________________________
+4. _________________________
+5. _________________________
+
