@@ -252,7 +252,7 @@ a {
 	text-align: center;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-	transition: transform 0.2s, box-shadow 0.2s;
+	transition: all 0.3s ease;
 	border: none;
 	cursor: pointer;
 }
@@ -263,11 +263,16 @@ a {
 	padding: 1.2rem 3rem;
 	font-size: 1rem;
 	border-radius: 30px;
+	border: 2px solid var(--nf-dark-blue);
+	transition: all 0.3s ease;
 }
 
 .nf-btn--primary:hover {
+	background-color: var(--nf-light-green);
+	color: var(--nf-dark-blue);
+	border-color: var(--nf-dark-blue);
 	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(26, 36, 170, 0.3);
+	box-shadow: 0 6px 20px rgba(196, 255, 0, 0.4);
 }
 
 /* ============================================
@@ -643,11 +648,12 @@ a {
 	padding: 1.2rem 3rem;
 	font-size: 1rem;
 	border-radius: 30px;
+	transition: all 0.3s ease;
 }
 
 .nf-btn--footer:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(170, 255, 0, 0.3);
+	box-shadow: 0 4px 12px rgba(196, 255, 0, 0.3);
 }
 
 .nf-footer__social {
@@ -665,7 +671,7 @@ a {
 	border: 2px solid var(--nf-light-green);
 	border-radius: 12px;
 	color: var(--nf-light-green);
-	transition: background-color 0.2s, color 0.2s;
+	transition: all 0.3s ease;
 }
 
 .nf-footer__social a svg {
@@ -677,6 +683,8 @@ a {
 .nf-footer__social a:hover {
 	background-color: var(--nf-light-green);
 	color: var(--nf-dark-blue);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(196, 255, 0, 0.3);
 }
 
 /* ============================================
@@ -1120,10 +1128,10 @@ a {
 	width: 50px;
 	height: 50px;
 	background-color: var(--nf-dark-blue);
-	border: none;
+	border: 2px solid var(--nf-dark-blue);
 	border-radius: 12px;
 	color: var(--nf-cream);
-	transition: background-color 0.2s, color 0.2s;
+	transition: all 0.3s ease;
 }
 
 .nf-location__social a svg {
@@ -1134,7 +1142,10 @@ a {
 
 .nf-location__social a:hover {
 	background-color: var(--nf-light-green);
-	color: var(--nf-cream);
+	color: var(--nf-dark-blue);
+	border-color: var(--nf-dark-blue);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(196, 255, 0, 0.3);
 }
 
 .nf-location__image {
@@ -1198,7 +1209,7 @@ a {
 	position: absolute;
 	bottom: 3rem;
 	right: 5rem;
-	width: 80px;
+	width: 68px;
 	height: 50px;
 }
 
