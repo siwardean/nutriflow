@@ -27,7 +27,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<section class="nf-apropos-intro">
 			<div class="nf-apropos-intro__wrapper">
 				<div class="nf-apropos-intro__left">
-					<h1 class="nf-apropos-intro__title">
+					<h1 class="nf-apropos-intro__title nf-animate-on-scroll nf-fade-in">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('intro_title') ?: 'Qui suis-je ?';
@@ -38,7 +38,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</h1>
 				</div>
 				<div class="nf-apropos-intro__right">
-					<p class="nf-apropos-intro__text">
+					<p class="nf-apropos-intro__text nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 						<?php 
 						if ( function_exists('get_field') && get_field('intro_text') ) {
 							echo get_field('intro_text');
@@ -61,14 +61,18 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				<?php 
 				$gallery = function_exists('get_field') ? get_field('gallery_images') : false;
 				if ( $gallery ) :
-					foreach ( $gallery as $image ) : ?>
-						<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+					$index = 0;
+					foreach ( $gallery as $image ) : 
+						$index++;
+						$delay = 'nf-animate-delay-' . ($index % 4 + 1);
+					?>
+						<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>" />
 					<?php endforeach;
 				else : ?>
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-1.jpg" alt="Préparation culinaire" />
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-2.jpg" alt="Préparation culinaire" />
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-3.jpg" alt="Préparation culinaire" />
-					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-4.jpg" alt="Préparation culinaire" />
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-1.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1" />
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-2.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2" />
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-3.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3" />
+					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-4.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4" />
 				<?php endif; ?>
 			</div>
 		</section>
@@ -76,7 +80,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<!-- Mon Parcours Section -->
 		<section class="nf-apropos-story">
 			<div class="nf-apropos-story__wrapper">
-				<div class="nf-apropos-story__content">
+				<div class="nf-apropos-story__content nf-animate-on-scroll nf-fade-in">
 					<?php 
 					$story_content = function_exists('get_field') ? get_field('story_content') : false;
 					if ( $story_content ) {
@@ -89,7 +93,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					?>
 				</div>
 				
-				<div class="nf-apropos-formations">
+				<div class="nf-apropos-formations nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 					<h2 class="nf-apropos-formations__title">
 						<?php 
 						if ( function_exists('get_field') ) {
@@ -117,7 +121,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<!-- Le Sport Section -->
 		<section class="nf-apropos-sport">
 			<div class="nf-apropos-sport__wrapper">
-				<h2 class="nf-apropos-sport__title">
+				<h2 class="nf-apropos-sport__title nf-animate-on-scroll nf-fade-in">
 					<?php 
 					if ( function_exists('get_field') ) {
 						echo get_field('sport_title') ?: 'Le sport comme source de bien-être';
@@ -126,7 +130,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					}
 					?>
 				</h2>
-				<div class="nf-apropos-sport__content">
+				<div class="nf-apropos-sport__content nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 					<?php 
 					$sport_content = function_exists('get_field') ? get_field('sport_content') : false;
 					if ( $sport_content ) {

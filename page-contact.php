@@ -35,13 +35,13 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<?php 
 					$contact_image = function_exists('get_field') ? get_field('contact_image') : false;
 					if ( $contact_image ) : ?>
-						<img src="<?php echo esc_url( $contact_image['url'] ); ?>" alt="<?php echo esc_attr( $contact_image['alt'] ); ?>" />
+						<img src="<?php echo esc_url( $contact_image['url'] ); ?>" alt="<?php echo esc_attr( $contact_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-left" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/contact/florence-kitchen.jpg" alt="Florence dans sa cuisine" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/contact/florence-kitchen.jpg" alt="Florence dans sa cuisine" class="nf-animate-on-scroll nf-slide-in-left" />
 					<?php endif; ?>
 				</div>
 				<div class="nf-contact__content">
-					<h1 class="nf-contact__title">
+					<h1 class="nf-contact__title nf-animate-on-scroll nf-fade-in">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('contact_title') ?: 'Contact';
@@ -51,7 +51,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</h1>
 					
-					<h2 class="nf-contact__subtitle">
+					<h2 class="nf-contact__subtitle nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('contact_subtitle') ?: 'Consultations en nutrithérapie';
@@ -61,7 +61,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</h2>
 					
-					<ul class="nf-contact__list">
+					<ul class="nf-contact__list nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
 						<?php 
 						if ( function_exists('have_rows') && have_rows('contact_items') ) :
 							while ( have_rows('contact_items') ) : the_row(); 
@@ -83,7 +83,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						<?php endif; ?>
 					</ul>
 					
-					<p class="nf-contact__cta-text">
+					<p class="nf-contact__cta-text nf-animate-on-scroll nf-fade-in nf-animate-delay-3">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('contact_cta_text') ?: 'Si tu as des questions ? N\'hésites pas à me contacter !';
@@ -93,7 +93,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</p>
 					
-					<a href="<?php echo esc_url( $calendly_url ); ?>" target="_blank" class="nf-btn nf-btn--primary nf-contact__btn">
+					<a href="<?php echo esc_url( $calendly_url ); ?>" target="_blank" class="nf-btn nf-btn--primary nf-contact__btn nf-animate-on-scroll nf-fade-in nf-animate-delay-4">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('contact_button_text') ?: 'PRENDRE RDV';

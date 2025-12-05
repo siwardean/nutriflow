@@ -135,5 +135,72 @@ function ready () {
 			}
 		})
 	}
+
+	// ! Scroll Animations
+	// Simple and reliable scroll-triggered animations
+	const animateOnScroll = () => {
+		const animatedElements = document.querySelectorAll('.nf-animate-on-scroll')
+		
+		if (animatedElements.length === 0) {
+			console.log('No animation elements found')
+			return
+		}
+
+		console.log('Found', animatedElements.length, 'animation elements')
+
+		// Check if Intersection Observer is supported
+		if (!window.IntersectionObserver) {
+			// Fallback: show all elements immediately
+			animatedElements.forEach(element => {
+				element.classList.add('visible')
+			})
+			return
+		}
+
+		// Prepare elements for animation
+		animatedElements.forEach(element => {
+			element.classList.add('nf-animate-ready')
+		})
+
+		// Set up intersection observer
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px 0px -50px 0px',
+			threshold: 0.1
+		}
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible')
+					observer.unobserve(entry.target)
+				}
+			})
+		}, observerOptions)
+
+		// Observe all elements
+		animatedElements.forEach(element => {
+			observer.observe(element)
+		})
+
+		// Also check elements already in viewport on load
+		setTimeout(() => {
+			animatedElements.forEach(element => {
+				const rect = element.getBoundingClientRect()
+				const isInViewport = rect.top < window.innerHeight && rect.bottom > 0
+				if (isInViewport && !element.classList.contains('visible')) {
+					element.classList.add('visible')
+				}
+			})
+		}, 100)
+	}
+
+	// Initialize scroll animations
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', animateOnScroll)
+	} else {
+		// DOM already loaded
+		animateOnScroll()
+	}
 }
 document.addEventListener( 'DOMContentLoaded', ready )

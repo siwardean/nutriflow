@@ -31,9 +31,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<div class="nf-hero__wrapper">
 				<div class="nf-hero__content">
 					<div class="nf-logo">
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logo-nutriflow.svg" alt="Nutriflow Logo" class="nf-logo__image" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logo-nutriflow.svg" alt="Nutriflow Logo" class="nf-logo__image nf-animate-on-scroll nf-fade-in" />
 					</div>
-					<h1 class="nf-hero__title">
+					<h1 class="nf-hero__title nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_hero_title') ?: 'NUTRIFLOW';
@@ -42,7 +42,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</h1>
-					<p class="nf-hero__subtitle">
+					<p class="nf-hero__subtitle nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_hero_subtitle') ?: '- NUTRITHÉRAPEUTE À BRUXELLES -';
@@ -51,7 +51,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</p>
-					<p class="nf-hero__description">
+					<p class="nf-hero__description nf-animate-on-scroll nf-fade-in nf-animate-delay-3">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_hero_description') ?: 'Accompagnement en nutrithérapie: rééquilibrage alimentaire, nutrition sportive, troubles hormonaux et digestifs.';
@@ -60,7 +60,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</p>
-					<a class="nf-btn nf-btn--primary" href="<?php echo esc_url( $calendly_url ); ?>" target="_blank">
+					<a class="nf-btn nf-btn--primary nf-animate-on-scroll nf-fade-in nf-animate-delay-4" href="<?php echo esc_url( $calendly_url ); ?>" target="_blank">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_hero_button') ?: 'PRENDRE RDV';
@@ -74,9 +74,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<?php 
 					$hero_image = function_exists('get_field') ? get_field('homepage_hero_image') : false;
 					if ( $hero_image ) : ?>
-						<img src="<?php echo esc_url( $hero_image['url'] ); ?>" alt="<?php echo esc_attr( $hero_image['alt'] ); ?>" />
+						<img src="<?php echo esc_url( $hero_image['url'] ); ?>" alt="<?php echo esc_attr( $hero_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero/hero-kitchen.jpg" alt="Kitchen scene" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero/hero-kitchen.jpg" alt="Kitchen scene" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php endif; ?>
 				</div>
 			</div>
@@ -89,13 +89,13 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<?php 
 					$about_image = function_exists('get_field') ? get_field('homepage_about_image') : false;
 					if ( $about_image ) : ?>
-						<img src="<?php echo esc_url( $about_image['url'] ); ?>" alt="<?php echo esc_attr( $about_image['alt'] ); ?>" />
+						<img src="<?php echo esc_url( $about_image['url'] ); ?>" alt="<?php echo esc_attr( $about_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-left" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/pool-woman.jpg" alt="Woman by pool" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/pool-woman.jpg" alt="Woman by pool" class="nf-animate-on-scroll nf-slide-in-left" />
 					<?php endif; ?>
 				</div>
 				<div class="nf-about__content">
-					<h2 class="nf-about__title">
+					<h2 class="nf-about__title nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_about_title') ?: 'Qui suis-je ?';
@@ -105,7 +105,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</h2>
 					<div class="nf-about__text">
-						<p class="nf-about__text--left">
+						<p class="nf-about__text--left nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
 							<?php 
 							if ( function_exists('get_field') && get_field('homepage_about_text_left') ) {
 								echo wp_kses_post( get_field('homepage_about_text_left') );
@@ -114,7 +114,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							}
 							?>
 						</p>
-						<p class="nf-about__text--right">
+						<p class="nf-about__text--right nf-animate-on-scroll nf-fade-in nf-animate-delay-3">
 							<?php 
 							if ( function_exists('get_field') && get_field('homepage_about_text_right') ) {
 								echo wp_kses_post( get_field('homepage_about_text_right') );
@@ -136,7 +136,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<section class="nf-consultation" id="consultation">
 			<div class="nf-consultation__wrapper">
 				<div class="nf-consultation__content">
-					<h2 class="nf-consultation__title">
+					<h2 class="nf-consultation__title nf-animate-on-scroll nf-fade-in">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_consult_title') ?: 'L\'objectif de la consultation';
@@ -148,13 +148,13 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<?php 
 					$consult_text = function_exists('get_field') ? get_field('homepage_consult_text') : false;
 					if ( $consult_text ) {
-						echo wp_kses_post( $consult_text );
+						echo '<div class="nf-animate-on-scroll nf-fade-in nf-animate-delay-1">' . wp_kses_post( $consult_text ) . '</div>';
 					} else {
-						echo '<p class="nf-consultation__text">Je t\'accompagne pour mieux <strong>comprendre ton corps</strong>, ses <strong>besoins nutritionnels</strong> et ses <strong>mécanismes</strong>, afin que tu puisses faire des choix éclairés, <strong>durables</strong> et bienveillants.</p>';
-						echo '<p class="nf-consultation__text">Ensemble, nous rendrons les clés de la nutrition <strong>accessibles</strong>, simples et ancrées dans le plaisir. Pas de régime strict ni d\'interdits, mais des <strong>réflexes santé</strong> concrets, adaptés à ta réalité. Mon approche vise à reconnecter l\'alimentation au plaisir gourmand, tout en t\'apportant les clés d\'un mieux-être durable, étape par étape.</p>';
+						echo '<div class="nf-animate-on-scroll nf-fade-in nf-animate-delay-1"><p class="nf-consultation__text">Je t\'accompagne pour mieux <strong>comprendre ton corps</strong>, ses <strong>besoins nutritionnels</strong> et ses <strong>mécanismes</strong>, afin que tu puisses faire des choix éclairés, <strong>durables</strong> et bienveillants.</p></div>';
+						echo '<div class="nf-animate-on-scroll nf-fade-in nf-animate-delay-2"><p class="nf-consultation__text">Ensemble, nous rendrons les clés de la nutrition <strong>accessibles</strong>, simples et ancrées dans le plaisir. Pas de régime strict ni d\'interdits, mais des <strong>réflexes santé</strong> concrets, adaptés à ta réalité. Mon approche vise à reconnecter l\'alimentation au plaisir gourmand, tout en t\'apportant les clés d\'un mieux-être durable, étape par étape.</p></div>';
 					}
 					?>
-					<a class="nf-btn nf-btn--primary" href="<?php echo esc_url( home_url( '/accompagnement/' ) ); ?>">
+					<a class="nf-btn nf-btn--primary nf-animate-on-scroll nf-fade-in nf-animate-delay-3" href="<?php echo esc_url( home_url( '/accompagnement/' ) ); ?>">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('homepage_consult_button') ?: 'DÉCOUVRIR LES ACCOMPAGNEMENTS';
@@ -168,9 +168,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<?php 
 					$consult_image = function_exists('get_field') ? get_field('homepage_consult_image') : false;
 					if ( $consult_image ) : ?>
-						<img src="<?php echo esc_url( $consult_image['url'] ); ?>" alt="<?php echo esc_attr( $consult_image['alt'] ); ?>" />
+						<img src="<?php echo esc_url( $consult_image['url'] ); ?>" alt="<?php echo esc_attr( $consult_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/consultation/market-woman.jpg" alt="Woman at market" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/consultation/market-woman.jpg" alt="Woman at market" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php endif; ?>
 				</div>
 			</div>
@@ -178,7 +178,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 
 		<!-- Default Services Section -->
 		<section class="nf-services" id="services">
-			<h2 class="nf-services__heading">
+			<h2 class="nf-services__heading nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
 					echo get_field('homepage_services_heading') ?: 'Je t\'accompagne pour';
@@ -190,26 +190,30 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<div class="nf-services__grid">
 				<?php 
 				if ( function_exists('have_rows') && have_rows('homepage_services') ) :
-					while ( have_rows('homepage_services') ) : the_row(); ?>
-						<article class="nf-service-card">
+					$index = 0;
+					while ( have_rows('homepage_services') ) : the_row(); 
+						$index++;
+						$delay = 'nf-animate-delay-' . ($index % 4 + 1);
+					?>
+						<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>">
 							<h3 class="nf-service-card__title"><?php echo esc_html( get_sub_field('service_title') ); ?></h3>
 							<p class="nf-service-card__description"><?php echo esc_html( get_sub_field('service_description') ); ?></p>
 						</article>
 					<?php endwhile;
 				else : ?>
-					<article class="nf-service-card">
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-service-card__title">Rééquilibrage alimentaire</h3>
 						<p class="nf-service-card__description">Rééquilibrer ton alimentation et/ou perdre du poids.</p>
 					</article>
-					<article class="nf-service-card">
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
 						<h3 class="nf-service-card__title">Troubles hormonaux</h3>
 						<p class="nf-service-card__description">Soulager tes symptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
 					</article>
-					<article class="nf-service-card">
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
 						<h3 class="nf-service-card__title">Nutrition & performances sportives</h3>
 						<p class="nf-service-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
-					<article class="nf-service-card">
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
 						<h3 class="nf-service-card__title">Troubles digestifs</h3>
 						<p class="nf-service-card__description">Prendre soin de ton microbiote mais également pour soulager les troubles digestifs chroniques (SII, MICI, SIBO,..).</p>
 					</article>
@@ -219,7 +223,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 
 		<!-- Default Testimonials Section -->
 		<section class="nf-testimonials" id="testimonials">
-			<h2 class="nf-testimonials__heading">
+			<h2 class="nf-testimonials__heading nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
 					echo get_field('homepage_testimonials_heading') ?: 'Témoignages';
@@ -228,7 +232,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				}
 				?>
 			</h2>
-			<div class="nf-testimonials__quote">
+			<div class="nf-testimonials__quote nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 				<span class="nf-testimonials__quote-mark">"</span>
 				<?php 
 				if ( function_exists('have_rows') && have_rows('homepage_testimonials') ) :

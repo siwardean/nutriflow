@@ -59,5 +59,66 @@
 
 <?php wp_footer(); ?>
 
+<script>
+(function() {
+	'use strict';
+	
+	// Simple scroll animation handler
+	function initScrollAnimations() {
+		const elements = document.querySelectorAll('.nf-animate-on-scroll');
+		
+		if (elements.length === 0) return;
+		
+		// Add ready class to prepare for animation
+		elements.forEach(function(el) {
+			el.classList.add('nf-animate-ready');
+		});
+		
+		// Use Intersection Observer if available
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver(function(entries) {
+				entries.forEach(function(entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, {
+				rootMargin: '0px 0px -50px 0px',
+				threshold: 0.1
+			});
+			
+			elements.forEach(function(el) {
+				observer.observe(el);
+			});
+		} else {
+			// Fallback: show all elements
+			elements.forEach(function(el) {
+				el.classList.add('visible');
+			});
+		}
+		
+		// Also check elements already in viewport
+		setTimeout(function() {
+			elements.forEach(function(el) {
+				const rect = el.getBoundingClientRect();
+				if (rect.top < window.innerHeight && rect.bottom > 0) {
+					if (!el.classList.contains('visible')) {
+						el.classList.add('visible');
+					}
+				}
+			});
+		}, 100);
+	}
+	
+	// Initialize when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initScrollAnimations);
+	} else {
+		initScrollAnimations();
+	}
+})();
+</script>
+
 </body>
 </html>

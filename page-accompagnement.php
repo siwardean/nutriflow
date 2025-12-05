@@ -36,7 +36,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		$hero_bg_url = $hero_bg ? $hero_bg['url'] : get_template_directory_uri() . '/assets/images/services/peppers-bg.jpg';
 		?>
 		<section class="nf-accomp-hero" style="background-image: url('<?php echo esc_url( $hero_bg_url ); ?>');">
-			<h1 class="nf-accomp-hero__title">
+			<h1 class="nf-accomp-hero__title nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
 					echo get_field('hero_title') ?: 'Je t\'accompagne pour';
@@ -48,26 +48,30 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<div class="nf-accomp-hero__grid">
 				<?php 
 				if ( function_exists('have_rows') && have_rows('hero_cards') ) :
-					while ( have_rows('hero_cards') ) : the_row(); ?>
-						<article class="nf-accomp-card nf-accomp-card--filled">
+					$index = 0;
+					while ( have_rows('hero_cards') ) : the_row(); 
+						$index++;
+						$delay = 'nf-animate-delay-' . ($index % 4 + 1);
+					?>
+						<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>">
 							<h3 class="nf-accomp-card__title"><?php echo esc_html( get_sub_field('card_title') ); ?></h3>
 							<p class="nf-accomp-card__description"><?php echo esc_html( get_sub_field('card_description') ); ?></p>
 						</article>
 					<?php endwhile;
 				else : ?>
-					<article class="nf-accomp-card nf-accomp-card--filled">
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-accomp-card__title">Rééquilibrage alimentaire</h3>
 						<p class="nf-accomp-card__description">Rééquilibrer ton alimentation et/ou perdre du poids.</p>
 					</article>
-					<article class="nf-accomp-card nf-accomp-card--filled">
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
 						<h3 class="nf-accomp-card__title">Troubles hormonaux</h3>
 						<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
 					</article>
-					<article class="nf-accomp-card nf-accomp-card--filled">
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
 						<h3 class="nf-accomp-card__title">Nutrition & performances sportives</h3>
 						<p class="nf-accomp-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
-					<article class="nf-accomp-card nf-accomp-card--filled">
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
 						<h3 class="nf-accomp-card__title">Troubles digestifs</h3>
 						<p class="nf-accomp-card__description">Prendre soin de ton microbiote mais également pour soulager les troubles digestifs chroniques (SII, MICI, SIBO,..).</p>
 					</article>
@@ -77,7 +81,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 
 		<!-- Comment Section - Pricing -->
 		<section class="nf-pricing">
-			<h2 class="nf-pricing__title">
+			<h2 class="nf-pricing__title nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
 					echo get_field('pricing_title') ?: 'Comment ?';
@@ -89,8 +93,12 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<div class="nf-pricing__grid">
 				<?php 
 				if ( function_exists('have_rows') && have_rows('pricing_cards') ) :
-					while ( have_rows('pricing_cards') ) : the_row(); ?>
-						<article class="nf-pricing-card">
+					$index = 0;
+					while ( have_rows('pricing_cards') ) : the_row(); 
+						$index++;
+						$delay = 'nf-animate-delay-' . ($index % 3 + 1);
+					?>
+						<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>">
 							<h3 class="nf-pricing-card__title"><?php echo esc_html( get_sub_field('pricing_card_title') ); ?></h3>
 							<p class="nf-pricing-card__price"><?php echo wp_kses_post( get_sub_field('pricing_card_price') ); ?></p>
 							<ul class="nf-pricing-card__list">
@@ -104,7 +112,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						</article>
 					<?php endwhile;
 				else : ?>
-					<article class="nf-pricing-card">
+					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-pricing-card__title">Première consultation de +- 1h15</h3>
 						<p class="nf-pricing-card__price">- 70 euros -</p>
 						<ul class="nf-pricing-card__list">
@@ -114,7 +122,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							<li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li>
 						</ul>
 					</article>
-					<article class="nf-pricing-card">
+					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
 						<h3 class="nf-pricing-card__title">Consultation de suivi de 30 à 45 minutes</h3>
 						<p class="nf-pricing-card__price">- 40 euros -</p>
 						<ul class="nf-pricing-card__list">
@@ -122,7 +130,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							<li>Evaluation des <strong>résultats et adaptation</strong> de l'accompagnement si nécessaire</li>
 						</ul>
 					</article>
-					<article class="nf-pricing-card">
+					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
 						<h3 class="nf-pricing-card__title">Pack 'Accompagnement sur 3 mois'</h3>
 						<p class="nf-pricing-card__price"><del>-190</del> 175 euros -</p>
 						<ul class="nf-pricing-card__list">
@@ -138,7 +146,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 
 		<!-- Nutrition du Sportif Section -->
 		<section class="nf-sportif">
-			<h2 class="nf-sportif__title">
+			<h2 class="nf-sportif__title nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
 					echo get_field('sportif_title') ?: 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
@@ -148,7 +156,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				?>
 			</h2>
 			<div class="nf-sportif__wrapper">
-				<article class="nf-sportif__card">
+				<article class="nf-sportif__card nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 					<h3 class="nf-sportif__card-title">
 						<?php 
 						if ( function_exists('get_field') ) {
@@ -182,7 +190,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<section class="nf-location">
 			<div class="nf-location__wrapper">
 				<div class="nf-location__content">
-					<h2 class="nf-location__title">
+					<h2 class="nf-location__title nf-animate-on-scroll nf-fade-in">
 						<?php 
 						if ( function_exists('get_field') ) {
 							echo get_field('location_title') ?: 'Où se passent mes consultations ?';
@@ -191,7 +199,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</h2>
-					<div class="nf-location__info">
+					<div class="nf-location__info nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 						<?php 
 						$location_info = function_exists('get_field') ? get_field('location_info') : false;
 						if ( $location_info ) {
@@ -204,7 +212,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</div>
-					<div class="nf-location__social">
+					<div class="nf-location__social nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
 						<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" aria-label="Instagram">
 							<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
 						</a>
@@ -217,9 +225,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<?php 
 					$location_image = function_exists('get_field') ? get_field('location_image') : false;
 					if ( $location_image ) : ?>
-						<img src="<?php echo esc_url( $location_image['url'] ); ?>" alt="<?php echo esc_attr( $location_image['alt'] ); ?>" />
+						<img src="<?php echo esc_url( $location_image['url'] ); ?>" alt="<?php echo esc_attr( $location_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/location/cooking.jpg" alt="Préparation culinaire" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/location/cooking.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php endif; ?>
 				</div>
 			</div>
