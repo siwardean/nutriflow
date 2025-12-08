@@ -93,12 +93,17 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<div class="nf-pricing__grid">
 				<?php 
 				if ( function_exists('have_rows') && have_rows('pricing_cards') ) :
+					// Count total rows first
+					$pricing_cards = get_field('pricing_cards');
+					$total_rows = $pricing_cards ? count( $pricing_cards ) : 0;
 					$index = 0;
 					while ( have_rows('pricing_cards') ) : the_row(); 
 						$index++;
 						$delay = 'nf-animate-delay-' . ($index % 3 + 1);
+						// Add flip-reverse class to last 2 cards
+						$flip_class = ($total_rows > 1 && $index > ($total_rows - 2)) ? 'nf-pricing-card--flip-reverse' : '';
 					?>
-						<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>">
+						<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?> <?php echo esc_attr( $flip_class ); ?>">
 							<h3 class="nf-pricing-card__title"><?php echo esc_html( get_sub_field('pricing_card_title') ); ?></h3>
 							<p class="nf-pricing-card__price"><?php echo wp_kses_post( get_sub_field('pricing_card_price') ); ?></p>
 							<ul class="nf-pricing-card__list">
@@ -122,7 +127,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							<li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li>
 						</ul>
 					</article>
-					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
+					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2 nf-pricing-card--flip-reverse">
 						<h3 class="nf-pricing-card__title">Consultation de suivi de 30 à 45 minutes</h3>
 						<p class="nf-pricing-card__price">- 40 euros -</p>
 						<ul class="nf-pricing-card__list">
@@ -130,7 +135,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							<li>Evaluation des <strong>résultats et adaptation</strong> de l'accompagnement si nécessaire</li>
 						</ul>
 					</article>
-					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
+					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3 nf-pricing-card--flip-reverse">
 						<h3 class="nf-pricing-card__title">Pack 'Accompagnement sur 3 mois'</h3>
 						<p class="nf-pricing-card__price"><del>-190</del> 175 euros -</p>
 						<ul class="nf-pricing-card__list">

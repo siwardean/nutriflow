@@ -233,7 +233,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				?>
 			</h2>
 			<div class="nf-testimonials__quote nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
-				<span class="nf-testimonials__quote-mark">"</span>
+				<span class="nf-testimonials__quote-mark">&ldquo;</span>
 				<?php 
 				if ( function_exists('have_rows') && have_rows('homepage_testimonials') ) :
 					while ( have_rows('homepage_testimonials') ) : the_row(); ?>

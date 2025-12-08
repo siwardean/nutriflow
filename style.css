@@ -474,6 +474,7 @@ a {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1.5rem;
+	perspective: 1000px;
 }
 
 .nf-service-card {
@@ -481,6 +482,48 @@ a {
 	padding: 2rem;
 	border-radius: 16px;
 	text-align: center;
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform 1.6s ease 0.5s;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	transform: rotateY(180deg) translateY(100px);
+}
+
+.nf-service-card.nf-animate-ready {
+	transform: rotateY(180deg) translateY(100px);
+}
+
+.nf-service-card.visible {
+	transform: rotateY(0deg) translateX(0) translateY(0) !important;
+}
+
+.nf-service-card::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: var(--nf-cream);
+	background-image: url('./logo-nutriflow.jpg');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 16px;
+	backface-visibility: hidden;
+	transform: rotateY(180deg);
+	z-index: 2;
+}
+
+.nf-service-card__title,
+.nf-service-card__description {
+	position: relative;
+	z-index: 1;
+	backface-visibility: hidden;
+	transform: rotateY(0deg);
 }
 
 .nf-service-card__title {
@@ -927,6 +970,7 @@ a {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 2rem;
 	align-items: start;
+	perspective: 1000px;
 }
 
 .nf-pricing-card {
@@ -935,6 +979,49 @@ a {
 	border-radius: 20px;
 	padding: 2rem;
 	text-align: left;
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform 1.6s ease 0.5s;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	transform: rotateY(180deg) translateY(100px);
+}
+
+.nf-pricing-card.nf-animate-ready {
+	transform: rotateY(180deg) translateY(100px);
+}
+
+.nf-pricing-card.visible {
+	transform: rotateY(0deg) translateX(0) translateY(0) !important;
+}
+
+.nf-pricing-card::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: var(--nf-dark-blue);
+	background-image: url('./logo-nutriflow-blue-navy.png');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 3px solid var(--nf-dark-blue);
+	border-radius: 20px;
+	backface-visibility: hidden;
+	transform: rotateY(180deg);
+	z-index: 2;
+}
+
+.nf-pricing-card__title,
+.nf-pricing-card__price,
+.nf-pricing-card__list {
+	position: relative;
+	z-index: 1;
+	backface-visibility: hidden;
+	transform: rotateY(0deg);
 }
 
 .nf-pricing-card__title {
@@ -972,6 +1059,23 @@ a {
 
 .nf-pricing-card__list strong {
 	font-weight: 700;
+}
+
+/* Reverse flip for last 2 pricing cards */
+.nf-pricing-card--flip-reverse {
+	transform: rotateY(-180deg) translateY(100px);
+}
+
+.nf-pricing-card--flip-reverse.nf-animate-ready {
+	transform: rotateY(-180deg) translateY(100px);
+}
+
+.nf-pricing-card--flip-reverse.visible {
+	transform: rotateY(0deg) translateX(0) translateY(0) !important;
+}
+
+.nf-pricing-card--flip-reverse::after {
+	transform: rotateY(-180deg);
 }
 
 /* Nutrition du Sportif Section */
@@ -1562,6 +1666,16 @@ img.nf-slide-in-up {
 
 .nf-slide-in-up.nf-animate-ready {
 	transform: translateY(100px);
+}
+
+/* Don't apply slide-in-up transform to cards that have flip effect */
+.nf-service-card.nf-slide-in-up.nf-animate-ready,
+.nf-pricing-card.nf-slide-in-up.nf-animate-ready {
+	transform: rotateY(180deg) translateY(100px);
+}
+
+.nf-pricing-card--flip-reverse.nf-slide-in-up.nf-animate-ready {
+	transform: rotateY(-180deg) translateY(100px);
 }
 
 /* Text fade animations - hide when ready */
