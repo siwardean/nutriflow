@@ -41,6 +41,14 @@
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'nutriflow' ); ?></a>
 
 		<div class="header-container">
+			<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
+				<span class="menu-toggle__bars" aria-hidden="true">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+				<span class="menu-toggle__label"><?php esc_html_e( 'Menu', 'nutriflow' ); ?></span>
+			</button>
 			<nav id="site-navigation" aria-label="Primary">
 				<div class="site-logo">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
@@ -56,3 +64,15 @@
 			</nav><!-- #site-navigation -->
 		</div>
 	</header><!-- #masthead -->
+
+	<script>
+		(function() {
+			const toggle = document.getElementById('nav-toggle');
+			const menu = document.getElementById('primary-menu');
+			if (!toggle || !menu) return;
+			toggle.addEventListener('click', function() {
+				const isOpen = document.body.classList.toggle('mobile-nav-open');
+				toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			});
+		})();
+	</script>

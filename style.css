@@ -54,6 +54,9 @@ body {
 	color: var(--nf-text-dark);
 	background-color: var(--nf-cream);
 	line-height: 1.6;
+	overflow-x: hidden;
+	width: 100%;
+	max-width: 100vw;
 }
 
 img {
@@ -76,15 +79,21 @@ a {
 	top: 0;
 	z-index: 100;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: visible;
 }
 
 .header-container {
 	padding: 1.25rem 2rem;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
 	gap: 3rem;
 	position: relative;
+	max-width: 100%;
+	overflow-x: hidden;
+	min-height: 70px;
 }
 
 .site-branding {
@@ -113,8 +122,10 @@ a {
 .site-logo {
 	display: flex;
 	align-items: center;
-	position: absolute;
-	left: 1rem;
+	position: relative;
+	left: auto;
+	z-index: 101;
+	flex-shrink: 0;
 }
 
 .site-logo a {
@@ -141,6 +152,7 @@ a {
 	gap: 2.5rem;
 	align-items: center;
 	justify-content: flex-end;
+	flex-wrap: wrap;
 }
 
 #primary-menu a {
@@ -165,12 +177,63 @@ a {
 	display: none;
 }
 
+/* Mobile nav toggle (phones) */
+.menu-toggle {
+	display: none;
+	align-items: center;
+	gap: 0.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 10px;
+	background: transparent;
+	color: var(--nf-white);
+	padding: 0.55rem 0.8rem;
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-left: auto;
+}
+
+.menu-toggle:focus-visible {
+	outline: 2px solid var(--nf-white);
+	outline-offset: 2px;
+}
+
+.menu-toggle__bars {
+	display: inline-flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.menu-toggle__bars span {
+	display: block;
+	width: 22px;
+	height: 2px;
+	background: var(--nf-white);
+	border-radius: 2px;
+	transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+body.mobile-nav-open .menu-toggle__bars span:nth-child(1) {
+	transform: translateY(7px) rotate(45deg);
+}
+
+body.mobile-nav-open .menu-toggle__bars span:nth-child(2) {
+	opacity: 0;
+}
+
+body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
+	transform: translateY(-7px) rotate(-45deg);
+}
+
 /* ============================================
    Hero Section
    ============================================ */
 .nf-hero {
 	padding: 4rem 2rem;
 	background: var(--nf-cream);
+	width: 100%;
+	overflow-x: hidden;
 }
 
 .nf-hero__wrapper {
@@ -180,6 +243,7 @@ a {
 	grid-template-columns: 1fr 1fr;
 	gap: 3rem;
 	align-items: center;
+	width: 100%;
 }
 
 .nf-hero__content {
@@ -187,17 +251,27 @@ a {
 	text-align: center;
 	position: relative;
 	padding-top: 8rem;
+	width: 100%;
 }
 
 .nf-logo {
 	position: absolute;
 	top: -3rem;
 	left: -3rem;
+	z-index: 1;
+}
+
+@media (max-width: 768px) {
+	.nf-logo {
+		top: -2rem;
+		left: -1.5rem;
+	}
 }
 
 .nf-logo__image {
 	width: 140px;
 	height: auto;
+	max-width: 100%;
 }
 
 .nf-hero__title {
@@ -208,6 +282,8 @@ a {
 	margin: 0.5rem 0;
 	line-height: 1.1;
 	letter-spacing: -0.02em;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .nf-hero__subtitle {
@@ -216,7 +292,9 @@ a {
 	color: var(--nf-dark-blue);
 	margin: 0 0 2.5rem;
 	font-weight: 400;
-	white-space: nowrap;
+	white-space: normal;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .nf-hero__description {
@@ -314,6 +392,7 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	min-height: 550px;
+	width: 100%;
 }
 
 .nf-about__title {
@@ -322,10 +401,12 @@ a {
 	font-weight: 400;
 	color: var(--nf-light-green);
 	text-align: center;
-	position: absolute;
-	top: 2rem;
-	left: 5rem;
-	right: 5rem;
+	position: relative;
+	top: auto;
+	left: auto;
+	right: auto;
+	margin: 0 0 2rem;
+	padding: 2rem 2rem 0;
 }
 
 .nf-about__text {
@@ -404,6 +485,7 @@ a {
 	justify-content: center;
 	position: relative;
 	min-height: 500px;
+	width: 100%;
 }
 
 .nf-consultation__title {
@@ -411,10 +493,12 @@ a {
 	font-size: clamp(2.2rem, 4vw, 3rem);
 	font-weight: 400;
 	color: var(--nf-dark-blue);
-	position: absolute;
-	top: 7.5rem;
-	left: 5rem;
-	right: 5rem;
+	position: relative;
+	top: auto;
+	left: auto;
+	right: auto;
+	margin: 0 0 2rem;
+	padding: 0;
 }
 
 .nf-consultation__text {
@@ -454,9 +538,10 @@ a {
    Services Section
    ============================================ */
 .nf-services {
-	padding: 4rem 2rem;
+	padding: 4rem 2rem 6rem;
 	background-color: var(--nf-dark-blue);
 	position: relative;
+	overflow: visible;
 }
 
 .nf-services__heading {
@@ -470,11 +555,12 @@ a {
 
 .nf-services__grid {
 	max-width: 900px;
-	margin: 0 auto;
+	margin: 0 auto 2rem;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1.5rem;
 	perspective: 1000px;
+	overflow: visible;
 }
 
 .nf-service-card {
@@ -742,6 +828,8 @@ a {
 
 	.nf-hero__content {
 		order: 1;
+		padding-top: 4rem;
+		max-width: 100%;
 	}
 	
 	.nf-hero__media {
@@ -759,6 +847,12 @@ a {
 
 	.nf-about__content {
 		padding: 3rem 2rem;
+		min-height: auto;
+	}
+
+	.nf-about__title {
+		padding: 2rem 2rem 0;
+		margin-bottom: 1.5rem;
 	}
 
 	.nf-services__grid {
@@ -780,6 +874,14 @@ a {
 
 	#site-navigation {
 		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+
+	.site-logo {
+		position: relative;
+		left: auto;
+		margin-right: auto;
+		max-width: none;
 	}
 
 	.site-logo img {
@@ -788,48 +890,138 @@ a {
 
 	#primary-menu {
 		gap: 1.5rem;
+		flex-wrap: wrap;
+	}
+
+	.nf-consultation__content {
+		padding: 3rem 2rem;
+		min-height: auto;
+	}
+
+	.nf-consultation__title {
+		margin-bottom: 1.5rem;
 	}
 }
 
 @media (max-width: 768px) {
 	.header-container {
-		padding: 1rem;
-		flex-wrap: wrap;
+		padding: 1rem 1.25rem;
+		flex-wrap: nowrap;
+		gap: 1rem;
+		justify-content: space-between;
+		align-items: center;
+		min-height: 60px;
+		max-height: 60px;
+		overflow: visible;
 	}
 	
+	.menu-toggle {
+		display: inline-flex;
+		order: 2;
+		flex-shrink: 0;
+		margin-left: auto;
+	}
+
 	.site-logo {
-		left: 0.5rem;
+		position: relative;
+		left: auto;
+		margin-right: 0;
+		max-width: none;
+		order: 1;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	#site-navigation .site-logo {
+		display: flex;
 	}
 
 	.site-branding {
-		width: 100%;
-		margin-bottom: 0.5rem;
+		width: auto;
+		margin-bottom: 0;
 	}
 
 	#site-navigation {
-		width: 100%;
-		justify-content: space-between;
-		flex-wrap: wrap;
+		position: static;
+		width: auto;
+		order: 0;
+		margin-top: 0;
+		flex: 0 0 auto;
+	}
+
+	#site-navigation .site-logo {
+		display: flex;
 	}
 
 	.site-logo img {
 		height: 40px;
+		max-width: 100%;
+		display: block;
 	}
 
 	#primary-menu {
-		gap: 1rem;
-		font-size: 0.9rem;
+		display: none;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0;
+		position: fixed;
+		top: 60px;
+		left: 0;
+		right: 0;
+		width: 100%;
+		margin: 0;
+		padding: 1rem 0;
+		background: var(--nf-dark-blue);
+		border-top: 1px solid rgba(255, 255, 255, 0.12);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+		z-index: 99;
+		max-height: calc(100vh - 60px);
+		overflow-y: auto;
+	}
+
+	#primary-menu li {
+		width: 100%;
+	}
+
+	#primary-menu a {
+		display: block;
+		width: 100%;
+		padding: 0.75rem 1.25rem;
+		white-space: nowrap;
+	}
+
+	body.mobile-nav-open #primary-menu {
+		display: flex;
 	}
 
 	.nf-hero,
 	.nf-consultation,
 	.nf-services,
 	.nf-testimonials {
-		padding: 2rem 1rem;
+		padding: 2rem 1rem 4rem;
+	}
+
+	.nf-hero__content {
+		padding-top: 2rem;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.nf-hero__wrapper {
+		gap: 2rem;
+		padding: 0;
 	}
 
 	.nf-about__content {
 		padding: 2rem 1.5rem;
+		min-height: auto;
+	}
+
+	.nf-about__title {
+		padding: 1.5rem 1.5rem 0;
+		margin-bottom: 1rem;
+		font-size: clamp(1.5rem, 5vw, 2rem);
 	}
 
 	.nf-about__image img {
@@ -847,12 +1039,109 @@ a {
 	}
 
 	.nf-logo {
-		top: -2rem;
-		left: -1.5rem;
+		top: -1.5rem;
+		left: -0.5rem;
 	}
 
 	.nf-logo__image {
-		width: 120px;
+		width: 100px;
+		max-width: calc(100vw - 2rem);
+	}
+
+	.nf-hero__subtitle {
+		font-size: clamp(1rem, 3vw, 1.4rem);
+		white-space: normal;
+	}
+
+	.nf-consultation__content {
+		padding: 2rem 1.5rem;
+		min-height: auto;
+	}
+
+	.nf-consultation__title {
+		margin-bottom: 1.5rem;
+		font-size: clamp(1.8rem, 5vw, 2.2rem);
+	}
+
+	.nf-hero__description {
+		font-size: 1rem;
+		margin-bottom: 3rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.header-container {
+		padding: 0.75rem 1rem;
+		min-height: 55px;
+	}
+
+	.site-logo img {
+		height: 35px;
+	}
+
+	.menu-toggle {
+		padding: 0.5rem 0.7rem;
+		font-size: 0.85rem;
+	}
+
+	#primary-menu {
+		gap: 0.5rem;
+		font-size: 0.8rem;
+	}
+
+	#primary-menu a {
+		padding: 0.4rem 0.5rem;
+	}
+
+	.nf-hero,
+	.nf-consultation,
+	.nf-services,
+	.nf-testimonials {
+		padding: 1.5rem 0.75rem 3.5rem;
+	}
+
+	.nf-hero__content {
+		padding-top: 1.5rem;
+	}
+
+	.nf-logo {
+		top: -1rem;
+		left: 0;
+	}
+
+	.nf-logo__image {
+		width: 80px;
+	}
+
+	.nf-hero__title {
+		font-size: clamp(1.5rem, 6vw, 2rem);
+	}
+
+	.nf-hero__subtitle {
+		font-size: clamp(0.9rem, 4vw, 1.2rem);
+		margin-bottom: 1.5rem;
+	}
+
+	.nf-hero__description {
+		font-size: 0.95rem;
+		margin-bottom: 2rem;
+	}
+
+	.nf-about__content {
+		padding: 1.5rem 1rem;
+	}
+
+	.nf-about__title {
+		padding: 1rem 1rem 0;
+		font-size: clamp(1.3rem, 6vw, 1.8rem);
+	}
+
+	.nf-consultation__content {
+		padding: 1.5rem 1rem;
+	}
+
+	.nf-consultation__title {
+		font-size: clamp(1.5rem, 6vw, 2rem);
 	}
 }
 
@@ -861,10 +1150,14 @@ a {
    ============================================ */
 .nf-front-page {
 	width: 100%;
+	overflow-x: hidden;
+	max-width: 100vw;
 }
 
 .nf-front-page > section {
 	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 /* ============================================
@@ -1499,6 +1792,12 @@ a {
 	text-align: center;
 }
 
+@media (max-width: 1024px) {
+	.nf-contact__title {
+		margin: 0 0 2rem;
+	}
+}
+
 .nf-contact__subtitle {
 	font-family: var(--font-title);
 	font-size: 1.5rem;
@@ -1548,12 +1847,57 @@ a {
 	
 	.nf-contact__image {
 		max-height: 400px;
+		order: 1;
+	}
+
+	.nf-contact__content {
+		order: 2;
+		padding: 3rem 2rem;
+	}
+
+	.nf-contact__title {
+		margin: 0 0 2rem;
+		text-align: center;
 	}
 }
 
 @media (max-width: 768px) {
 	.nf-contact__content {
-		padding: 3rem 2rem;
+		padding: 2rem 1.5rem;
+	}
+
+	.nf-contact__title {
+		font-size: clamp(1.8rem, 6vw, 2.5rem);
+		margin: 0 0 1.5rem;
+	}
+
+	.nf-contact__subtitle {
+		font-size: 1.2rem;
+		margin: 0 0 1rem;
+	}
+
+	.nf-contact__image {
+		max-height: 300px;
+	}
+}
+
+@media (max-width: 480px) {
+	.nf-contact__content {
+		padding: 1.5rem 1rem;
+	}
+
+	.nf-contact__title {
+		font-size: clamp(1.5rem, 7vw, 2rem);
+		margin: 0 0 1rem;
+	}
+
+	.nf-contact__subtitle {
+		font-size: 1.1rem;
+		margin: 0 0 1rem;
+	}
+
+	.nf-contact__image {
+		max-height: 250px;
 	}
 }
 
