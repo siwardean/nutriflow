@@ -385,7 +385,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 
 .nf-about__content {
 	background-color: transparent;
-	padding: 3rem 5rem 4rem;
+	padding: 3rem 5rem 7rem;
 	border-radius: 0;
 	position: relative;
 	display: flex;
@@ -414,6 +414,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	font-size: 0.95rem;
 	line-height: 1.8;
 	margin-top: 1rem;
+	margin-bottom: 3rem;
 }
 
 .nf-about__text p {
@@ -436,9 +437,11 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 .nf-about__circles {
 	position: absolute;
 	bottom: 2rem;
-	right: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
 	width: 70px;
 	height: 50px;
+	z-index: 1;
 }
 
 .nf-about__circle {
@@ -846,13 +849,19 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	}
 
 	.nf-about__content {
-		padding: 3rem 2rem;
+		padding: 3rem 2rem 6rem;
 		min-height: auto;
 	}
 
 	.nf-about__title {
 		padding: 2rem 2rem 0;
 		margin-bottom: 1.5rem;
+	}
+
+	.nf-about__circles {
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 1.5rem;
 	}
 
 	.nf-services__grid {
@@ -1014,7 +1023,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	}
 
 	.nf-about__content {
-		padding: 2rem 1.5rem;
+		padding: 2rem 1.5rem 5.5rem;
 		min-height: auto;
 	}
 
@@ -1022,6 +1031,12 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 		padding: 1.5rem 1.5rem 0;
 		margin-bottom: 1rem;
 		font-size: clamp(1.5rem, 5vw, 2rem);
+	}
+
+	.nf-about__circles {
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 1.5rem;
 	}
 
 	.nf-about__image img {
@@ -1128,12 +1143,18 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	}
 
 	.nf-about__content {
-		padding: 1.5rem 1rem;
+		padding: 1.5rem 1rem 5rem;
 	}
 
 	.nf-about__title {
 		padding: 1rem 1rem 0;
 		font-size: clamp(1.3rem, 6vw, 1.8rem);
+	}
+
+	.nf-about__circles {
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 1rem;
 	}
 
 	.nf-consultation__content {
