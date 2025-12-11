@@ -156,6 +156,8 @@ function nutriflow_custom_html_title( $title_parts_array ) {
 		if ( get_query_var( 'paged' ) === 0 ) {
 			$title_parts_array['title'] = 'Blog - Page 1';
 		}
+	} elseif ( is_front_page() ) {
+		$title_parts_array['title'] = 'Nutriflow.florence → Accueil';
 	} elseif ( wp_get_post_parent_id( get_the_ID() ) ) {
 		$title_parts_array['title'] = get_the_title() . ' - ' . get_the_title( wp_get_post_parent_id( get_the_ID() ) );
 	} else {
@@ -217,3 +219,31 @@ add_action( 'init', 'nutriflow_register_block_pattern_category' );
 function nutriflow_get_option( $option, $default = '' ) {
 	return get_theme_mod( 'nutriflow_' . $option, $default );
 }
+
+/**
+ * Replace "sportif" with "sportif·ve" for inclusive content on Contenu page
+ */
+function nutriflow_replace_sportif_inclusive( $content ) {
+	// Check if we're on the Contenu page
+	if ( is_page() && strtolower( get_the_title() ) === 'contenu' ) {
+		// Replace all instances of "sportif" with "sportif·ve" (case-insensitive)
+		$content = preg_replace( '/\bsportif\b/i', 'sportif·ve', $content );
+		$content = preg_replace( '/\bsportives\b/i', 'sportif·ves', $content );
+	}
+	return $content;
+}
+add_filter( 'the_content', 'nutriflow_replace_sportif_inclusive', 10 );
+
+/**
+ * Replace "sportif" with "sportif·ve" for inclusive content on Accompagnement page
+ */
+function nutriflow_replace_sportif_inclusive_accompagnement( $content ) {
+	// Check if we're on the Accompagnement page template
+	if ( is_page_template( 'page-accompagnement.php' ) ) {
+		// Replace all instances of "sportif" with "sportif·ve" (case-insensitive)
+		$content = preg_replace( '/\bsportif\b/i', 'sportif·ve', $content );
+		$content = preg_replace( '/\bsportives\b/i', 'sportif·ves', $content );
+	}
+	return $content;
+}
+add_filter( 'the_content', 'nutriflow_replace_sportif_inclusive_accompagnement', 10 );

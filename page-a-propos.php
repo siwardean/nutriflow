@@ -38,7 +38,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</h1>
 				</div>
 				<div class="nf-apropos-intro__right">
-					<p class="nf-apropos-intro__text nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
+					<p class="nf-apropos-intro__text nf-apropos-intro__text--blue nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
 						<?php 
 						if ( function_exists('get_field') && get_field('intro_text') ) {
 							echo get_field('intro_text');
@@ -144,9 +144,6 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				</div>
 			</div>
 		</section>
-
-		<!-- Blue Bar -->
-		<section class="nf-apropos-bar"></section>
 	<?php endif; ?>
 
 </main><!-- #main -->

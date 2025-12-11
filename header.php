@@ -41,22 +41,22 @@
 		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'nutriflow' ); ?></a>
 
 		<div class="header-container">
-			<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
-				<span class="menu-toggle__bars" aria-hidden="true">
-					<span></span>
-					<span></span>
-					<span></span>
-				</span>
-				<span class="menu-toggle__label"><?php esc_html_e( 'Menu', 'nutriflow' ); ?></span>
-			</button>
 			<nav id="site-navigation" aria-label="Primary">
 				<div class="site-logo">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/logo-nutriflow-blue-navy.png" alt="<?php bloginfo( 'name' ); ?>" />
 					</a>
 				</div>
+				<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
+					<span class="menu-toggle__bars" aria-hidden="true">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+					<span class="menu-toggle__label"><?php esc_html_e( 'Menu', 'nutriflow' ); ?></span>
+				</button>
 				<ul id="primary-menu">
-					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"<?php if ( is_front_page() ) echo ' class="current-page"'; ?>>Nutriflow.florence</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"<?php if ( is_front_page() ) echo ' class="current-page"'; ?>>Accueil</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/accompagnement/' ) ); ?>"<?php if ( is_page_template( 'page-accompagnement.php' ) ) echo ' class="current-page"'; ?>>Accompagnement</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/a-propos/' ) ); ?>"<?php if ( is_page_template( 'page-a-propos.php' ) ) echo ' class="current-page"'; ?>>A propos</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"<?php if ( is_page_template( 'page-contact.php' ) ) echo ' class="current-page"'; ?>>Contact</a></li>

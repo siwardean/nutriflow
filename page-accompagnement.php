@@ -68,7 +68,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
 					</article>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
-						<h3 class="nf-accomp-card__title">Nutrition & performances sportives</h3>
+						<h3 class="nf-accomp-card__title">Nutrition & performances sportif·ves</h3>
 						<p class="nf-accomp-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
@@ -154,9 +154,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<h2 class="nf-sportif__title nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
-					echo get_field('sportif_title') ?: 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
+					echo get_field('sportif_title') ?: 'Tu souhaites un accompagnement spécial " Nutrition du sportif·ve " ?';
 				} else {
-					echo 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
+					echo 'Tu souhaites un accompagnement spécial " Nutrition du sportif·ve " ?';
 				}
 				?>
 			</h2>
@@ -178,8 +178,8 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 								<li><?php echo wp_kses_post( get_sub_field('sportif_item') ); ?></li>
 							<?php endwhile;
 						else : ?>
-							<li>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un sportif et adapter ton alimentation</li>
-							<li>Pour te <strong>préparer à un challenge sportif</strong> ou <strong>compétition</strong></li>
+							<li>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un·e sportif·ve et adapter ton alimentation</li>
+							<li>Pour te <strong>préparer à un challenge sportif·ve</strong> ou <strong>compétition</strong></li>
 							<li><strong>Bilan nutritionnel</strong> sur mesure</li>
 						<?php endif; ?>
 					</ul>

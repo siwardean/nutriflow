@@ -326,7 +326,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				'label' => 'Titre Section Sportif',
 				'name' => 'sportif_title',
 				'type' => 'text',
-				'default_value' => 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?',
+				'default_value' => 'Tu souhaites un accompagnement spécial " Nutrition du sportif·ve " ?',
 			),
 			array(
 				'key' => 'field_sportif_card_title',
