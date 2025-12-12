@@ -51,12 +51,115 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 body {
 	margin: 0;
 	font-family: var(--font-body);
-	color: var(--nf-text-dark);
+	color: var(--nf-dark-blue);
 	background-color: var(--nf-cream);
 	line-height: 1.6;
 	overflow-x: hidden;
 	width: 100%;
 	max-width: 100vw;
+}
+
+/* Règle générale : tous les textes par défaut sur fond cream sont en blue navy */
+body {
+	color: var(--nf-dark-blue);
+}
+
+/* Sections avec fond cream - s'assurer que tous les textes sont en blue navy */
+.nf-hero,
+.nf-consultation,
+.nf-consultation__content,
+.nf-service-card,
+.nf-testimonials,
+.nf-pricing,
+.nf-sportif__card,
+.nf-location,
+.nf-location__content,
+.nf-apropos-intro,
+.nf-apropos-sport,
+.nf-contact,
+.nf-contact__content {
+	color: var(--nf-dark-blue);
+}
+
+/* Champs WYSIWYG et contenus dans les sections cream - tous en blue navy */
+.nf-hero p,
+.nf-hero ul,
+.nf-hero li,
+.nf-hero *,
+.nf-consultation p,
+.nf-consultation ul,
+.nf-consultation li,
+.nf-consultation *,
+.nf-consultation__text,
+.nf-consultation__text *,
+.nf-service-card p,
+.nf-service-card ul,
+.nf-service-card li,
+.nf-service-card *,
+.nf-service-card__description,
+.nf-service-card__description *,
+.nf-testimonials p,
+.nf-testimonials ul,
+.nf-testimonials li,
+.nf-testimonials *,
+.nf-pricing p,
+.nf-pricing ul,
+.nf-pricing li,
+.nf-pricing *,
+.nf-sportif__card p,
+.nf-sportif__card ul,
+.nf-sportif__card li,
+.nf-sportif__card *,
+.nf-sportif__content,
+.nf-sportif__content *,
+.nf-location p,
+.nf-location ul,
+.nf-location li,
+.nf-location *:not(.nf-location__social):not(.nf-location__social *),
+.nf-location__info,
+.nf-location__info *,
+.nf-apropos-intro p,
+.nf-apropos-intro ul,
+.nf-apropos-intro li,
+.nf-apropos-intro *,
+.nf-apropos-intro__text,
+.nf-apropos-intro__text *,
+.nf-apropos-sport p,
+.nf-apropos-sport ul,
+.nf-apropos-sport li,
+.nf-apropos-sport *,
+.nf-apropos-sport__content,
+.nf-apropos-sport__content *,
+.nf-contact p,
+.nf-contact ul,
+.nf-contact li,
+.nf-contact * {
+	color: var(--nf-dark-blue);
+}
+
+/* Exception : les boutons bleus conservent leur texte blanc (après les règles générales) */
+.nf-btn--primary,
+.nf-btn--primary * {
+	color: var(--nf-white) !important;
+}
+
+/* Au hover, le texte du bouton bleu devient bleu */
+.nf-btn--primary:hover,
+.nf-btn--primary:hover * {
+	color: var(--nf-dark-blue) !important;
+}
+
+/* Override pour les sections avec fond dark-blue qui doivent avoir du texte blanc/vert */
+.nf-about,
+.nf-services,
+.nf-apropos-story {
+	color: var(--nf-white);
+}
+
+.nf-about *,
+.nf-services *,
+.nf-apropos-story * {
+	color: inherit;
 }
 
 img {
@@ -258,14 +361,16 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 .nf-logo {
 	position: absolute;
 	top: -3rem;
-	left: -3rem;
+	left: 50%;
+	transform: translateX(-50%);
 	z-index: 1;
 }
 
 @media (max-width: 768px) {
 	.nf-logo {
 		top: -2rem;
-		left: -1.5rem;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 }
 
@@ -629,9 +734,13 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 
 .nf-service-card__description {
 	font-size: 0.85rem;
-	color: var(--nf-text-gray);
+	color: var(--nf-dark-blue);
 	line-height: 1.6;
 	margin: 0;
+}
+
+.nf-service-card__description * {
+	color: var(--nf-dark-blue);
 }
 
 /* ============================================
@@ -677,12 +786,31 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	text-align: center;
 }
 
+.nf-testimonial__text {
+	font-size: 1rem;
+	line-height: 1.7;
+	margin: 0 0 2rem;
+	color: var(--nf-dark-blue);
+	text-align: left;
+}
+
+.nf-testimonial__text p {
+	font-size: 1rem;
+	line-height: 1.7;
+	margin: 0 0 1rem;
+	color: var(--nf-dark-blue);
+}
+
+.nf-testimonial__text p:last-child {
+	margin-bottom: 0;
+}
+
 .nf-testimonial p {
 	font-size: 1rem;
-	font-style: italic;
-	color: var(--nf-dark-blue);
 	line-height: 1.7;
-	margin: 0 0 1.5rem;
+	margin: 0 0 2rem;
+	color: var(--nf-dark-blue);
+	text-align: left;
 }
 
 .nf-testimonial cite {
@@ -692,6 +820,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	color: var(--nf-dark-blue);
 	font-style: normal;
 	text-align: center;
+	margin-top: 2rem;
 }
 
 /* ============================================
@@ -739,6 +868,14 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	padding-top: 4.5rem;
 }
 
+.nf-footer__cta {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	align-items: center;
+	padding-top: 4.5rem;
+}
+
 .nf-footer__contact p {
 	margin: 0;
 	color: var(--nf-white);
@@ -773,12 +910,6 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	color: var(--nf-light-green);
 }
 
-.nf-footer__cta {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-	align-items: center;
-}
 
 .nf-btn--footer {
 	background-color: var(--nf-light-green);
@@ -897,6 +1028,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 
 	.nf-footer__cta {
 		align-items: center;
+		padding-top: 0;
 	}
 
 	.nf-footer__social {
@@ -1170,6 +1302,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 
 	.nf-footer__cta {
 		align-items: center;
+		padding-top: 0;
 	}
 	
 	.nf-footer__social {
@@ -1289,6 +1422,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	
 	.nf-footer__cta {
 		align-items: center;
+		padding-top: 0;
 	}
 	
 	.nf-footer__social {
@@ -1576,11 +1710,28 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	margin: 0 0 1.5rem;
 }
 
+.nf-sportif__content {
+	color: var(--nf-dark-blue);
+}
+
+.nf-sportif__content p,
+.nf-sportif__content ul,
+.nf-sportif__content li,
+.nf-sportif__content * {
+	color: var(--nf-dark-blue);
+}
+
 .nf-sportif__list {
 	list-style: disc;
 	margin: 0;
 	padding-left: 1.5rem;
 	color: var(--nf-dark-blue);
+}
+
+.nf-sportif__list ul {
+	list-style: disc;
+	margin: 0;
+	padding-left: 1.5rem;
 }
 
 .nf-sportif__list li {
@@ -1652,13 +1803,22 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 
 .nf-location__info {
 	margin-bottom: 2rem;
+	color: var(--nf-dark-blue);
 }
 
-.nf-location__info p {
+.nf-location__info p,
+.nf-location__info ul,
+.nf-location__info li,
+.nf-location__info * {
 	color: var(--nf-dark-blue);
 	font-size: 1rem;
 	margin: 0 0 1rem;
 	line-height: 1.6;
+}
+
+.nf-location__info p:last-child,
+.nf-location__info *:last-child {
+	margin-bottom: 0;
 }
 
 .nf-location__info a {
@@ -1671,6 +1831,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 
 .nf-location__info strong {
 	font-weight: 700;
+	color: var(--nf-dark-blue);
 }
 
 .nf-location__social {
@@ -1688,7 +1849,7 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	background-color: var(--nf-dark-blue);
 	border: 2px solid var(--nf-dark-blue);
 	border-radius: 12px;
-	color: var(--nf-cream);
+	color: var(--nf-cream) !important;
 	transition: all 0.3s ease;
 }
 
@@ -1696,14 +1857,19 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	width: 28px;
 	height: 28px;
 	stroke: currentColor;
+	color: var(--nf-cream) !important;
 }
 
 .nf-location__social a:hover {
 	background-color: var(--nf-light-green);
-	color: var(--nf-dark-blue);
+	color: var(--nf-dark-blue) !important;
 	border-color: var(--nf-dark-blue);
 	transform: translateY(-2px);
 	box-shadow: 0 4px 12px rgba(196, 255, 0, 0.3);
+}
+
+.nf-location__social a:hover svg {
+	color: var(--nf-dark-blue) !important;
 }
 
 .nf-location__image {
@@ -1869,6 +2035,12 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	margin: 0;
 	padding-left: 1.5rem;
 	color: var(--nf-white);
+}
+
+.nf-apropos-formations__list ul {
+	list-style: disc;
+	margin: 0;
+	padding-left: 1.5rem;
 }
 
 .nf-apropos-formations__list li {

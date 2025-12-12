@@ -103,17 +103,18 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</h2>
-					<ul class="nf-apropos-formations__list">
+					<div class="nf-apropos-formations__list">
 						<?php 
-						if ( function_exists('have_rows') && have_rows('formations_list') ) :
-							while ( have_rows('formations_list') ) : the_row(); ?>
-								<li><?php echo wp_kses_post( get_sub_field('formation_item') ); ?></li>
-							<?php endwhile;
-						else : ?>
-							<li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li>
-							<li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li>
+						$formations_list = function_exists('nutriflow_get_field') ? nutriflow_get_field('formations_list') : ( function_exists('get_field') ? get_field('formations_list') : false );
+						if ( $formations_list ) : ?>
+							<?php echo wp_kses_post( $formations_list ); ?>
+						<?php else : ?>
+							<ul>
+								<li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li>
+								<li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li>
+							</ul>
 						<?php endif; ?>
-					</ul>
+					</div>
 				</div>
 			</div>
 		</section>
