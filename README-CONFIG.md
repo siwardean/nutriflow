@@ -21,7 +21,11 @@ Le thème utilise un système de flags permettant de basculer facilement entre *
 
 ### Méthode 1 : wp-config.local.php (Recommandé)
 
-1. **Créez `wp-config.local.php`** à la racine WordPress (à côté de `wp-config.php`) :
+1. **Créez `wp-config.local.php`** à la **racine de WordPress** (à côté de `wp-config.php`) :
+   
+   **Emplacement** : `/wp-config.local.php` (à la racine, au même niveau que `wp-config.php`)
+   
+   **Contenu** :
    ```php
    <?php
    // Configuration locale - Ne pas commiter dans Git
@@ -32,13 +36,26 @@ Le thème utilise un système de flags permettant de basculer facilement entre *
    // OU forcer ACF (pour rollback ou test)
    // define( 'NUTRIFLOW_FIELD_SYSTEM', 'acf' );
    ```
+   
+   **Structure des fichiers** :
+   ```
+   WordPress Root/
+   ├── wp-config.php              ← Fichier WordPress principal
+   ├── wp-config.local.php        ← VOTRE config locale (dans .gitignore)
+   ├── wp-content/
+   │   └── themes/
+   │       └── nutriflow/
+   │           └── wp-config.local.example.php  ← Exemple (versionné)
+   ```
 
-2. **Chargez le fichier dans `wp-config.php`** (si pas déjà fait) :
+2. **Chargez le fichier dans `wp-config.php`** (ajoutez juste avant `/* That's all, stop editing! */`) :
    ```php
    // Charger la config locale si elle existe
    if ( file_exists( __DIR__ . '/wp-config.local.php' ) ) {
        require_once __DIR__ . '/wp-config.local.php';
    }
+   
+   /* That's all, stop editing! Happy publishing. */
    ```
 
 **Avantages** :
@@ -48,14 +65,14 @@ Le thème utilise un système de flags permettant de basculer facilement entre *
 
 ### Méthode 2 : Variable d'environnement (.env)
 
-1. **Créez `.env`** dans le dossier du thème :
+1. **Créez `.env`** à la **racine de WordPress** (à côté de `wp-config.php`) :
    ```
    NUTRIFLOW_FIELD_SYSTEM=pods
    ```
 
 2. **Chargez les variables** (si vous utilisez un système comme vlucas/phpdotenv)
-
-**Note** : Nécessite une bibliothèque pour charger les variables d'environnement.
+   
+   **Note** : Nécessite une bibliothèque pour charger les variables d'environnement. Cette méthode est moins courante que `wp-config.local.php`.
 
 ### Méthode 3 : Constante directe dans wp-config.php
 
@@ -106,12 +123,16 @@ update_option( 'nutriflow_field_system', 'pods' ); // Utiliser Pods
 ### Premier setup (nouveau développeur)
 
 1. Clone le dépôt
-2. Copie `wp-config.local.example.php` vers `wp-config.local.php`
-3. Configure selon son environnement :
+2. **À la racine WordPress** (pas dans le thème), créez `wp-config.local.php`
+3. Copiez le contenu de `wp-content/themes/nutriflow/wp-config.local.example.php` dans votre `wp-config.local.php`
+4. Configurez selon votre environnement :
    ```php
    define( 'NUTRIFLOW_FIELD_SYSTEM', 'pods' ); // ou 'acf'
    ```
-4. `wp-config.local.php` est dans `.gitignore`, donc ne sera pas commité
+5. Vérifiez que `wp-config.php` charge le fichier local (voir étape 2 de Méthode 1)
+6. `wp-config.local.php` est dans `.gitignore`, donc ne sera pas commité
+
+**Important** : Le fichier `wp-config.local.php` doit être à la **racine WordPress**, pas dans le dossier du thème !
 
 ### Déploiement
 

@@ -145,8 +145,13 @@ Créez un document listant :
    
    **Option A : Via wp-config.local.php (Recommandé)**
    
-   Créez ou modifiez `wp-config.local.php` (ou ajoutez à votre `wp-config.php`) :
+   **IMPORTANT** : Le fichier doit être créé à la **racine de WordPress** (au même niveau que `wp-config.php`), PAS dans le dossier du thème !
+   
+   **Emplacement** : `/wp-config.local.php` (à la racine WordPress)
+   
+   Créez ce fichier et ajoutez :
    ```php
+   <?php
    // Pour utiliser Pods (développement)
    define( 'NUTRIFLOW_FIELD_SYSTEM', 'pods' );
    
@@ -154,16 +159,27 @@ Créez un document listant :
    // define( 'NUTRIFLOW_FIELD_SYSTEM', 'acf' );
    ```
    
+   **Assurez-vous que `wp-config.php` charge ce fichier** (ajoutez juste avant `/* That's all, stop editing! */`) :
+   ```php
+   // Charger la config locale si elle existe
+   if ( file_exists( __DIR__ . '/wp-config.local.php' ) ) {
+       require_once __DIR__ . '/wp-config.local.php';
+   }
+   
+   /* That's all, stop editing! Happy publishing. */
+   ```
+   
    **Note** : `wp-config.local.php` est dans `.gitignore` et ne sera pas commité.
    
    **Option B : Via .env (Alternative)**
    
-   Créez un fichier `.env` dans le thème :
+   Créez un fichier `.env` à la **racine de WordPress** :
    ```
    NUTRIFLOW_FIELD_SYSTEM=pods
    ```
    
    **Note** : `.env` est dans `.gitignore` et ne sera pas commité.
+   **Note** : Nécessite une bibliothèque pour charger les variables d'environnement.
 
 ### ✅ Point de contrôle Phase 1
 

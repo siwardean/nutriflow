@@ -143,12 +143,17 @@ function nutriflow_setup_pods_fields() {
 					'name' => $field_config['name'],
 				) );
 				
-				// Si le champ existe, continuer (mais logger pour debug)
+				// Si le champ existe déjà, on récupère son ID pour la mise à jour
+				$existing_field_id = null;
 				if ( ! empty( $existing_field ) ) {
-					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-						error_log( 'Pods Field Already Exists (skipped): ' . $field_config['name'] );
+					if ( is_array( $existing_field ) && isset( $existing_field['id'] ) ) {
+						$existing_field_id = $existing_field['id'];
+					} elseif ( is_object( $existing_field ) && method_exists( $existing_field, 'get_id' ) ) {
+						$existing_field_id = $existing_field->get_id();
 					}
-					continue; // Le champ existe déjà, passer au suivant
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+						error_log( 'Pods Field Already Exists: ' . $field_config['name'] . ' (ID: ' . $existing_field_id . ') - Will update' );
+					}
 				}
 				
 				$field_params = array(
@@ -177,6 +182,13 @@ function nutriflow_setup_pods_fields() {
 				
 				// Options spécifiques pour les champs de type file
 				if ( $field_config['type'] === 'file' ) {
+					if ( ! isset( $field_params['options'] ) ) {
+						$field_params['options'] = array();
+					}
+					// Dans Pods, les options de fichier sont dans le tableau options
+					$field_params['options']['file_format_type'] = isset( $field_config['file_format_type'] ) ? $field_config['file_format_type'] : 'single';
+					$field_params['options']['file_type'] = isset( $field_config['file_type'] ) ? $field_config['file_type'] : 'images';
+					// Aussi définir au niveau racine pour compatibilité
 					$field_params['file_format_type'] = isset( $field_config['file_format_type'] ) ? $field_config['file_format_type'] : 'single';
 					$field_params['file_type'] = isset( $field_config['file_type'] ) ? $field_config['file_type'] : 'images';
 				}
@@ -218,7 +230,12 @@ function nutriflow_setup_pods_fields() {
 					}
 				}
 				
-				// Sauvegarder le champ
+				// Ajouter l'ID si le champ existe déjà (pour mise à jour)
+				if ( $existing_field_id ) {
+					$field_params['id'] = $existing_field_id;
+				}
+				
+				// Sauvegarder le champ (création ou mise à jour)
 				try {
 					$result = $api->save_field( $field_params, true, false, true );
 					if ( is_wp_error( $result ) ) {
@@ -226,7 +243,8 @@ function nutriflow_setup_pods_fields() {
 						error_log( 'Pods Field Error: ' . $field_config['name'] . ' - ' . $result->get_error_message() );
 					} elseif ( $result ) {
 						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-							error_log( 'Pods Field Created Successfully: ' . $field_config['name'] );
+							$action = $existing_field_id ? 'Updated' : 'Created';
+							error_log( 'Pods Field ' . $action . ' Successfully: ' . $field_config['name'] );
 						}
 					}
 				} catch ( Exception $e ) {

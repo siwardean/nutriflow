@@ -2,8 +2,14 @@
 /**
  * Local WordPress Configuration
  * 
- * Copy this file to wp-config.local.php (or add to your existing wp-config.php)
- * This file should NOT be committed to Git (add to .gitignore)
+ * INSTRUCTIONS:
+ * =============
+ * 1. Copy this file to the WordPress ROOT directory (same level as wp-config.php)
+ * 2. Rename it to: wp-config.local.php
+ * 3. Uncomment the configuration you need
+ * 4. This file should NOT be committed to Git (already in .gitignore)
+ * 
+ * Location: /wp-config.local.php (WordPress root, NOT in the theme folder)
  * 
  * Environment-specific configurations for Nutriflow theme
  */

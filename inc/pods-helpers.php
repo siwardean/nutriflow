@@ -188,11 +188,18 @@ function nutriflow_get_pods_field_value( $pod, $field_name ) {
 	// Get field data to check type
 	$field_data = $pod->fields( $field_name );
 	$field_type = null;
+	$file_format_type = null;
 	
 	if ( $field_data && is_array( $field_data ) ) {
 		$field_type = isset( $field_data['type'] ) ? $field_data['type'] : null;
-	} elseif ( is_object( $field_data ) && method_exists( $field_data, 'get_type' ) ) {
-		$field_type = $field_data->get_type();
+		$file_format_type = isset( $field_data['file_format_type'] ) ? $field_data['file_format_type'] : null;
+	} elseif ( is_object( $field_data ) ) {
+		if ( method_exists( $field_data, 'get_type' ) ) {
+			$field_type = $field_data->get_type();
+		}
+		if ( method_exists( $field_data, 'get_file_format_type' ) ) {
+			$file_format_type = $field_data->get_file_format_type();
+		}
 	}
 	
 	// Get field value from Pods
@@ -200,7 +207,50 @@ function nutriflow_get_pods_field_value( $pod, $field_name ) {
 	
 	// Handle image/file fields - convert Pods format to ACF-like format
 	if ( in_array( $field_type, array( 'file', 'picture' ), true ) ) {
-		// Try to get attachment ID directly
+		// Handle multi-file fields (galleries)
+		if ( $file_format_type === 'multi' && is_array( $value ) && ! empty( $value ) ) {
+			$gallery_array = array();
+			foreach ( $value as $item ) {
+				$attachment_id = null;
+				
+				// Get attachment ID from various formats
+				if ( is_numeric( $item ) ) {
+					$attachment_id = (int) $item;
+				} elseif ( is_array( $item ) && isset( $item['ID'] ) ) {
+					$attachment_id = (int) $item['ID'];
+				}
+				
+				if ( $attachment_id ) {
+					$attachment = get_post( $attachment_id );
+					if ( $attachment ) {
+						$image_sizes = array();
+						$image_sizes['thumbnail'] = wp_get_attachment_image_url( $attachment_id, 'thumbnail' );
+						$image_sizes['medium'] = wp_get_attachment_image_url( $attachment_id, 'medium' );
+						$image_sizes['large'] = wp_get_attachment_image_url( $attachment_id, 'large' );
+						$image_sizes['full'] = wp_get_attachment_image_url( $attachment_id, 'full' );
+						
+						$gallery_array[] = array(
+							'ID' => $attachment_id,
+							'url' => wp_get_attachment_url( $attachment_id ),
+							'alt' => get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ),
+							'width' => '',
+							'height' => '',
+							'filename' => basename( get_attached_file( $attachment_id ) ),
+							'sizes' => $image_sizes,
+						);
+					}
+				}
+			}
+			
+			// Return array of images (gallery format) or array of IDs if conversion failed
+			if ( ! empty( $gallery_array ) ) {
+				return $gallery_array;
+			}
+			// If conversion failed, return the original array (might be IDs)
+			return $value;
+		}
+		
+		// Handle single file fields
 		$attachment_id = null;
 		
 		if ( is_numeric( $value ) ) {

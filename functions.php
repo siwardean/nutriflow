@@ -545,9 +545,10 @@ function nutriflow_page_media_meta_box_callback( $post ) {
 			);
 		}
 	} elseif ( $template === 'page-a-propos.php' ) {
-		// Page À propos
+		// Page À propos - Galerie d'images
 		$gallery = nutriflow_get_field( 'gallery_images', $post->ID );
-		if ( $gallery && is_array( $gallery ) ) {
+		if ( $gallery && is_array( $gallery ) && ! empty( $gallery ) ) {
+			// Images définies dans le champ
 			foreach ( $gallery as $index => $image ) {
 				$images_found[] = array(
 					'label' => 'Galerie - Image ' . ( $index + 1 ),
@@ -557,12 +558,23 @@ function nutriflow_page_media_meta_box_callback( $post ) {
 				);
 			}
 		} else {
-			$images_found[] = array(
-				'label' => 'Galerie d\'images',
-				'field_name' => 'gallery_images',
-				'image' => false,
-				'default' => '4 images par défaut (gallery-1.jpg à gallery-4.jpg)',
+			// Aucune image définie - Afficher les 4 images par défaut avec liens
+			$default_gallery_images = array(
+				'gallery-1.jpg',
+				'gallery-2.jpg',
+				'gallery-3.jpg',
+				'gallery-4.jpg',
 			);
+			foreach ( $default_gallery_images as $index => $image_filename ) {
+				$image_url = get_template_directory_uri() . '/assets/images/about/' . $image_filename;
+				$images_found[] = array(
+					'label' => 'Galerie - Image ' . ( $index + 1 ) . ' (par défaut)',
+					'field_name' => 'gallery_images',
+					'image' => false,
+					'default' => $image_url,
+					'default_filename' => $image_filename,
+				);
+			}
 		}
 	} elseif ( $template === 'page-contact.php' ) {
 		// Page Contact
@@ -668,18 +680,41 @@ function nutriflow_page_media_meta_box_callback( $post ) {
 						</span>
 					</p>
 				<?php else : ?>
-					<p style="color: #666; font-style: italic; margin: 5px 0;">Aucune image définie.</p>
-					<p style="font-size: 12px; color: #999; margin: 5px 0;">
-						<strong>Image par défaut:</strong><br>
-						<?php if ( is_string( $item['default'] ) && strpos( $item['default'], 'http' ) === 0 ) : ?>
-							<a href="<?php echo esc_url( $item['default'] ); ?>" target="_blank" style="word-break: break-all;"><?php echo esc_html( $item['default'] ); ?></a>
-						<?php else : ?>
-							<?php echo esc_html( $item['default'] ); ?>
+					<?php if ( isset( $item['default'] ) && is_string( $item['default'] ) && strpos( $item['default'], 'http' ) === 0 ) : 
+						// Image par défaut avec URL - Afficher l'image et le lien
+						$default_url = $item['default'];
+						$default_filename = isset( $item['default_filename'] ) ? $item['default_filename'] : basename( $default_url );
+					?>
+						<div style="margin-bottom: 10px;">
+							<a href="<?php echo esc_url( $default_url ); ?>" target="_blank">
+								<img src="<?php echo esc_url( $default_url ); ?>" 
+									 alt="<?php echo esc_attr( $default_filename ); ?>" 
+									 style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px; background: #fff; cursor: pointer;">
+							</a>
+						</div>
+						<p style="margin: 5px 0; font-size: 12px; color: #666;">
+							<strong>Fichier par défaut:</strong> <?php echo esc_html( $default_filename ); ?><br>
+							<strong>URL:</strong> <a href="<?php echo esc_url( $default_url ); ?>" target="_blank" style="font-size: 11px; word-break: break-all;"><?php echo esc_html( $default_url ); ?></a>
+						</p>
+						<p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">
+							<em>Cliquez sur l'image pour l'agrandir. Pour remplacer cette image par défaut, remplissez le champ "<?php echo esc_html( $item['field_name'] ); ?>" ci-dessous.</em>
+						</p>
+					<?php else : ?>
+						<p style="color: #666; font-style: italic; margin: 5px 0;">Aucune image définie.</p>
+						<?php if ( isset( $item['default'] ) ) : ?>
+							<p style="font-size: 12px; color: #999; margin: 5px 0;">
+								<strong>Image par défaut:</strong><br>
+								<?php if ( is_string( $item['default'] ) && strpos( $item['default'], 'http' ) === 0 ) : ?>
+									<a href="<?php echo esc_url( $item['default'] ); ?>" target="_blank" style="word-break: break-all;"><?php echo esc_html( $item['default'] ); ?></a>
+								<?php else : ?>
+									<?php echo esc_html( $item['default'] ); ?>
+								<?php endif; ?>
+							</p>
 						<?php endif; ?>
-					</p>
-					<p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">
-						Pour ajouter une image, remplissez le champ "<?php echo esc_html( $item['field_name'] ); ?>" ci-dessous.
-					</p>
+						<p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">
+							Pour ajouter une image, remplissez le champ "<?php echo esc_html( $item['field_name'] ); ?>" ci-dessous.
+						</p>
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
