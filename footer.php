@@ -65,7 +65,7 @@
 	
 	// Simple scroll animation handler
 	function initScrollAnimations() {
-		const elements = document.querySelectorAll('.nf-animate-on-scroll');
+		const elements = document.querySelectorAll('.nf-animate-on-scroll:not(.nf-testimonials__slide)');
 		
 		if (elements.length === 0) return;
 		
@@ -116,6 +116,163 @@
 		document.addEventListener('DOMContentLoaded', initScrollAnimations);
 	} else {
 		initScrollAnimations();
+	}
+	
+	// Carousel de témoignages - Simple et propre
+	function initTestimonialsSlider() {
+		const slider = document.querySelector('.nf-testimonials__slider');
+		if (!slider) return;
+		
+		const slides = slider.querySelectorAll('.nf-testimonials__slide');
+		if (slides.length === 0) return;
+		
+		const prevBtn = document.querySelector('.nf-testimonials__prev');
+		const nextBtn = document.querySelector('.nf-testimonials__next');
+		
+		if (slides.length === 1) {
+			slides[0].classList.add('active');
+			if (prevBtn) prevBtn.style.display = 'none';
+			if (nextBtn) nextBtn.style.display = 'none';
+			return;
+		}
+		
+		let currentIndex = 0;
+		let timer = null;
+		
+		function moveToSlide(index, direction) {
+			if (index < 0) index = slides.length - 1;
+			if (index >= slides.length) index = 0;
+			if (index === currentIndex) return;
+			
+			// Si direction n'est pas spécifiée, utiliser 'forward' par défaut
+			if (!direction) direction = 'forward';
+			
+			const oldSlide = slides[currentIndex];
+			const newSlide = slides[index];
+			
+			// Déterminer les positions selon la direction
+			const isBackward = direction === 'backward';
+			
+			// Pour backward (flèche gauche) :
+			// - oldSlide sort par la droite (translateX(100%))
+			// - newSlide entre depuis la gauche (commence à translateX(-100%), puis va à 0)
+			// Pour forward (flèche droite) :
+			// - oldSlide sort par la gauche (translateX(-100%))
+			// - newSlide entre depuis la droite (commence à translateX(100%), puis va à 0)
+			
+			const newSlideStart = isBackward ? '-100%' : '100%';
+			const oldSlideEnd = isBackward ? '100%' : '-100%';
+			
+			// Nettoyer complètement le nouveau slide
+			newSlide.classList.remove('active');
+			newSlide.classList.remove('exiting');
+			
+			// Désactiver temporairement la transition pour positionner le slide
+			newSlide.style.transition = 'none';
+			
+			// Positionner le nouveau slide hors écran à la position initiale
+			newSlide.style.position = 'absolute';
+			newSlide.style.top = '0';
+			newSlide.style.left = '0';
+			newSlide.style.width = '100%';
+			newSlide.style.transform = 'translateX(' + newSlideStart + ')';
+			newSlide.style.opacity = '0';
+			newSlide.style.display = 'block';
+			
+			// Forcer le navigateur à appliquer les styles immédiatement
+			newSlide.offsetHeight;
+			
+			// Réactiver la transition et démarrer l'animation
+			requestAnimationFrame(function() {
+				// Réactiver la transition
+				newSlide.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
+				
+				// Forcer un nouveau reflow
+				newSlide.offsetHeight;
+				
+				// Dans le frame suivant, démarrer l'animation
+				requestAnimationFrame(function() {
+					// Faire sortir l'ancien slide
+					oldSlide.classList.remove('active');
+					oldSlide.style.position = 'absolute';
+					oldSlide.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
+					oldSlide.style.transform = 'translateX(' + oldSlideEnd + ')';
+					oldSlide.style.opacity = '0';
+					oldSlide.classList.add('exiting');
+					
+					// Faire entrer le nouveau slide - IL GLISSE DE GAUCHE VERS DROITE
+					newSlide.classList.add('active');
+					newSlide.style.transform = 'translateX(0)';
+					newSlide.style.opacity = '1';
+				});
+			});
+			
+			// Nettoyer après l'animation
+			setTimeout(function() {
+				oldSlide.classList.remove('exiting');
+				oldSlide.style.transform = '';
+				oldSlide.style.opacity = '';
+				oldSlide.style.display = '';
+				oldSlide.style.position = '';
+				oldSlide.style.top = '';
+				oldSlide.style.left = '';
+				oldSlide.style.width = '';
+				oldSlide.style.transition = '';
+				
+				// Après l'animation, changer en relative pour le nouveau slide actif
+				if (newSlide.classList.contains('active')) {
+					newSlide.style.position = 'relative';
+					newSlide.style.top = '';
+					newSlide.style.left = '';
+					newSlide.style.width = '';
+					newSlide.style.transform = '';
+				}
+				newSlide.style.opacity = '';
+				newSlide.style.transition = '';
+			}, 500);
+			
+			currentIndex = index;
+		}
+		
+		function startTimer() {
+			clearInterval(timer);
+			timer = setInterval(function() {
+				moveToSlide(currentIndex + 1, 'forward');
+			}, 5000);
+		}
+		
+		if (prevBtn) {
+			prevBtn.onclick = function() {
+				clearInterval(timer);
+				moveToSlide(currentIndex - 1, 'backward');
+				startTimer();
+			};
+		}
+		
+		if (nextBtn) {
+			nextBtn.onclick = function() {
+				clearInterval(timer);
+				moveToSlide(currentIndex + 1, 'forward');
+				startTimer();
+			};
+		}
+		
+		// Initialiser le premier slide
+		if (slides.length > 0) {
+			slides[0].classList.add('active');
+			slides[0].style.position = 'relative';
+			slides[0].style.transform = 'translateX(0)';
+			slides[0].style.opacity = '1';
+		}
+		
+		startTimer();
+	}
+	
+	// Initialize slider when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initTestimonialsSlider);
+	} else {
+		initTestimonialsSlider();
 	}
 })();
 </script>
