@@ -283,26 +283,67 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				echo $testimonial_heading ?: 'Témoignages';
 				?>
 			</h2>
-			<div class="nf-testimonials__quote nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
+			<div class="nf-testimonials__slider-wrapper">
 				<span class="nf-testimonials__quote-mark">&ldquo;</span>
-				<?php 
-				$testimonial_text = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_text') : ( function_exists('get_field') ? get_field('homepage_testimonial_text') : false );
-				$testimonial_author = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_author') : ( function_exists('get_field') ? get_field('homepage_testimonial_author') : false );
-				if ( $testimonial_text || $testimonial_author ) : ?>
-					<blockquote class="nf-testimonial">
-						<?php if ( $testimonial_text ) : ?>
-							<div class="nf-testimonial__text"><?php echo wp_kses_post( $testimonial_text ); ?></div>
-						<?php endif; ?>
-						<?php if ( $testimonial_author ) : ?>
-							<cite><?php echo esc_html( $testimonial_author ); ?></cite>
-						<?php endif; ?>
-					</blockquote>
-				<?php else : ?>
-					<blockquote class="nf-testimonial">
-						<p>J'ai contacté Florence afin de mieux comprendre quelle est l'alimentation qui me correspondrait le mieux, et adopter des habitudes saines sur le long terme. Son écoute attentive et son accompagnement personnalisé m'ont beaucoup appris, et le défi à été réussi. Je la recommande vivement.</p>
-						<cite>Nina Rozenberg</cite>
-					</blockquote>
-				<?php endif; ?>
+				<div class="nf-testimonials__slider" id="testimonials-slider">
+					<?php 
+					// Témoignage 1
+					$testimonial_1_text = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_1_text') : ( function_exists('get_field') ? get_field('homepage_testimonial_1_text') : '' );
+					$testimonial_1_author = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_1_author') : ( function_exists('get_field') ? get_field('homepage_testimonial_1_author') : '' );
+					
+					// Valeurs par défaut pour le témoignage 1
+					if ( empty( $testimonial_1_text ) ) {
+						$testimonial_1_text = '<p style="text-align: center;"><em>J\'ai contacté Florence afin de mieux comprendre quelle est l\'alimentation qui me correspondrait le mieux, et adopter des habitudes saines sur le long terme. Son écoute attentive et son accompagnement personnalisé m\'ont beaucoup appris, et le défi à été réussi. Je la recommande vivement.</em></p>';
+					}
+					if ( empty( $testimonial_1_author ) ) {
+						$testimonial_1_author = 'Nina Rozenberg';
+					}
+					
+					// Témoignage 2
+					$testimonial_2_text = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_2_text') : ( function_exists('get_field') ? get_field('homepage_testimonial_2_text') : '' );
+					$testimonial_2_author = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_2_author') : ( function_exists('get_field') ? get_field('homepage_testimonial_2_author') : '' );
+					
+					// Valeurs par défaut pour le témoignage 2
+					if ( empty( $testimonial_2_text ) ) {
+						$testimonial_2_text = '<p style="text-align: center;"><em>Dans le cadre de ma reprise du sport, j\'ai fait appel à Florence pour adopter des habitudes nutritionnelles adaptées et durables. Son accompagnement, à la fois clair et bienveillant, m\'a permis d\'améliorer ma nutrition de manière concrète. Je suis très satisfait de son suivi et je la remercie pour son aide précieuse.</em></p>';
+					}
+					if ( empty( $testimonial_2_author ) ) {
+						$testimonial_2_author = 'Siwar Madrane';
+					}
+					?>
+					<!-- Témoignage 1 -->
+					<div class="nf-testimonials__slide">
+						<div class="nf-testimonials__quote">
+							<blockquote class="nf-testimonial">
+								<?php if ( $testimonial_1_text ) : ?>
+									<div class="nf-testimonial__text"><?php echo wp_kses_post( $testimonial_1_text ); ?></div>
+								<?php endif; ?>
+								<?php if ( $testimonial_1_author ) : ?>
+									<cite><?php echo esc_html( $testimonial_1_author ); ?></cite>
+								<?php endif; ?>
+							</blockquote>
+						</div>
+					</div>
+					
+					<!-- Témoignage 2 -->
+					<div class="nf-testimonials__slide">
+						<div class="nf-testimonials__quote">
+							<blockquote class="nf-testimonial">
+								<?php if ( $testimonial_2_text ) : ?>
+									<div class="nf-testimonial__text"><?php echo wp_kses_post( $testimonial_2_text ); ?></div>
+								<?php endif; ?>
+								<?php if ( $testimonial_2_author ) : ?>
+									<cite><?php echo esc_html( $testimonial_2_author ); ?></cite>
+								<?php endif; ?>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+				<!-- Contrôles du slider -->
+				<div class="nf-testimonials__controls">
+					<button class="nf-testimonials__prev" aria-label="Témoignage précédent">‹</button>
+					<button class="nf-testimonials__next" aria-label="Témoignage suivant">›</button>
+				</div>
 			</div>
 		</section>
 	<?php endif; ?>

@@ -203,17 +203,25 @@ function nutriflow_prefill_homepage_fields( $page_id ) {
 	// Section Témoignages - Pré-remplir avec les valeurs par défaut
 	$testimonial_data = array();
 	$current_heading = $pod->field( 'homepage_testimonials_heading', true );
-	$current_text = $pod->field( 'homepage_testimonial_text', true );
-	$current_author = $pod->field( 'homepage_testimonial_author', true );
+	$current_text_1 = $pod->field( 'homepage_testimonial_1_text', true );
+	$current_author_1 = $pod->field( 'homepage_testimonial_1_author', true );
+	$current_text_2 = $pod->field( 'homepage_testimonial_2_text', true );
+	$current_author_2 = $pod->field( 'homepage_testimonial_2_author', true );
 	
 	if ( empty( $current_heading ) || $current_heading === false ) {
 		$testimonial_data['homepage_testimonials_heading'] = 'Témoignages';
 	}
-	if ( empty( $current_text ) || $current_text === false ) {
-		$testimonial_data['homepage_testimonial_text'] = 'J\'ai contacté Florence afin de mieux comprendre quelle est l\'alimentation qui me correspondrait le mieux, et adopter des habitudes saines sur le long terme. Son écoute attentive et son accompagnement personnalisé m\'ont beaucoup appris, et le défi à été réussi. Je la recommande vivement.';
+	if ( empty( $current_text_1 ) || $current_text_1 === false ) {
+		$testimonial_data['homepage_testimonial_1_text'] = '<p style="text-align: center;"><em>J\'ai contacté Florence afin de mieux comprendre quelle est l\'alimentation qui me correspondrait le mieux, et adopter des habitudes saines sur le long terme. Son écoute attentive et son accompagnement personnalisé m\'ont beaucoup appris, et le défi à été réussi. Je la recommande vivement.</em></p>';
 	}
-	if ( empty( $current_author ) || $current_author === false ) {
-		$testimonial_data['homepage_testimonial_author'] = 'Nina Rozenberg';
+	if ( empty( $current_author_1 ) || $current_author_1 === false ) {
+		$testimonial_data['homepage_testimonial_1_author'] = 'Nina Rozenberg';
+	}
+	if ( empty( $current_text_2 ) || $current_text_2 === false ) {
+		$testimonial_data['homepage_testimonial_2_text'] = '<p style="text-align: center;"><em>Dans le cadre de ma reprise du sport, j\'ai fait appel à Florence pour adopter des habitudes nutritionnelles adaptées et durables. Son accompagnement, à la fois clair et bienveillant, m\'a permis d\'améliorer ma nutrition de manière concrète. Je suis très satisfait de son suivi et je la remercie pour son aide précieuse.</em></p>';
+	}
+	if ( empty( $current_author_2 ) || $current_author_2 === false ) {
+		$testimonial_data['homepage_testimonial_2_author'] = 'Siwar Madrane';
 	}
 	
 	if ( ! empty( $testimonial_data ) ) {

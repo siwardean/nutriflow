@@ -293,7 +293,7 @@ function nutriflow_filter_pods_groups_by_page_template( $groups, $pod_type, $pod
 	
 	if ( $page_template === 'front-page.php' || $is_front_page ) {
 		// Page d'accueil
-		$allowed_field_prefixes = array( 'homepage_hero', 'homepage_about', 'homepage_consult', 'homepage_services_heading', 'homepage_service_1_title', 'homepage_service_1_description', 'homepage_service_2_title', 'homepage_service_2_description', 'homepage_service_3_title', 'homepage_service_3_description', 'homepage_service_4_title', 'homepage_service_4_description', 'homepage_testimonials', 'homepage_testimonial_text', 'homepage_testimonial_author' );
+		$allowed_field_prefixes = array( 'homepage_hero', 'homepage_about', 'homepage_consult', 'homepage_services_heading', 'homepage_service_1_title', 'homepage_service_1_description', 'homepage_service_2_title', 'homepage_service_2_description', 'homepage_service_3_title', 'homepage_service_3_description', 'homepage_service_4_title', 'homepage_service_4_description', 'homepage_testimonials', 'homepage_testimonial_1_text', 'homepage_testimonial_1_author', 'homepage_testimonial_2_text', 'homepage_testimonial_2_author' );
 	} elseif ( $page_template === 'page-accompagnement.php' ) {
 		// Page Accompagnement
 		$allowed_field_prefixes = array( 'hero_title', 'hero_background', 'hero_card_1_title', 'hero_card_1_content', 'hero_card_2_title', 'hero_card_2_content', 'hero_card_3_title', 'hero_card_3_content', 'hero_card_4_title', 'hero_card_4_content', 'pricing_', 'pricing_card_', 'pricing_title', 'sportif_title', 'sportif_card_title', 'sportif_content', 'location_title', 'location_info', 'location_image' );
