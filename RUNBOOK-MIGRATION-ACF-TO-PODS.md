@@ -29,12 +29,23 @@ Ce runbook décrit la procédure complète pour migrer le thème Nutriflow d'**A
 
 ### Temps estimé
 
-- **Préparation** : 15 minutes
+- **Préparation** : 10-15 minutes (5-10 minutes sur OVH Cloud grâce aux sauvegardes automatiques)
 - **Installation Pods** : 5 minutes
 - **Création des champs** : 2-5 minutes (automatique)
 - **Migration des données** : 5-10 minutes
 - **Vérification** : 10-15 minutes
-- **Total** : ~40-50 minutes
+- **Total** : ~35-50 minutes
+
+### Environnement OVH Cloud avec Git
+
+**Note importante** : Ce projet utilise **OVH Cloud** comme hébergement et **Git** pour la gestion du code. 
+
+- **Base de données** : Les sauvegardes sont effectuées automatiquement par OVH
+- **Code source** : Les fichiers sont versionnés avec Git, permettant un rollback facile via `git checkout` ou `git reset`
+- **Recommandations** :
+  - Effectuer un commit Git avant la migration pour créer un point de restauration
+  - Vérifier que les sauvegardes automatiques OVH sont actives dans l'espace client
+  - (Optionnel) Effectuer une export SQL supplémentaire pour avoir une copie locale
 
 ### Configuration Git-friendly
 
@@ -59,10 +70,11 @@ Le thème utilise un système de flags permettant de basculer facilement entre A
 Avant de commencer, vérifiez que :
 
 - [ ] Vous avez un **accès administrateur** à WordPress
-- [ ] Vous avez accès au **code du thème** (via FTP, SSH, ou gestionnaire de fichiers)
+- [ ] Vous avez accès au **code du thème** via Git (ou FTP/SFTP/SSH pour OVH Cloud)
 - [ ] **WordPress** est à jour (version 6.0+)
 - [ ] Le site fonctionne correctement avec ACF
-- [ ] Vous avez effectué une **sauvegarde complète** du site (voir Phase 1)
+- [ ] Vous avez effectué un **commit Git** avec tous les changements actuels (voir Phase 1)
+- [ ] (OVH Cloud) Les sauvegardes automatiques de base de données sont actives dans l'espace client OVH
 
 ### Logiciels/Extensions nécessaires
 
@@ -78,14 +90,46 @@ Avant de commencer, vérifiez que :
 
 **⚠️ IMPORTANT : Ne jamais sauter cette étape !**
 
-#### Option A : Via le gestionnaire Local/Staging
+#### Option A : OVH Cloud avec Git (Recommandé pour ce projet)
+
+**Note** : OVH Cloud effectue des sauvegardes automatiques de la base de données. Les fichiers du thème sont versionnés avec Git, ce qui permet un rollback facile si nécessaire.
+
+1. **Commit Git avant migration** (recommandé) :
+   ```bash
+   # Dans le dossier du thème ou du projet
+   git status
+   git add .
+   git commit -m "Avant migration ACF vers Pods - Point de restauration"
+   git push origin main  # ou votre branche principale
+   ```
+   Cela crée un point de restauration dans Git que vous pouvez utiliser pour revenir en arrière facilement.
+
+2. **Vérification des sauvegardes de base de données OVH** :
+   - Connectez-vous à votre **espace client OVH**
+   - Allez dans **Hébergement** > **Base de données**
+   - Vérifiez que les sauvegardes automatiques sont bien activées
+   - Notez la date de la dernière sauvegarde (elle sera utilisée pour le rollback si nécessaire)
+
+3. **Sauvegarde manuelle supplémentaire (optionnel mais recommandé)** :
+   - Via **phpMyAdmin** (accessible via OVH) :
+     - Sélectionnez votre base de données
+     - Cliquez sur **Exporter**
+     - Choisissez **Méthode d'export : SQL**
+     - Cliquez sur **Exécuter** et téléchargez le fichier `.sql`
+
+**Vérification** : Assurez-vous que vous avez :
+- ✅ Un commit Git récent avec tous les changements (vérifié avec `git status`)
+- ✅ Confirmation que les sauvegardes OVH sont actives (vérifié dans l'espace client)
+- ✅ (Optionnel) Une export SQL téléchargée localement
+
+#### Option B : Via le gestionnaire Local/Staging
 
 1. Arrêtez le site Local si nécessaire
 2. Exportez une sauvegarde complète :
    - Copiez le dossier `wp-content` entier
    - Exportez la base de données via phpMyAdmin ou l'interface Local
 
-#### Option B : Via un plugin de sauvegarde
+#### Option C : Via un plugin de sauvegarde
 
 1. Installez un plugin de sauvegarde (UpdraftPlus, BackWPup, etc.)
 2. Effectuez une sauvegarde complète incluant :
@@ -93,7 +137,7 @@ Avant de commencer, vérifiez que :
    - Fichiers du thème
    - Uploads/media
 
-#### Option C : Sauvegarde manuelle
+#### Option D : Sauvegarde manuelle
 
 ```bash
 # Sauvegarde des fichiers
@@ -103,10 +147,10 @@ cp -r wp-content/themes/nutriflow wp-content/themes/nutriflow-backup-$(date +%Y%
 mysqldump -u username -p database_name > backup-$(date +%Y%m%d).sql
 ```
 
-**Vérification** : Assurez-vous que la sauvegarde contient bien :
-- ✅ Le dossier du thème `nutriflow`
-- ✅ La base de données complète
-- ✅ Les fichiers media (images, etc.)
+**Vérification globale** : Assurez-vous que :
+- ✅ Les fichiers du thème sont versionnés dans Git (commit récent effectué)
+- ✅ La base de données est sauvegardée (sauvegarde automatique OVH ou export manuel)
+- ✅ (Optionnel) Les fichiers media sont sauvegardés si vous les versionnez séparément
 
 ### Étape 1.2 : Documenter l'état actuel
 
@@ -748,13 +792,59 @@ add_action( 'init', function() {
 
 Cette méthode restaure complètement l'état avant migration.
 
+#### Pour OVH Cloud avec Git :
+
+1. **Restaurez les fichiers via Git** :
+   ```bash
+   # Dans le dossier du thème ou du projet
+   git log --oneline  # Trouvez le commit d'avant la migration
+   git checkout <commit-hash>  # Remplacez <commit-hash> par le hash du commit d'avant migration
+   # OU si vous avez créé un tag :
+   git checkout <tag-name>
+   # OU revenez à la branche principale et annulez les commits :
+   git reset --hard HEAD~<n>  # où <n> est le nombre de commits à annuler
+   ```
+   Si vous avez déjà pushé les changements :
+   ```bash
+   git reset --hard <commit-hash>
+   git push --force origin <branch-name>  # ⚠️ Attention : force push
+   ```
+   **Alternative simple** : Revenez en arrière sur les fichiers spécifiques :
+   ```bash
+   git checkout HEAD -- inc/pods-config.php functions.php
+   ```
+
+2. **Restaurez la base de données depuis OVH** :
+   - Connectez-vous à votre **espace client OVH**
+   - Allez dans **Hébergement** > **Base de données**
+   - Sélectionnez votre base de données
+   - Cliquez sur **Sauvegardes** ou **Backups**
+   - Choisissez une sauvegarde datant d'**avant la migration**
+   - Cliquez sur **Restaurer** ou **Importer**
+   - ⚠️ **Attention** : La restauration peut prendre quelques minutes et peut écraser les données actuelles
+
+3. **Réactivez ACF** :
+   - Extensions > Activer "Advanced Custom Fields"
+
+4. **Désactivez Pods** (optionnel) :
+   - Extensions > Désactiver "Pods"
+
+5. **Testez le site** : Vérifiez que tout fonctionne comme avant
+
+#### Pour autres environnements :
+
 1. **Arrêtez WordPress** si possible (pour éviter des écritures pendant la restauration)
 
 2. **Restaurez les fichiers** :
-   - Remplacez `wp-content/themes/nutriflow` par la version sauvegardée
-   - OU restaurez uniquement les fichiers modifiés :
-     - `inc/pods-config.php` (re-commentez la ligne `add_action`)
-     - `functions.php` (vérifiez que les includes Pods sont commentés)
+   - **Si vous utilisez Git** :
+     ```bash
+     git checkout <commit-hash>  # Commit d'avant la migration
+     ```
+   - **Si vous n'utilisez pas Git** :
+     - Remplacez `wp-content/themes/nutriflow` par la version sauvegardée
+     - OU restaurez uniquement les fichiers modifiés :
+       - `inc/pods-config.php` (re-commentez la ligne `add_action`)
+       - `functions.php` (vérifiez que les includes Pods sont commentés)
 
 3. **Restaurez la base de données** :
    - Via phpMyAdmin : Importez la sauvegarde SQL
