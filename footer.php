@@ -54,6 +54,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="site-footer__signature">
+			<p>A digital craft by SDM Digital Studio</p>
+		</div>
 	</footer>
 </div><!-- #page -->
 

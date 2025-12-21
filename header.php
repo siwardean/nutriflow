@@ -47,13 +47,12 @@
 						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/logo-nutriflow-blue-navy.png" alt="<?php bloginfo( 'name' ); ?>" />
 					</a>
 				</div>
-				<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
+				<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Menu">
 					<span class="menu-toggle__bars" aria-hidden="true">
 						<span></span>
 						<span></span>
 						<span></span>
 					</span>
-					<span class="menu-toggle__label"><?php esc_html_e( 'Menu', 'nutriflow' ); ?></span>
 				</button>
 				<ul id="primary-menu">
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"<?php if ( is_front_page() ) echo ' class="current-page"'; ?>>Accueil</a></li>

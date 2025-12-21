@@ -188,7 +188,7 @@ function nutriflow_prefill_homepage_fields( $page_id ) {
 		$pod->save( array( 'homepage_service_2_description' => 'Soulager tes symptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...' ) );
 	}
 	if ( ! $pod->field( 'homepage_service_3_title' ) ) {
-		$pod->save( array( 'homepage_service_3_title' => 'Nutrition & performances sportif·ves' ) );
+		$pod->save( array( 'homepage_service_3_title' => 'Nutrition & performances sportives' ) );
 	}
 	if ( ! $pod->field( 'homepage_service_3_description' ) ) {
 		$pod->save( array( 'homepage_service_3_description' => 'Améliorer tes performances et mieux comprendre l\'impact de ton alimentation sur tes résultats.' ) );
@@ -272,7 +272,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 		$pod->save( array( 'hero_card_2_content' => 'Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...' ) );
 	}
 	if ( ! $pod->field( 'hero_card_3_title' ) ) {
-		$pod->save( array( 'hero_card_3_title' => 'Nutrition & performances sportif·ves' ) );
+		$pod->save( array( 'hero_card_3_title' => 'Nutrition & performances sportives' ) );
 	}
 	if ( ! $pod->field( 'hero_card_3_content' ) ) {
 		$pod->save( array( 'hero_card_3_content' => 'Améliorer tes performances et mieux comprendre l\'impact de ton alimentation sur tes résultats.' ) );
@@ -329,7 +329,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	
 	// Section Sportif
 	if ( ! $pod->field( 'sportif_title' ) ) {
-		$data_to_save['sportif_title'] = 'Tu souhaites un accompagnement spécial " Nutrition du sportif·ve " ?';
+		$data_to_save['sportif_title'] = 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
 	}
 	if ( ! $pod->field( 'sportif_card_title' ) ) {
 		$data_to_save['sportif_card_title'] = 'Accompagnement sur mesure';
@@ -395,7 +395,7 @@ function nutriflow_prefill_apropos_fields( $page_id ) {
 	
 	// Section Parcours
 	if ( ! $pod->field( 'story_content' ) ) {
-		$data_to_save['story_content'] = '<p>Mon corps a été mon <strong>premier guide.</strong> Dès l\'adolescence, j\'ai été confrontée à des <strong>déséquilibres</strong> (eczéma, douleurs <strong>chroniques</strong>, troubles <strong>digestifs</strong>, acné) que la médecine moderne n\'expliquait pas. En cherchant à comprendre les <strong>causes</strong> de mes maux et à trouver des solutions, j\'ai découvert la <strong>puissance</strong> de la <strong>nutrition</strong> dans mon processus de guérison. Je me suis donc formée en nutrithérapie pendant plusieurs années.</p><p>Aujourd\'hui, je me sens alignée, ancrée, et <strong>connectée</strong> à mes rythmes.</p><p>Ce chemin personnel m\'a donné des <strong>clés précieuses</strong>, que je transmets avec nuance et bienveillance. J\'aide les personnes à se <strong>reconnecter</strong> à leur corps, à comprendre leurs <strong>symptômes</strong> et à retrouver leur <strong>vitalité</strong> via leur alimentation, en écoutant ce que leur corps exprime.</p>';
+		$data_to_save['story_content'] = '<p>Mon corps a été mon <strong>premier guide.</strong> Dès l\'adolescence, j\'ai été confrontée à des <strong>déséquilibres</strong> (eczéma, douleurs <strong>chroniques</strong>, troubles <strong>digestifs</strong>, acné) que la médecine moderne n\'expliquait pas. En cherchant à comprendre les <strong>causes</strong> de mes maux et à trouver des solutions, j\'ai découvert la <strong>puissance</strong> de la <strong>nutrition</strong> dans mon processus de guérison. Je me suis donc formée en nutrithérapie pendant plusieurs années.</p><br><br><p>Aujourd\'hui, je me sens alignée, ancrée, et <strong>connectée</strong> à mes rythmes.</p><br><br><p>Ce chemin personnel m\'a donné des <strong>clés précieuses</strong>, que je transmets avec nuance et bienveillance. J\'aide les personnes à se <strong>reconnecter</strong> à leur corps, à comprendre leurs <strong>symptômes</strong> et à retrouver leur <strong>vitalité</strong> via leur alimentation, en écoutant ce que leur corps exprime.</p>';
 	}
 	if ( ! $pod->field( 'formations_title' ) ) {
 		$data_to_save['formations_title'] = 'Mes formations';
@@ -422,7 +422,7 @@ function nutriflow_prefill_apropos_fields( $page_id ) {
 		$data_to_save['sport_title'] = 'Le sport comme source de bien-être';
 	}
 	if ( ! $pod->field( 'sport_content' ) ) {
-		$data_to_save['sport_content'] = '<p>Je fais du sport depuis toute petite : <strong>danse</strong>, tennis, <strong>natation</strong>,... Puis jeune adulte je mords très vite à la <strong>course à pied</strong> dont je ne peux aujourd\'hui plus me passer, mais je découvre également le <strong>yoga</strong>, le <strong>vélo</strong> et bien d\'autres activités sportives. J\'obtiens mon <strong>Yoga Teacher Training Certificate</strong> en 2023 au Portugal lors d\'une pause professionnelle.</p><p>En 2025, je deviens <strong>triathlète</strong> avec mon tout premier triathlon olympique.</p><p>La pratique sportive est pour moi la recherche d\'un <strong>bien-être général</strong> de mon corps et la <strong>recherche de l\'équilibre</strong>.</p>';
+		$data_to_save['sport_content'] = '<p>Je fais du sport depuis toute petite : <strong>danse</strong>, tennis, <strong>natation</strong>,... Puis jeune adulte je mords très vite à la <strong>course à pied</strong> dont je ne peux aujourd\'hui plus me passer, mais je découvre également le <strong>yoga</strong>, le <strong>vélo</strong> et bien d\'autres activités sportives. J\'obtiens mon <strong>Yoga Teacher Training Certificate</strong> en 2023 au Portugal lors d\'une pause professionnelle.</p><br><br><p>En 2025, je deviens <strong>triathlète</strong> avec mon tout premier triathlon olympique.</p><br><br><p>La pratique sportive est pour moi la recherche d\'un <strong>bien-être général</strong> de mon corps et la <strong>recherche de l\'équilibre</strong>.</p>';
 	}
 	
 	if ( ! empty( $data_to_save ) ) {
