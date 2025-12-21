@@ -42,7 +42,7 @@ function nutriflow_get_seo_description( $post_id = null ) {
 	}
 
 	// Default description
-	return 'Nutrithérapeute à Bruxelles. Accompagnement en nutrithérapie : rééquilibrage alimentaire, nutrition sportive, troubles hormonaux et digestifs.';
+	return 'Florence Van Hecke, nutrithérapeute à Bruxelles (Ixelles, Flagey). Consultation en nutrithérapie : rééquilibrage alimentaire, nutrition sportive, troubles hormonaux et digestifs. Nutrithérapeute Florence Bruxelles.';
 }
 
 /**
@@ -106,7 +106,7 @@ function nutriflow_add_seo_meta_tags() {
 
 	if ( is_front_page() ) {
 		$title = get_bloginfo( 'name' ) . ' - Nutrithérapeute à Bruxelles | Accompagnement en nutrithérapie';
-		$description = 'Florence Van Hecke, nutrithérapeute à Bruxelles. Accompagnement personnalisé en nutrithérapie : rééquilibrage alimentaire, nutrition sportive, troubles hormonaux et digestifs. Prenez rendez-vous.';
+		$description = 'Florence Van Hecke, nutrithérapeute à Bruxelles, Ixelles (Flagey). Consultation et accompagnement en nutrithérapie : rééquilibrage alimentaire, nutrition sportive, troubles hormonaux et digestifs. Nutrithérapeute Florence Bruxelles. Prenez rendez-vous.';
 		$url = home_url( '/' );
 	} elseif ( is_singular() && $post ) {
 		$title = nutriflow_get_seo_title( $post->ID );
