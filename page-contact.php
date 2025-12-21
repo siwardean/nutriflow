@@ -63,24 +63,39 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					
 					<ul class="nf-contact__list nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
 						<?php 
-						if ( function_exists('have_rows') && have_rows('contact_items') ) :
-							while ( have_rows('contact_items') ) : the_row(); 
-								$item_text = get_sub_field('item_text');
-								$item_type = get_sub_field('item_type');
-								$item_link = get_sub_field('item_link');
-								
-								if ( $item_type === 'link' && $item_link ) {
-									echo '<li><a href="' . esc_url( $item_link ) . '">' . esc_html( $item_text ) . '</a></li>';
-								} else {
-									echo '<li>' . esc_html( $item_text ) . '</li>';
-								}
-							endwhile;
-						else : ?>
-							<li>à Ixelles ou en visio</li>
-							<li>Le vendredi de 8h à 18h30 et le samedi de 10h à 18h30</li>
-							<li><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></li>
-							<li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li>
-						<?php endif; ?>
+						// Lieu
+						$contact_location = function_exists('get_field') ? get_field('contact_location') : false;
+						if ( $contact_location ) {
+							echo '<li>' . esc_html( $contact_location ) . '</li>';
+						} else {
+							echo '<li>à Ixelles ou en visio</li>';
+						}
+						
+						// Horaires
+						$contact_schedule = function_exists('get_field') ? get_field('contact_schedule') : false;
+						if ( $contact_schedule ) {
+							echo '<li>' . esc_html( $contact_schedule ) . '</li>';
+						} else {
+							echo '<li>Le vendredi de 8h à 18h30 et le samedi de 10h à 18h30</li>';
+						}
+						
+						// Téléphone
+						$contact_phone = function_exists('get_field') ? get_field('contact_phone') : false;
+						if ( $contact_phone ) {
+							$phone_clean = preg_replace( '/[^0-9+]/', '', $contact_phone );
+							echo '<li><a href="tel:' . esc_attr( $phone_clean ) . '">' . esc_html( $contact_phone ) . '</a></li>';
+						} else {
+							echo '<li><a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a></li>';
+						}
+						
+						// Email
+						$contact_email = function_exists('get_field') ? get_field('contact_email') : false;
+						if ( $contact_email ) {
+							echo '<li><a href="mailto:' . esc_attr( $contact_email ) . '">' . esc_html( $contact_email ) . '</a></li>';
+						} else {
+							echo '<li><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></li>';
+						}
+						?>
 					</ul>
 					
 					<p class="nf-contact__cta-text nf-animate-on-scroll nf-fade-in nf-animate-delay-3">

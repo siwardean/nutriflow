@@ -47,30 +47,79 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			</h1>
 			<div class="nf-accomp-hero__grid">
 				<?php 
-				if ( function_exists('have_rows') && have_rows('hero_cards') ) :
-					$index = 0;
-					while ( have_rows('hero_cards') ) : the_row(); 
-						$index++;
-						$delay = 'nf-animate-delay-' . ($index % 4 + 1);
-					?>
-						<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>">
-							<h3 class="nf-accomp-card__title"><?php echo esc_html( get_sub_field('card_title') ); ?></h3>
-							<p class="nf-accomp-card__description"><?php echo esc_html( get_sub_field('card_description') ); ?></p>
-						</article>
-					<?php endwhile;
-				else : ?>
+				// Carte 1
+				$card_1_title = function_exists('get_field') ? get_field('hero_card_1_title') : false;
+				$card_1_content = function_exists('get_field') ? get_field('hero_card_1_content') : false;
+				if ( $card_1_title || $card_1_content ) : ?>
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
+						<?php if ( $card_1_title ) : ?>
+							<h3 class="nf-accomp-card__title"><?php echo esc_html( $card_1_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $card_1_content ) : ?>
+							<div class="nf-accomp-card__description"><?php echo wp_kses_post( $card_1_content ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-accomp-card__title">Rééquilibrage alimentaire</h3>
 						<p class="nf-accomp-card__description">Rééquilibrer ton alimentation et/ou perdre du poids.</p>
 					</article>
+				<?php endif; ?>
+				
+				<?php 
+				// Carte 2
+				$card_2_title = function_exists('get_field') ? get_field('hero_card_2_title') : false;
+				$card_2_content = function_exists('get_field') ? get_field('hero_card_2_content') : false;
+				if ( $card_2_title || $card_2_content ) : ?>
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
+						<?php if ( $card_2_title ) : ?>
+							<h3 class="nf-accomp-card__title"><?php echo esc_html( $card_2_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $card_2_content ) : ?>
+							<div class="nf-accomp-card__description"><?php echo wp_kses_post( $card_2_content ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
 						<h3 class="nf-accomp-card__title">Troubles hormonaux</h3>
 						<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
 					</article>
+				<?php endif; ?>
+				
+				<?php 
+				// Carte 3
+				$card_3_title = function_exists('get_field') ? get_field('hero_card_3_title') : false;
+				$card_3_content = function_exists('get_field') ? get_field('hero_card_3_content') : false;
+				if ( $card_3_title || $card_3_content ) : ?>
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
+						<?php if ( $card_3_title ) : ?>
+							<h3 class="nf-accomp-card__title"><?php echo esc_html( $card_3_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $card_3_content ) : ?>
+							<div class="nf-accomp-card__description"><?php echo wp_kses_post( $card_3_content ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
 						<h3 class="nf-accomp-card__title">Nutrition & performances sportif·ves</h3>
 						<p class="nf-accomp-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
+				<?php endif; ?>
+				
+				<?php 
+				// Carte 4
+				$card_4_title = function_exists('get_field') ? get_field('hero_card_4_title') : false;
+				$card_4_content = function_exists('get_field') ? get_field('hero_card_4_content') : false;
+				if ( $card_4_title || $card_4_content ) : ?>
+					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
+						<?php if ( $card_4_title ) : ?>
+							<h3 class="nf-accomp-card__title"><?php echo esc_html( $card_4_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $card_4_content ) : ?>
+							<div class="nf-accomp-card__description"><?php echo wp_kses_post( $card_4_content ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
 						<h3 class="nf-accomp-card__title">Troubles digestifs</h3>
 						<p class="nf-accomp-card__description">Prendre soin de ton microbiote mais également pour soulager les troubles digestifs chroniques (SII, MICI, SIBO,..).</p>
@@ -92,30 +141,86 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			</h2>
 			<div class="nf-pricing__grid">
 				<?php 
-				if ( function_exists('have_rows') && have_rows('pricing_cards') ) :
-					// Count total rows first
-					$pricing_cards = get_field('pricing_cards');
-					$total_rows = $pricing_cards ? count( $pricing_cards ) : 0;
-					$index = 0;
-					while ( have_rows('pricing_cards') ) : the_row(); 
-						$index++;
-						$delay = 'nf-animate-delay-' . ($index % 3 + 1);
-						// Add flip-reverse class to last 2 cards
-						$flip_class = ($total_rows > 1 && $index > ($total_rows - 2)) ? 'nf-pricing-card--flip-reverse' : '';
-					?>
-						<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?> <?php echo esc_attr( $flip_class ); ?>">
-							<h3 class="nf-pricing-card__title"><?php echo esc_html( get_sub_field('pricing_card_title') ); ?></h3>
-							<p class="nf-pricing-card__price"><?php echo wp_kses_post( get_sub_field('pricing_card_price') ); ?></p>
-							<ul class="nf-pricing-card__list">
-								<?php 
-								if ( have_rows('pricing_card_items') ) :
-									while ( have_rows('pricing_card_items') ) : the_row(); ?>
-										<li><?php echo wp_kses_post( get_sub_field('pricing_item') ); ?></li>
-									<?php endwhile;
+				// Vérifier d'abord si les nouveaux champs ACF Free existent
+				$card_1_title = function_exists('get_field') ? get_field('pricing_card_1_title') : false;
+				
+				if ( $card_1_title || function_exists('have_rows') && have_rows('pricing_cards') ) :
+					// Nouveau système avec champs fixes (ACF Free)
+					if ( $card_1_title ) {
+						$pricing_cards = array();
+						for ( $i = 1; $i <= 3; $i++ ) {
+							$title = get_field( "pricing_card_{$i}_title" );
+							$price = get_field( "pricing_card_{$i}_price" );
+							$items = get_field( "pricing_card_{$i}_items" );
+							
+							if ( $title ) {
+								$pricing_cards[] = array(
+									'title' => $title,
+									'price' => $price,
+									'items' => $items,
+								);
+							}
+						}
+						
+						$total_rows = count( $pricing_cards );
+						foreach ( $pricing_cards as $index => $card ) :
+							$card_index = $index + 1;
+							$delay = 'nf-animate-delay-' . ($card_index % 3 + 1);
+							$flip_class = ($total_rows > 1 && $card_index > ($total_rows - 2)) ? 'nf-pricing-card--flip-reverse' : '';
+						?>
+							<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?> <?php echo esc_attr( $flip_class ); ?>">
+								<h3 class="nf-pricing-card__title"><?php echo esc_html( $card['title'] ); ?></h3>
+								<p class="nf-pricing-card__price"><?php echo wp_kses_post( $card['price'] ); ?></p>
+								<?php if ( $card['items'] ) : 
+									$items_content = $card['items'];
+									// Si le contenu contient déjà des <ul> ou <li>, on l'utilise tel quel
+									if ( strpos( $items_content, '<ul' ) !== false || strpos( $items_content, '<li' ) !== false ) {
+										// Extraire juste le contenu de la liste si elle est wrappée
+										if ( preg_match( '/<ul[^>]*>(.*?)<\/ul>/is', $items_content, $matches ) ) {
+											echo '<ul class="nf-pricing-card__list">' . wp_kses_post( $matches[1] ) . '</ul>';
+										} else {
+											echo wp_kses_post( $items_content );
+										}
+									} else {
+										// Sinon, créer une liste à partir du contenu
+										echo '<ul class="nf-pricing-card__list">';
+										// Diviser par les balises <p> ou les sauts de ligne
+										$items_array = preg_split( '/<p[^>]*>|<\/p>|\r\n|\r|\n/', $items_content );
+										foreach ( $items_array as $item ) {
+											$item = trim( strip_tags( $item, '<strong><em><a><del>' ) );
+											if ( ! empty( $item ) ) {
+												echo '<li>' . wp_kses_post( $item ) . '</li>';
+											}
+										}
+										echo '</ul>';
+									}
 								endif; ?>
-							</ul>
-						</article>
-					<?php endwhile;
+							</article>
+						<?php endforeach;
+					} else {
+						// Ancien système avec repeaters (ACF Pro)
+						$pricing_cards = get_field('pricing_cards');
+						$total_rows = $pricing_cards ? count( $pricing_cards ) : 0;
+						$index = 0;
+						while ( have_rows('pricing_cards') ) : the_row(); 
+							$index++;
+							$delay = 'nf-animate-delay-' . ($index % 3 + 1);
+							$flip_class = ($total_rows > 1 && $index > ($total_rows - 2)) ? 'nf-pricing-card--flip-reverse' : '';
+						?>
+							<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?> <?php echo esc_attr( $flip_class ); ?>">
+								<h3 class="nf-pricing-card__title"><?php echo esc_html( get_sub_field('pricing_card_title') ); ?></h3>
+								<p class="nf-pricing-card__price"><?php echo wp_kses_post( get_sub_field('pricing_card_price') ); ?></p>
+								<ul class="nf-pricing-card__list">
+									<?php 
+									if ( have_rows('pricing_card_items') ) :
+										while ( have_rows('pricing_card_items') ) : the_row(); ?>
+											<li><?php echo wp_kses_post( get_sub_field('pricing_item') ); ?></li>
+										<?php endwhile;
+									endif; ?>
+								</ul>
+							</article>
+						<?php endwhile;
+					}
 				else : ?>
 					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-pricing-card__title">Première consultation de +- 1h15</h3>
@@ -171,18 +276,24 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</h3>
-					<ul class="nf-sportif__list">
-						<?php 
-						if ( function_exists('have_rows') && have_rows('sportif_items') ) :
-							while ( have_rows('sportif_items') ) : the_row(); ?>
-								<li><?php echo wp_kses_post( get_sub_field('sportif_item') ); ?></li>
-							<?php endwhile;
-						else : ?>
-							<li>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un·e sportif·ve et adapter ton alimentation</li>
-							<li>Pour te <strong>préparer à un challenge sportif·ve</strong> ou <strong>compétition</strong></li>
-							<li><strong>Bilan nutritionnel</strong> sur mesure</li>
-						<?php endif; ?>
-					</ul>
+					<?php 
+					// Contenu Sportif (fusionné : contenu + liste)
+					$sportif_content = function_exists('nutriflow_get_field') ? nutriflow_get_field('sportif_content') : ( function_exists('get_field') ? get_field('sportif_content') : false );
+					if ( $sportif_content ) : ?>
+						<div class="nf-sportif__content">
+							<?php echo wp_kses_post( $sportif_content ); ?>
+						</div>
+					<?php else : ?>
+						<div class="nf-sportif__content">
+							<p>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un·e sportif·ve et adapter ton alimentation.</p>
+							<ul class="nf-sportif__list">
+								<li>Pour comprendre l'impact de l'alimentation sur tes performances</li>
+								<li>Pour optimiser ton alimentation avant, pendant et après l'effort</li>
+								<li>Pour gérer ton poids de façon adaptée à ta pratique</li>
+								<li>Pour optimiser ta récupération</li>
+							</ul>
+						</div>
+					<?php endif; ?>
 				</article>
 				<div class="nf-sportif__circles">
 					<span class="nf-sportif__circle nf-sportif__circle--white"></span>

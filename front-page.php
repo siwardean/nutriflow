@@ -189,30 +189,79 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			</h2>
 			<div class="nf-services__grid">
 				<?php 
-				if ( function_exists('have_rows') && have_rows('homepage_services') ) :
-					$index = 0;
-					while ( have_rows('homepage_services') ) : the_row(); 
-						$index++;
-						$delay = 'nf-animate-delay-' . ($index % 4 + 1);
-					?>
-						<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>">
-							<h3 class="nf-service-card__title"><?php echo esc_html( get_sub_field('service_title') ); ?></h3>
-							<p class="nf-service-card__description"><?php echo esc_html( get_sub_field('service_description') ); ?></p>
-						</article>
-					<?php endwhile;
-				else : ?>
+				// Service 1
+				$service_1_title = function_exists('get_field') ? get_field('homepage_service_1_title') : false;
+				$service_1_description = function_exists('get_field') ? get_field('homepage_service_1_description') : false;
+				if ( $service_1_title || $service_1_description ) : ?>
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
+						<?php if ( $service_1_title ) : ?>
+							<h3 class="nf-service-card__title"><?php echo esc_html( $service_1_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $service_1_description ) : ?>
+							<div class="nf-service-card__description"><?php echo wp_kses_post( $service_1_description ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-service-card__title">Rééquilibrage alimentaire</h3>
 						<p class="nf-service-card__description">Rééquilibrer ton alimentation et/ou perdre du poids.</p>
 					</article>
+				<?php endif; ?>
+				
+				<?php 
+				// Service 2
+				$service_2_title = function_exists('get_field') ? get_field('homepage_service_2_title') : false;
+				$service_2_description = function_exists('get_field') ? get_field('homepage_service_2_description') : false;
+				if ( $service_2_title || $service_2_description ) : ?>
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
+						<?php if ( $service_2_title ) : ?>
+							<h3 class="nf-service-card__title"><?php echo esc_html( $service_2_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $service_2_description ) : ?>
+							<div class="nf-service-card__description"><?php echo wp_kses_post( $service_2_description ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
 						<h3 class="nf-service-card__title">Troubles hormonaux</h3>
 						<p class="nf-service-card__description">Soulager tes symptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
 					</article>
+				<?php endif; ?>
+				
+				<?php 
+				// Service 3
+				$service_3_title = function_exists('get_field') ? get_field('homepage_service_3_title') : false;
+				$service_3_description = function_exists('get_field') ? get_field('homepage_service_3_description') : false;
+				if ( $service_3_title || $service_3_description ) : ?>
 					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
-						<h3 class="nf-service-card__title">Nutrition & performances sportives</h3>
+						<?php if ( $service_3_title ) : ?>
+							<h3 class="nf-service-card__title"><?php echo esc_html( $service_3_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $service_3_description ) : ?>
+							<div class="nf-service-card__description"><?php echo wp_kses_post( $service_3_description ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
+						<h3 class="nf-service-card__title">Nutrition & performances sportif·ves</h3>
 						<p class="nf-service-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
+				<?php endif; ?>
+				
+				<?php 
+				// Service 4
+				$service_4_title = function_exists('get_field') ? get_field('homepage_service_4_title') : false;
+				$service_4_description = function_exists('get_field') ? get_field('homepage_service_4_description') : false;
+				if ( $service_4_title || $service_4_description ) : ?>
+					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
+						<?php if ( $service_4_title ) : ?>
+							<h3 class="nf-service-card__title"><?php echo esc_html( $service_4_title ); ?></h3>
+						<?php endif; ?>
+						<?php if ( $service_4_description ) : ?>
+							<div class="nf-service-card__description"><?php echo wp_kses_post( $service_4_description ); ?></div>
+						<?php endif; ?>
+					</article>
+				<?php else : ?>
 					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-4">
 						<h3 class="nf-service-card__title">Troubles digestifs</h3>
 						<p class="nf-service-card__description">Prendre soin de ton microbiote mais également pour soulager les troubles digestifs chroniques (SII, MICI, SIBO,..).</p>
@@ -225,29 +274,76 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 		<section class="nf-testimonials" id="testimonials">
 			<h2 class="nf-testimonials__heading nf-animate-on-scroll nf-fade-in">
 				<?php 
-				if ( function_exists('get_field') ) {
-					echo get_field('homepage_testimonials_heading') ?: 'Témoignages';
-				} else {
-					echo 'Témoignages';
+				$testimonial_heading = false;
+				if ( function_exists('nutriflow_get_field') ) {
+					$testimonial_heading = nutriflow_get_field('homepage_testimonials_heading');
+				} elseif ( function_exists('get_field') ) {
+					$testimonial_heading = get_field('homepage_testimonials_heading');
 				}
+				echo $testimonial_heading ?: 'Témoignages';
 				?>
 			</h2>
-			<div class="nf-testimonials__quote nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
+			<div class="nf-testimonials__slider-wrapper">
 				<span class="nf-testimonials__quote-mark">&ldquo;</span>
-				<?php 
-				if ( function_exists('have_rows') && have_rows('homepage_testimonials') ) :
-					while ( have_rows('homepage_testimonials') ) : the_row(); ?>
-						<blockquote class="nf-testimonial">
-							<p><?php echo esc_html( get_sub_field('testimonial_text') ); ?></p>
-							<cite><?php echo esc_html( get_sub_field('testimonial_author') ); ?></cite>
-						</blockquote>
-					<?php endwhile;
-				else : ?>
-					<blockquote class="nf-testimonial">
-						<p>J'ai contacté Florence afin de mieux comprendre quelle est l'alimentation qui me correspondrait le mieux, et adopter des habitudes saines sur le long terme. Son écoute attentive et son accompagnement personnalisé m'ont beaucoup appris, et le défi à été réussi. Je la recommande vivement.</p>
-						<cite>Nina Rozenberg</cite>
-					</blockquote>
-				<?php endif; ?>
+				<div class="nf-testimonials__slider" id="testimonials-slider">
+					<?php 
+					// Témoignage 1
+					$testimonial_1_text = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_1_text') : ( function_exists('get_field') ? get_field('homepage_testimonial_1_text') : '' );
+					$testimonial_1_author = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_1_author') : ( function_exists('get_field') ? get_field('homepage_testimonial_1_author') : '' );
+					
+					// Valeurs par défaut pour le témoignage 1
+					if ( empty( $testimonial_1_text ) ) {
+						$testimonial_1_text = '<p style="text-align: center;"><em>J\'ai contacté Florence afin de mieux comprendre quelle est l\'alimentation qui me correspondrait le mieux, et adopter des habitudes saines sur le long terme. Son écoute attentive et son accompagnement personnalisé m\'ont beaucoup appris, et le défi à été réussi. Je la recommande vivement.</em></p>';
+					}
+					if ( empty( $testimonial_1_author ) ) {
+						$testimonial_1_author = 'Nina Rozenberg';
+					}
+					
+					// Témoignage 2
+					$testimonial_2_text = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_2_text') : ( function_exists('get_field') ? get_field('homepage_testimonial_2_text') : '' );
+					$testimonial_2_author = function_exists('nutriflow_get_field') ? nutriflow_get_field('homepage_testimonial_2_author') : ( function_exists('get_field') ? get_field('homepage_testimonial_2_author') : '' );
+					
+					// Valeurs par défaut pour le témoignage 2
+					if ( empty( $testimonial_2_text ) ) {
+						$testimonial_2_text = '<p style="text-align: center;"><em>Dans le cadre de ma reprise du sport, j\'ai fait appel à Florence pour adopter des habitudes nutritionnelles adaptées et durables. Son accompagnement, à la fois clair et bienveillant, m\'a permis d\'améliorer ma nutrition de manière concrète. Je suis très satisfait de son suivi et je la remercie pour son aide précieuse.</em></p>';
+					}
+					if ( empty( $testimonial_2_author ) ) {
+						$testimonial_2_author = 'Siwar Madrane';
+					}
+					?>
+					<!-- Témoignage 1 -->
+					<div class="nf-testimonials__slide">
+						<div class="nf-testimonials__quote">
+							<blockquote class="nf-testimonial">
+								<?php if ( $testimonial_1_text ) : ?>
+									<div class="nf-testimonial__text"><?php echo wp_kses_post( $testimonial_1_text ); ?></div>
+								<?php endif; ?>
+								<?php if ( $testimonial_1_author ) : ?>
+									<cite><?php echo esc_html( $testimonial_1_author ); ?></cite>
+								<?php endif; ?>
+							</blockquote>
+						</div>
+					</div>
+					
+					<!-- Témoignage 2 -->
+					<div class="nf-testimonials__slide">
+						<div class="nf-testimonials__quote">
+							<blockquote class="nf-testimonial">
+								<?php if ( $testimonial_2_text ) : ?>
+									<div class="nf-testimonial__text"><?php echo wp_kses_post( $testimonial_2_text ); ?></div>
+								<?php endif; ?>
+								<?php if ( $testimonial_2_author ) : ?>
+									<cite><?php echo esc_html( $testimonial_2_author ); ?></cite>
+								<?php endif; ?>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+				<!-- Contrôles du slider -->
+				<div class="nf-testimonials__controls">
+					<button class="nf-testimonials__prev" aria-label="Témoignage précédent">‹</button>
+					<button class="nf-testimonials__next" aria-label="Témoignage suivant">›</button>
+				</div>
 			</div>
 		</section>
 	<?php endif; ?>

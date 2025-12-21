@@ -55,19 +55,42 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			</div>
 		</section>
 
-		<!-- Image Gallery -->
+			<!-- Image Gallery -->
 		<section class="nf-apropos-gallery">
 			<div class="nf-apropos-gallery__grid">
 				<?php 
-				$gallery = function_exists('get_field') ? get_field('gallery_images') : false;
-				if ( $gallery ) :
+				$gallery = function_exists('nutriflow_get_field') ? nutriflow_get_field('gallery_images') : ( function_exists('get_field') ? get_field('gallery_images') : false );
+				if ( $gallery && is_array( $gallery ) ) :
+					// Normalize gallery format (Pods returns array differently than ACF)
 					$index = 0;
 					foreach ( $gallery as $image ) : 
 						$index++;
 						$delay = 'nf-animate-delay-' . ($index % 4 + 1);
+						
+						// Handle different image formats (ACF array vs Pods format)
+						$image_url = '';
+						$image_alt = '';
+						
+						if ( is_array( $image ) && isset( $image['url'] ) ) {
+							// ACF format
+							$image_url = $image['url'];
+							$image_alt = isset( $image['alt'] ) ? $image['alt'] : '';
+						} elseif ( is_numeric( $image ) ) {
+							// Pods format: attachment ID
+							$image_url = wp_get_attachment_image_url( $image, 'full' );
+							$image_alt = get_post_meta( $image, '_wp_attachment_image_alt', true );
+						} elseif ( is_array( $image ) && isset( $image['ID'] ) ) {
+							// Pods format: array with ID
+							$image_url = wp_get_attachment_image_url( $image['ID'], 'full' );
+							$image_alt = get_post_meta( $image['ID'], '_wp_attachment_image_alt', true );
+						}
+						
+						if ( $image_url ) :
 					?>
-						<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>" />
-					<?php endforeach;
+						<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="nf-animate-on-scroll nf-slide-in-up <?php echo esc_attr( $delay ); ?>" />
+					<?php 
+						endif;
+					endforeach;
 				else : ?>
 					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-1.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1" />
 					<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/gallery-2.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2" />
@@ -103,17 +126,18 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</h2>
-					<ul class="nf-apropos-formations__list">
+					<div class="nf-apropos-formations__list">
 						<?php 
-						if ( function_exists('have_rows') && have_rows('formations_list') ) :
-							while ( have_rows('formations_list') ) : the_row(); ?>
-								<li><?php echo wp_kses_post( get_sub_field('formation_item') ); ?></li>
-							<?php endwhile;
-						else : ?>
-							<li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li>
-							<li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li>
+						$formations_list = function_exists('nutriflow_get_field') ? nutriflow_get_field('formations_list') : ( function_exists('get_field') ? get_field('formations_list') : false );
+						if ( $formations_list ) : ?>
+							<?php echo wp_kses_post( $formations_list ); ?>
+						<?php else : ?>
+							<ul>
+								<li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li>
+								<li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li>
+							</ul>
 						<?php endif; ?>
-					</ul>
+					</div>
 				</div>
 			</div>
 		</section>

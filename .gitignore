@@ -1,3 +1,28 @@
-!README.md
-node_modules
-vite.local.mjs
+# Nutriflow Theme - Local Configuration Files
+# These files should not be committed to Git
+
+# Local WordPress configuration
+wp-config.local.php
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Node modules (if using build tools)
+node_modules/
+npm-debug.log
