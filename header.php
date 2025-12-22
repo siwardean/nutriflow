@@ -21,6 +21,9 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<!-- DNS prefetch for better performance -->
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 	<?php wp_head(); ?>
@@ -47,13 +50,12 @@
 						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/logo-nutriflow-blue-navy.png" alt="<?php bloginfo( 'name' ); ?>" />
 					</a>
 				</div>
-				<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">
+				<button id="nav-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Menu">
 					<span class="menu-toggle__bars" aria-hidden="true">
 						<span></span>
 						<span></span>
 						<span></span>
 					</span>
-					<span class="menu-toggle__label"><?php esc_html_e( 'Menu', 'nutriflow' ); ?></span>
 				</button>
 				<ul id="primary-menu">
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"<?php if ( is_front_page() ) echo ' class="current-page"'; ?>>Accueil</a></li>

@@ -76,7 +76,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					if ( $hero_image ) : ?>
 						<img src="<?php echo esc_url( $hero_image['url'] ); ?>" alt="<?php echo esc_attr( $hero_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero/hero-kitchen.jpg" alt="Kitchen scene" class="nf-animate-on-scroll nf-slide-in-right" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero/hero-kitchen.jpg" alt="Florence Van Hecke, nutrithérapeute à Bruxelles - Consultation en nutrithérapie" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php endif; ?>
 				</div>
 			</div>
@@ -91,7 +91,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					if ( $about_image ) : ?>
 						<img src="<?php echo esc_url( $about_image['url'] ); ?>" alt="<?php echo esc_attr( $about_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-left" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/pool-woman.jpg" alt="Woman by pool" class="nf-animate-on-scroll nf-slide-in-left" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/about/pool-woman.jpg" alt="Nutrithérapeute Florence Van Hecke à Ixelles, Bruxelles" class="nf-animate-on-scroll nf-slide-in-left" />
 					<?php endif; ?>
 				</div>
 				<div class="nf-about__content">
@@ -170,7 +170,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					if ( $consult_image ) : ?>
 						<img src="<?php echo esc_url( $consult_image['url'] ); ?>" alt="<?php echo esc_attr( $consult_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/consultation/market-woman.jpg" alt="Woman at market" class="nf-animate-on-scroll nf-slide-in-right" />
+						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/consultation/market-woman.jpg" alt="Consultation en nutrithérapie avec Florence Van Hecke, nutrithérapeute à Bruxelles" class="nf-animate-on-scroll nf-slide-in-right" />
 					<?php endif; ?>
 				</div>
 			</div>

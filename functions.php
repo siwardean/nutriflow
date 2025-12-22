@@ -201,6 +201,7 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/pods-config.php';
 require get_template_directory() . '/inc/pods-helpers.php';
 require get_template_directory() . '/inc/pods-migration-data.php';
+require get_template_directory() . '/inc/seo.php';
 
 /**
  * Filtrer les groupes Pods pour n'afficher que ceux correspondant au template de page
