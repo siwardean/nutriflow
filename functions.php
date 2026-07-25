@@ -432,20 +432,20 @@ function nutriflow_init_pricing_defaults( $post_id ) {
 	
 	// Check if pricing fields are empty and initialize defaults
 	if ( ! nutriflow_get_field( 'pricing_card_1_title', $post_id ) ) {
-		update_field( 'pricing_card_1_title', 'Première consultation de +- 1h15', $post_id );
-		update_field( 'pricing_card_1_price', '- 70 euros -', $post_id );
+		update_field( 'pricing_card_1_title', 'Première consultation de 1h15', $post_id );
+		update_field( 'pricing_card_1_price', '- 90 euros -', $post_id );
 		update_field( 'pricing_card_1_items', '<ul><li><strong>Questionnaire</strong> préparatoire</li><li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li><li>Etablissement des <strong>objectifs</strong></li><li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li></ul>', $post_id );
 	}
 	
 	if ( ! nutriflow_get_field( 'pricing_card_2_title', $post_id ) ) {
-		update_field( 'pricing_card_2_title', 'Consultation de suivi de 30 à 45 minutes', $post_id );
-		update_field( 'pricing_card_2_price', '- 40 euros -', $post_id );
+		update_field( 'pricing_card_2_title', 'Consultation de suivi de 45 minutes', $post_id );
+		update_field( 'pricing_card_2_price', '- 55 euros -', $post_id );
 		update_field( 'pricing_card_2_items', '<ul><li>Premier retour d\'expérience et <strong>questions</strong> - réponses</li><li>Evaluation des <strong>résultats et adaptation</strong> de l\'accompagnement si nécessaire</li></ul>', $post_id );
 	}
 	
 	if ( ! nutriflow_get_field( 'pricing_card_3_title', $post_id ) ) {
 		update_field( 'pricing_card_3_title', 'Pack \'Accompagnement sur 3 mois\'', $post_id );
-		update_field( 'pricing_card_3_price', '<del>-190</del> 175 euros -', $post_id );
+		update_field( 'pricing_card_3_price', '<del>-255</del> 235 euros -', $post_id );
 		update_field( 'pricing_card_3_items', '<ul><li>Total de <strong>4 consultations</strong></li><li>Pour un <strong>changement ancré</strong> sur du long terme</li><li>Payable en plusieurs fois</li><li>Echanges sur whatsapp entre les consultations</li></ul>', $post_id );
 	}
 }

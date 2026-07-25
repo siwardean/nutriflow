@@ -243,7 +243,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</article>
 				<?php else : ?>
 					<article class="nf-service-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
-						<h3 class="nf-service-card__title">Nutrition & performances sportif·ves</h3>
+						<h3 class="nf-service-card__title">Nutrition & performances sportives</h3>
 						<p class="nf-service-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
 				<?php endif; ?>

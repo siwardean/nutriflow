@@ -135,6 +135,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							<ul>
 								<li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li>
 								<li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li>
+								<li><strong>DFM Formation</strong> (2026) : Prise en charge des troubles du comportement alimentaire</li>
 							</ul>
 						<?php endif; ?>
 					</div>
@@ -160,9 +161,11 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					if ( $sport_content ) {
 						echo wp_kses_post( $sport_content );
 					} else {
-						echo '<p>Je fais du sport depuis toute petite : <strong>danse</strong>, tennis, <strong>natation</strong>,... Puis jeune adulte je mords très vite à la <strong>course à pied</strong> dont je ne peux aujourd\'hui plus me passer, mais je découvre également le <strong>yoga</strong>, le <strong>vélo</strong> et bien d\'autres activités sportives. J\'obtiens mon <strong>Yoga Teacher Training Certificate</strong> en 2023 au Portugal lors d\'une pause professionnelle.</p>';
-						echo '<p>En 2025, je deviens <strong>triathlète</strong> avec mon tout premier triathlon olympique.</p>';
-						echo '<p>La pratique sportive est pour moi la recherche d\'un <strong>bien-être général</strong> de mon corps et la <strong>recherche de l\'équilibre</strong>.</p>';
+						echo '<p>Le sport fait partie de ma vie depuis toujours. Enfant, j’ai exploré la danse, le tennis, la natation… puis, jeune adulte, la course à pied s’est imposée naturellement. Une pratique dont je ne peux aujourd’hui plus me passer. Avec le temps, j’ai aussi découvert le yoga, le vélo et d’autres formes de mouvement, chacune m’apportant un équilibre différent. En 2023, lors d’une pause professionnelle au Portugal, j’obtiens mon <strong>Yoga Teacher Training Certificate</strong>, renforçant encore ma vision globale du corps en mouvement.</p>';
+						echo '<p>En 2025, je franchis une nouvelle étape en devenant <strong>triathlète</strong>, avec la réalisation de mon premier triathlon olympique.</p>';
+						echo '<p>Au fil de ces expériences, une chose s’est imposée à moi : <strong>le sport est un formidable levier de bien-être</strong>, à condition d’être soutenu par une nutrition adaptée. Que l’on débute une activité physique, que l’on s’entraîne régulièrement ou que l’on vise la performance, l’alimentation joue un rôle central dans l’énergie, la récupération, la prévention des blessures et l’équilibre hormonal.</p>';
+						echo '<p>Sans un apport nutritionnel adéquat, le sport peut parfois devenir contre-productif : fatigue persistante, baisse de performance, troubles digestifs, dérèglements du cycle, blessures à répétition, ou encore une relation compliquée à l’alimentation et au corps. Chez certain·es sportif·ves, on observe également des risques plus sérieux comme le <strong>RED-S</strong> (syndrome de déficit énergétique relatif) ou des <strong>troubles du comportement alimentaire</strong>, souvent liés à une méconnaissance des besoins réels du corps.</p>';
+						echo '<p>C’est là que la nutrithérapie prend tout son sens. Mon approche en nutrition sportive vise à <strong>accompagner le corps</strong>, pas à le contraindre. Donner les bons apports au bon moment, comprendre ses besoins spécifiques, soutenir la récupération et préserver la santé sur le long terme.</p>';
 					}
 					?>
 				</div>

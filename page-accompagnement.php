@@ -82,7 +82,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				<?php else : ?>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2">
 						<h3 class="nf-accomp-card__title">Troubles hormonaux</h3>
-						<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...</p>
+						<p class="nf-accomp-card__description">Soulager tes simptômes et rééquilibrer les troubles hormonaux : thyroïde, SPM, endométriose, SOPK,...</p>
 					</article>
 				<?php endif; ?>
 				
@@ -101,7 +101,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</article>
 				<?php else : ?>
 					<article class="nf-accomp-card nf-accomp-card--filled nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3">
-						<h3 class="nf-accomp-card__title">Nutrition & performances sportif·ves</h3>
+						<h3 class="nf-accomp-card__title">Nutrition & performances sportives</h3>
 						<p class="nf-accomp-card__description">Améliorer tes performances et mieux comprendre l'impact de ton alimentation sur tes résultats.</p>
 					</article>
 				<?php endif; ?>
@@ -223,8 +223,8 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					}
 				else : ?>
 					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
-						<h3 class="nf-pricing-card__title">Première consultation de +- 1h15</h3>
-						<p class="nf-pricing-card__price">- 70 euros -</p>
+						<h3 class="nf-pricing-card__title">Première consultation de 1h15</h3>
+						<p class="nf-pricing-card__price">- 90 euros -</p>
 						<ul class="nf-pricing-card__list">
 							<li><strong>Questionnaire</strong> préparatoire</li>
 							<li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li>
@@ -233,8 +233,8 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						</ul>
 					</article>
 					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-2 nf-pricing-card--flip-reverse">
-						<h3 class="nf-pricing-card__title">Consultation de suivi de 30 à 45 minutes</h3>
-						<p class="nf-pricing-card__price">- 40 euros -</p>
+						<h3 class="nf-pricing-card__title">Consultation de suivi de 45 minutes</h3>
+						<p class="nf-pricing-card__price">- 55 euros -</p>
 						<ul class="nf-pricing-card__list">
 							<li>Premier retour d'expérience et <strong>questions</strong> - réponses</li>
 							<li>Evaluation des <strong>résultats et adaptation</strong> de l'accompagnement si nécessaire</li>
@@ -242,7 +242,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</article>
 					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3 nf-pricing-card--flip-reverse">
 						<h3 class="nf-pricing-card__title">Pack 'Accompagnement sur 3 mois'</h3>
-						<p class="nf-pricing-card__price"><del>-190</del> 175 euros -</p>
+						<p class="nf-pricing-card__price"><del>-255</del> 235 euros -</p>
 						<ul class="nf-pricing-card__list">
 							<li>Total de <strong>4 consultations</strong></li>
 							<li>Pour un <strong>changement ancré</strong> sur du long terme</li>
@@ -259,9 +259,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 			<h2 class="nf-sportif__title nf-animate-on-scroll nf-fade-in">
 				<?php 
 				if ( function_exists('get_field') ) {
-					echo get_field('sportif_title') ?: 'Tu souhaites un accompagnement spécial " Nutrition du sportif·ve " ?';
+					echo get_field('sportif_title') ?: 'La nutrition sportive ?';
 				} else {
-					echo 'Tu souhaites un accompagnement spécial " Nutrition du sportif·ve " ?';
+					echo 'La nutrition sportive ?';
 				}
 				?>
 			</h2>
@@ -285,12 +285,10 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						</div>
 					<?php else : ?>
 						<div class="nf-sportif__content">
-							<p>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un·e sportif·ve et adapter ton alimentation.</p>
 							<ul class="nf-sportif__list">
-								<li>Pour comprendre l'impact de l'alimentation sur tes performances</li>
-								<li>Pour optimiser ton alimentation avant, pendant et après l'effort</li>
-								<li>Pour gérer ton poids de façon adaptée à ta pratique</li>
-								<li>Pour optimiser ta récupération</li>
+								<li>Pour t'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d'un·e sportif·ve et adapter ton alimentation</li>
+								<li>Pour te <strong>préparer à un challenge sportif</strong> ou <strong>compétition</strong></li>
+								<li><strong>Bilan nutritionnel</strong> sur mesure</li>
 							</ul>
 						</div>
 					<?php endif; ?>
@@ -321,8 +319,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						if ( $location_info ) {
 							echo wp_kses_post( $location_info );
 						} else {
-							echo '<p>A <strong>Ixelles</strong> ou en visio</p>';
-							echo '<p>Le <strong>vendredi</strong> de 8h à 18h30 et le <strong>samedi</strong> de 10h à 18h30</p>';
+							echo '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p>';
+							echo '<p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p>';
+							echo '<p>Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p>';
 							echo '<p><a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a></p>';
 							echo '<p><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></p>';
 						}

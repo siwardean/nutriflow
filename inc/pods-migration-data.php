@@ -269,7 +269,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 		$pod->save( array( 'hero_card_2_title' => 'Troubles hormonaux' ) );
 	}
 	if ( ! $pod->field( 'hero_card_2_content' ) ) {
-		$pod->save( array( 'hero_card_2_content' => 'Soulager tes simptômes et rééquilibrer les troubles hormonaux : SPM, endométriose, SOPK,...' ) );
+		$pod->save( array( 'hero_card_2_content' => 'Soulager tes simptômes et rééquilibrer les troubles hormonaux : thyroïde, SPM, endométriose, SOPK,...' ) );
 	}
 	if ( ! $pod->field( 'hero_card_3_title' ) ) {
 		$pod->save( array( 'hero_card_3_title' => 'Nutrition & performances sportives' ) );
@@ -291,10 +291,10 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	
 	// Carte Tarif 1
 	if ( ! $pod->field( 'pricing_card_1_title' ) ) {
-		$data_to_save['pricing_card_1_title'] = 'Première consultation de +- 1h15';
+		$data_to_save['pricing_card_1_title'] = 'Première consultation de 1h15';
 	}
 	if ( ! $pod->field( 'pricing_card_1_price' ) ) {
-		$data_to_save['pricing_card_1_price'] = '- 70 euros -';
+		$data_to_save['pricing_card_1_price'] = '- 90 euros -';
 	}
 	if ( ! $pod->field( 'pricing_card_1_items' ) ) {
 		$data_to_save['pricing_card_1_items'] = '<ul><li><strong>Questionnaire</strong> préparatoire</li><li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li><li>Etablissement des <strong>objectifs</strong></li><li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li></ul>';
@@ -302,10 +302,10 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	
 	// Carte Tarif 2
 	if ( ! $pod->field( 'pricing_card_2_title' ) ) {
-		$data_to_save['pricing_card_2_title'] = 'Consultation de suivi de 30 à 45 minutes';
+		$data_to_save['pricing_card_2_title'] = 'Consultation de suivi de 45 minutes';
 	}
 	if ( ! $pod->field( 'pricing_card_2_price' ) ) {
-		$data_to_save['pricing_card_2_price'] = '- 40 euros -';
+		$data_to_save['pricing_card_2_price'] = '- 55 euros -';
 	}
 	if ( ! $pod->field( 'pricing_card_2_items' ) ) {
 		$data_to_save['pricing_card_2_items'] = '<ul><li>Premier retour d\'expérience et <strong>questions</strong> - réponses</li><li>Evaluation des <strong>résultats et adaptation</strong> de l\'accompagnement si nécessaire</li></ul>';
@@ -316,7 +316,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 		$data_to_save['pricing_card_3_title'] = 'Pack \'Accompagnement sur 3 mois\'';
 	}
 	if ( ! $pod->field( 'pricing_card_3_price' ) ) {
-		$data_to_save['pricing_card_3_price'] = '<del>-190</del> 175 euros -';
+		$data_to_save['pricing_card_3_price'] = '<del>-255</del> 235 euros -';
 	}
 	if ( ! $pod->field( 'pricing_card_3_items' ) ) {
 		$data_to_save['pricing_card_3_items'] = '<ul><li>Total de <strong>4 consultations</strong></li><li>Pour un <strong>changement ancré</strong> sur du long terme</li><li>Payable en plusieurs fois</li><li>Echanges sur whatsapp entre les consultations</li></ul>';
@@ -329,7 +329,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	
 	// Section Sportif
 	if ( ! $pod->field( 'sportif_title' ) ) {
-		$data_to_save['sportif_title'] = 'Tu souhaites un accompagnement spécial " Nutrition du sportif " ?';
+		$data_to_save['sportif_title'] = 'La nutrition sportive ?';
 	}
 	if ( ! $pod->field( 'sportif_card_title' ) ) {
 		$data_to_save['sportif_card_title'] = 'Accompagnement sur mesure';
@@ -343,7 +343,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	// Contenu Sportif (fusionné : contenu + liste)
 	$current_sportif_content = $pod->field( 'sportif_content', true );
 	if ( empty( $current_sportif_content ) || $current_sportif_content === false ) {
-		$data_to_save['sportif_content'] = '<p>Pour t\'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d\'un·e sportif·ve et adapter ton alimentation.</p><ul><li>Pour comprendre l\'impact de l\'alimentation sur tes performances</li><li>Pour optimiser ton alimentation avant, pendant et après l\'effort</li><li>Pour gérer ton poids de façon adaptée à ta pratique</li><li>Pour optimiser ta récupération</li></ul>';
+		$data_to_save['sportif_content'] = '<ul><li>Pour t\'aider à y voir plus clair dans les <strong>besoins spécifiques</strong> d\'un·e sportif·ve et adapter ton alimentation</li><li>Pour te <strong>préparer à un challenge sportif</strong> ou <strong>compétition</strong></li><li><strong>Bilan nutritionnel</strong> sur mesure</li></ul>';
 	}
 	
 	if ( ! empty( $data_to_save ) ) {
@@ -358,13 +358,13 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	
 	// Location Info (WYSIWYG) - Pré-remplir avec les valeurs par défaut
 	if ( ! $pod->field( 'location_info' ) ) {
-		$location_info = '<p>A <strong>Ixelles</strong> ou en visio</p><p>Le <strong>vendredi</strong> de 8h à 18h30 et le <strong>samedi</strong> de 10h à 18h30</p>';
+		$location_info = '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p>Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p>';
 		$pod->save( array( 'location_info' => $location_info ) );
 	}
 	
 	// Location Info (WYSIWYG) - Pré-remplir avec les valeurs par défaut
 	if ( ! $pod->field( 'location_info' ) ) {
-		$location_info = '<p>A <strong>Ixelles</strong> ou en visio</p><p>Le <strong>vendredi</strong> de 8h à 18h30 et le <strong>samedi</strong> de 10h à 18h30</p>';
+		$location_info = '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p>Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p>';
 		$pod->save( array( 'location_info' => $location_info ) );
 	}
 }
@@ -404,7 +404,7 @@ function nutriflow_prefill_apropos_fields( $page_id ) {
 	// Formations List (WYSIWYG)
 	$current_formations_list = $pod->field( 'formations_list', true );
 	if ( empty( $current_formations_list ) || $current_formations_list === false ) {
-		$data_to_save['formations_list'] = '<ul><li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li><li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li></ul>';
+		$data_to_save['formations_list'] = '<ul><li><strong>CFNA</strong> (2022-2024) : Conseiller en nutrithérapie</li><li><strong>Oreka Formation</strong> (2025) : Nutrition et complémentation du sportif</li><li><strong>DFM Formation</strong> (2026) : Prise en charge des troubles du comportement alimentaire</li></ul>';
 	}
 	
 	if ( ! empty( $data_to_save ) ) {
@@ -422,7 +422,7 @@ function nutriflow_prefill_apropos_fields( $page_id ) {
 		$data_to_save['sport_title'] = 'Le sport comme source de bien-être';
 	}
 	if ( ! $pod->field( 'sport_content' ) ) {
-		$data_to_save['sport_content'] = '<p>Je fais du sport depuis toute petite : <strong>danse</strong>, tennis, <strong>natation</strong>,... Puis jeune adulte je mords très vite à la <strong>course à pied</strong> dont je ne peux aujourd\'hui plus me passer, mais je découvre également le <strong>yoga</strong>, le <strong>vélo</strong> et bien d\'autres activités sportives. J\'obtiens mon <strong>Yoga Teacher Training Certificate</strong> en 2023 au Portugal lors d\'une pause professionnelle.</p><br><br><p>En 2025, je deviens <strong>triathlète</strong> avec mon tout premier triathlon olympique.</p><br><br><p>La pratique sportive est pour moi la recherche d\'un <strong>bien-être général</strong> de mon corps et la <strong>recherche de l\'équilibre</strong>.</p>';
+		$data_to_save['sport_content'] = '<p>Le sport fait partie de ma vie depuis toujours. Enfant, j’ai exploré la danse, le tennis, la natation… puis, jeune adulte, la course à pied s’est imposée naturellement. Une pratique dont je ne peux aujourd’hui plus me passer. Avec le temps, j’ai aussi découvert le yoga, le vélo et d’autres formes de mouvement, chacune m’apportant un équilibre différent. En 2023, lors d’une pause professionnelle au Portugal, j’obtiens mon <strong>Yoga Teacher Training Certificate</strong>, renforçant encore ma vision globale du corps en mouvement.</p><p>En 2025, je franchis une nouvelle étape en devenant <strong>triathlète</strong>, avec la réalisation de mon premier triathlon olympique.</p><p>Au fil de ces expériences, une chose s’est imposée à moi : <strong>le sport est un formidable levier de bien-être</strong>, à condition d’être soutenu par une nutrition adaptée. Que l’on débute une activité physique, que l’on s’entraîne régulièrement ou que l’on vise la performance, l’alimentation joue un rôle central dans l’énergie, la récupération, la prévention des blessures et l’équilibre hormonal.</p><p>Sans un apport nutritionnel adéquat, le sport peut parfois devenir contre-productif : fatigue persistante, baisse de performance, troubles digestifs, dérèglements du cycle, blessures à répétition, ou encore une relation compliquée à l’alimentation et au corps. Chez certain·es sportif·ves, on observe également des risques plus sérieux comme le <strong>RED-S</strong> (syndrome de déficit énergétique relatif) ou des <strong>troubles du comportement alimentaire</strong>, souvent liés à une méconnaissance des besoins réels du corps.</p><p>C’est là que la nutrithérapie prend tout son sens. Mon approche en nutrition sportive vise à <strong>accompagner le corps</strong>, pas à le contraindre. Donner les bons apports au bon moment, comprendre ses besoins spécifiques, soutenir la récupération et préserver la santé sur le long terme.</p>';
 	}
 	
 	if ( ! empty( $data_to_save ) ) {
@@ -464,7 +464,7 @@ function nutriflow_prefill_contact_fields( $page_id ) {
 		$pod->save( array( 'contact_location' => 'à Ixelles ou en visio' ) );
 	}
 	if ( ! $pod->field( 'contact_schedule' ) ) {
-		$pod->save( array( 'contact_schedule' => 'Le vendredi de 8h à 18h30 et le samedi de 10h à 18h30' ) );
+		$pod->save( array( 'contact_schedule' => 'Le mercredi de 8h30 à 18h30 à la Clinica Vital près de la place Jourdan à Ixelles et les jeudi et vendredi en visio' ) );
 	}
 	if ( ! $pod->field( 'contact_phone' ) ) {
 		$pod->save( array( 'contact_phone' => '+32 486 920 962' ) );

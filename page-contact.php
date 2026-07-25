@@ -76,7 +76,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						if ( $contact_schedule ) {
 							echo '<li>' . esc_html( $contact_schedule ) . '</li>';
 						} else {
-							echo '<li>Le vendredi de 8h à 18h30 et le samedi de 10h à 18h30</li>';
+							echo '<li>Le mercredi de 8h30 à 18h30 à la Clinica Vital près de la place Jourdan à Ixelles et les jeudi et vendredi en visio</li>';
 						}
 						
 						// Téléphone
@@ -101,9 +101,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					<p class="nf-contact__cta-text nf-animate-on-scroll nf-fade-in nf-animate-delay-3">
 						<?php 
 						if ( function_exists('get_field') ) {
-							echo get_field('contact_cta_text') ?: 'Si tu as des questions ? N\'hésites pas à me contacter !';
+							echo get_field('contact_cta_text') ?: 'Si tu as des questions ? N\'hésite pas à me contacter !';
 						} else {
-							echo 'Si tu as des questions ? N\'hésites pas à me contacter !';
+							echo 'Si tu as des questions ? N\'hésite pas à me contacter !';
 						}
 						?>
 					</p>
