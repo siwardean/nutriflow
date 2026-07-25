@@ -9,7 +9,7 @@
 get_header();
 
 // Get Customizer settings
-$calendly_url = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke/premiere-consultation' );
+$calendly_url = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke' );
 
 // Check if page has custom content from block editor
 $has_content = get_the_content() && trim( get_the_content() ) !== '';

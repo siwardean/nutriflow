@@ -204,6 +204,16 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				),
 			),
 			array(
+				'key' => 'field_contact_consultation_schedule',
+				'label' => 'Horaires par jour',
+				'name' => 'consultation_schedule',
+				'type' => 'wysiwyg',
+				'toolbar' => 'full',
+				'media_upload' => 0,
+				'instructions' => 'Un jour par ligne de liste ; le nom du lieu peut être un lien vers le site du centre.',
+				'default_value' => '<ul class="nf-schedule"><li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li><li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li><li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li></ul>',
+			),
+			array(
 				'key' => 'field_contact_cta_text',
 				'label' => 'Texte d\'Appel à l\'Action',
 				'name' => 'contact_cta_text',
@@ -438,6 +448,16 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				'type' => 'wysiwyg',
 				'toolbar' => 'full',
 				'instructions' => 'Horaires, adresse, téléphone, email',
+			),
+			array(
+				'key' => 'field_accomp_consultation_schedule',
+				'label' => 'Horaires par jour',
+				'name' => 'consultation_schedule',
+				'type' => 'wysiwyg',
+				'toolbar' => 'full',
+				'media_upload' => 0,
+				'instructions' => 'Un jour par ligne de liste ; le nom du lieu peut être un lien vers le site du centre.',
+				'default_value' => '<ul class="nf-schedule"><li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li><li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li><li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li></ul>',
 			),
 			array(
 				'key' => 'field_location_image',

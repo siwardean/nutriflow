@@ -9,7 +9,7 @@
 
 if ( ! defined( 'NUTRIFLOW_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'NUTRIFLOW_VERSION', '0.1.0' );
+	define( 'NUTRIFLOW_VERSION', '0.2.0' );
 }
 
 /**
@@ -103,6 +103,14 @@ function nutriflow_scripts() {
 	// wp_enqueue_style( 'nutriflow-style', get_template_directory_uri() . '/assets/css/style.css', array(), NUTRIFLOW_VERSION );
 	// javascript.
 	// wp_enqueue_script( 'nutriflow-script', get_template_directory_uri() . '/assets/js/script.min.js', array( 'jquery' ), NUTRIFLOW_VERSION, true );
+
+	// Calendly : widget popup sur tous les liens calendly.com (fallback : ouverture en nouvel onglet si le script est bloqué).
+	wp_enqueue_style( 'calendly-widget', 'https://assets.calendly.com/assets/external/widget.css', array(), null );
+	wp_enqueue_script( 'calendly-widget', 'https://assets.calendly.com/assets/external/widget.js', array(), null, true );
+	wp_add_inline_script(
+		'calendly-widget',
+		"document.addEventListener('click',function(e){var l=e.target.closest('a[href*=\"calendly.com\"]');if(!l||typeof Calendly==='undefined')return;e.preventDefault();Calendly.initPopupWidget({url:l.href});});"
+	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -391,6 +399,31 @@ add_action( 'init', 'nutriflow_register_block_pattern_category' );
  */
 function nutriflow_get_option( $option, $default = '' ) {
 	return get_theme_mod( 'nutriflow_' . $option, $default );
+}
+
+/**
+ * Migration ponctuelle : l'ancienne URL Calendly (lien direct "première consultation")
+ * stockée dans le Customizer est remplacée par la page Calendly principale,
+ * qui liste désormais tous les types de consultation.
+ */
+function nutriflow_migrate_calendly_url() {
+	$stored = get_theme_mod( 'nutriflow_calendly_url' );
+	if ( $stored && false !== strpos( $stored, 'calendly.com/fl-vanhecke/premiere-consultation' ) ) {
+		set_theme_mod( 'nutriflow_calendly_url', 'https://calendly.com/fl-vanhecke' );
+	}
+}
+add_action( 'init', 'nutriflow_migrate_calendly_url' );
+
+/**
+ * Horaires de consultation par défaut (lieux par jour), utilisés comme fallback
+ * du champ éditable "consultation_schedule" sur les pages Accompagnement et Contact.
+ */
+function nutriflow_default_schedule_html() {
+	return '<ul class="nf-schedule">'
+		. '<li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li>'
+		. '<li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li>'
+		. '<li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li>'
+		. '</ul>';
 }
 
 /**

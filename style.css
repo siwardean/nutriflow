@@ -2589,3 +2589,83 @@ img.nf-slide-in-up {
 .nf-animate-delay-4 {
 	transition-delay: 0.6s;
 }
+
+/* ==========================================================================
+   Lieux de consultation : horaires par jour + carte Google Maps
+   ========================================================================== */
+.nf-schedule {
+	list-style: none;
+	margin: 0 0 1rem;
+	padding: 0;
+}
+
+.nf-schedule li {
+	color: var(--nf-dark-blue);
+	font-size: 1rem;
+	line-height: 1.6;
+	margin: 0 0 0.75rem;
+}
+
+.nf-schedule__day {
+	font-weight: 700;
+}
+
+.nf-schedule a {
+	color: var(--nf-dark-blue);
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+.nf-schedule a:hover {
+	color: var(--nf-light-green);
+}
+
+.nf-map {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.nf-map iframe {
+	flex: 1;
+	width: 100%;
+	min-height: 320px;
+	border: 0;
+	border-radius: 20px;
+	display: block;
+}
+
+/* Accompagnement : la carte remplace l'image de la section location */
+.nf-location__map {
+	display: flex;
+	padding: 2rem;
+}
+
+/* Contact : carte pleine largeur sous le contenu */
+.nf-contact__schedule {
+	margin: 0 0 2rem;
+}
+
+.nf-contact__map {
+	padding: 0 4rem 4rem;
+}
+
+.nf-contact__map iframe {
+	min-height: 380px;
+}
+
+@media (max-width: 1024px) {
+	.nf-contact__map {
+		padding: 0 2rem 3rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.nf-location__map {
+		padding: 1.5rem;
+	}
+
+	.nf-map iframe {
+		min-height: 280px;
+	}
+}

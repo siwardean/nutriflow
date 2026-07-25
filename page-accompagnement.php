@@ -9,7 +9,7 @@
 get_header();
 
 // Get Customizer settings
-$calendly_url  = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke/premiere-consultation' );
+$calendly_url  = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke' );
 $instagram_url = nutriflow_get_option( 'instagram_url', 'https://www.instagram.com/nutriflow.florence/' );
 $linkedin_url  = nutriflow_get_option( 'linkedin_url', 'https://www.linkedin.com/in/florence-van-hecke-30386712b/' );
 $phone         = nutriflow_get_option( 'phone', '+32 486 920 962' );
@@ -314,18 +314,10 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</h2>
 					<div class="nf-location__info nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
-						<?php 
-						$location_info = function_exists('get_field') ? get_field('location_info') : false;
-						if ( $location_info ) {
-							echo wp_kses_post( $location_info );
-						} else {
-							echo '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p>';
-							echo '<p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p>';
-							echo '<p>Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p>';
-							echo '<p><a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a></p>';
-							echo '<p><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></p>';
-						}
-						?>
+						<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p>
+						<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'schedule' ) ); ?>
+						<p><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></p>
+						<p><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></p>
 					</div>
 					<div class="nf-location__social nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
 						<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" aria-label="Instagram">
@@ -336,14 +328,8 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						</a>
 					</div>
 				</div>
-				<div class="nf-location__image">
-					<?php 
-					$location_image = function_exists('get_field') ? get_field('location_image') : false;
-					if ( $location_image ) : ?>
-						<img src="<?php echo esc_url( $location_image['url'] ); ?>" alt="<?php echo esc_attr( $location_image['alt'] ); ?>" class="nf-animate-on-scroll nf-slide-in-right" />
-					<?php else : ?>
-						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/location/cooking.jpg" alt="Préparation culinaire" class="nf-animate-on-scroll nf-slide-in-right" />
-					<?php endif; ?>
+				<div class="nf-location__map nf-animate-on-scroll nf-slide-in-right">
+					<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'map' ) ); ?>
 				</div>
 			</div>
 		</section>

@@ -41,7 +41,7 @@ function nutriflow_customize_register( $wp_customize ) {
 
 	// Calendly URL
 	$wp_customize->add_setting( 'nutriflow_calendly_url', array(
-		'default'           => 'https://calendly.com/fl-vanhecke/premiere-consultation',
+		'default'           => 'https://calendly.com/fl-vanhecke',
 		'sanitize_callback' => 'esc_url_raw',
 		'transport'         => 'refresh',
 	) );
@@ -50,6 +50,20 @@ function nutriflow_customize_register( $wp_customize ) {
 		'label'    => __( 'Calendly URL', 'nutriflow' ),
 		'section'  => 'nutriflow_settings',
 		'type'     => 'url',
+	) );
+
+	// Google Maps embed URL (carte des lieux de consultation)
+	$wp_customize->add_setting( 'nutriflow_map_embed_url', array(
+		'default'           => 'https://www.google.com/maps?q=Clinica%20Vital%2C%20Chauss%C3%A9e%20de%20Wavre%20133%2C%201050%20Ixelles&z=15&output=embed',
+		'sanitize_callback' => 'esc_url_raw',
+		'transport'         => 'refresh',
+	) );
+
+	$wp_customize->add_control( 'nutriflow_map_embed_url', array(
+		'label'       => __( 'Google Maps embed URL', 'nutriflow' ),
+		'description' => __( 'URL de la carte des lieux de consultation (format Google Maps avec &output=embed).', 'nutriflow' ),
+		'section'     => 'nutriflow_settings',
+		'type'        => 'url',
 	) );
 
 	// Instagram URL

@@ -13,7 +13,7 @@
 
 	<?php
 	// Get Customizer settings
-	$calendly_url  = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke/premiere-consultation' );
+	$calendly_url  = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke' );
 	$instagram_url = nutriflow_get_option( 'instagram_url', 'https://www.instagram.com/nutriflow.florence/' );
 	$linkedin_url  = nutriflow_get_option( 'linkedin_url', 'https://www.linkedin.com/in/florence-van-hecke-30386712b/' );
 	$phone         = nutriflow_get_option( 'phone', '+32 486 920 962' );

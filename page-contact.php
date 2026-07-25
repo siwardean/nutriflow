@@ -9,7 +9,7 @@
 get_header();
 
 // Get Customizer settings
-$calendly_url = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke/premiere-consultation' );
+$calendly_url = nutriflow_get_option( 'calendly_url', 'https://calendly.com/fl-vanhecke' );
 $phone        = nutriflow_get_option( 'phone', '+32 486 920 962' );
 $email        = nutriflow_get_option( 'email', 'fl.vanhecke@gmail.com' );
 
@@ -71,14 +71,6 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 							echo '<li>à Ixelles ou en visio</li>';
 						}
 						
-						// Horaires
-						$contact_schedule = function_exists('get_field') ? get_field('contact_schedule') : false;
-						if ( $contact_schedule ) {
-							echo '<li>' . esc_html( $contact_schedule ) . '</li>';
-						} else {
-							echo '<li>Le mercredi de 8h30 à 18h30 à la Clinica Vital près de la place Jourdan à Ixelles et les jeudi et vendredi en visio</li>';
-						}
-						
 						// Téléphone
 						$contact_phone = function_exists('get_field') ? get_field('contact_phone') : false;
 						if ( $contact_phone ) {
@@ -97,7 +89,11 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</ul>
-					
+
+					<div class="nf-contact__schedule nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
+						<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'schedule' ) ); ?>
+					</div>
+
 					<p class="nf-contact__cta-text nf-animate-on-scroll nf-fade-in nf-animate-delay-3">
 						<?php 
 						if ( function_exists('get_field') ) {
@@ -118,6 +114,9 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</a>
 				</div>
+			</div>
+			<div class="nf-contact__map nf-animate-on-scroll nf-fade-in">
+				<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'map' ) ); ?>
 			</div>
 		</section>
 	<?php endif; ?>

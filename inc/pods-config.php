@@ -742,6 +742,13 @@ function nutriflow_get_pods_fields_config() {
 					'file_type' => 'images',
 					'weight' => 2,
 				),
+				array(
+					'name' => 'consultation_schedule',
+					'label' => 'Horaires par jour',
+					'type' => 'wysiwyg',
+					'default_value' => '<ul class="nf-schedule"><li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li><li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li><li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li></ul>',
+					'weight' => 3,
+				),
 			),
 		),
 		
@@ -862,10 +869,10 @@ function nutriflow_get_pods_fields_config() {
 					'weight' => 3,
 				),
 				array(
-					'name' => 'contact_schedule',
-					'label' => 'Horaires',
-					'type' => 'text',
-					'default_value' => 'Le mercredi de 8h30 à 18h30 à la Clinica Vital près de la place Jourdan à Ixelles et les jeudi et vendredi en visio',
+					'name' => 'consultation_schedule',
+					'label' => 'Horaires par jour',
+					'type' => 'wysiwyg',
+					'default_value' => '<ul class="nf-schedule"><li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li><li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li><li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li></ul>',
 					'weight' => 4,
 				),
 				array(

@@ -27,7 +27,7 @@
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"nf-btn nf-btn--primary"} -->
-				<div class="wp-block-button nf-btn nf-btn--primary"><a class="wp-block-button__link wp-element-button" href="https://calendly.com/fl-vanhecke/premiere-consultation" target="_blank">PRENDRE RDV</a></div>
+				<div class="wp-block-button nf-btn nf-btn--primary"><a class="wp-block-button__link wp-element-button" href="https://calendly.com/fl-vanhecke" target="_blank">PRENDRE RDV</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
