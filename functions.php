@@ -109,7 +109,7 @@ function nutriflow_scripts() {
 	wp_enqueue_script( 'calendly-widget', 'https://assets.calendly.com/assets/external/widget.js', array(), null, true );
 	wp_add_inline_script(
 		'calendly-widget',
-		"document.addEventListener('click',function(e){var l=e.target.closest('a[href*=\"calendly.com\"]');if(!l||typeof Calendly==='undefined')return;e.preventDefault();Calendly.initPopupWidget({url:l.href});});"
+		"document.addEventListener('click',function(e){var l=e.target.closest('a[href*=\"calendly.com\"]');if(!l||typeof Calendly==='undefined')return;e.preventDefault();var u=l.href+(l.href.indexOf('?')>-1?'&':'?')+'hide_gdpr_banner=1';Calendly.initPopupWidget({url:u});});"
 	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
