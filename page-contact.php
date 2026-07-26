@@ -113,10 +113,11 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						}
 						?>
 					</a>
+
+					<div class="nf-contact__map nf-animate-on-scroll nf-fade-in">
+						<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'map' ) ); ?>
+					</div>
 				</div>
-			</div>
-			<div class="nf-contact__map nf-animate-on-scroll nf-fade-in">
-				<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'map' ) ); ?>
 			</div>
 		</section>
 	<?php endif; ?>
