@@ -62,31 +62,27 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</h2>
 					
 					<ul class="nf-contact__list nf-animate-on-scroll nf-fade-in nf-animate-delay-2">
-						<?php 
-						// Lieu
-						$contact_location = function_exists('get_field') ? get_field('contact_location') : false;
+						<?php
+						$icon_pin   = '<span class="nf-contact__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>';
+						$icon_phone = '<span class="nf-contact__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>';
+						$icon_mail  = '<span class="nf-contact__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span>';
+
+						// Lieu : généré depuis les lieux de consultation et la visio (ex. "à Ixelles ou en visio")
+						$contact_location = nutriflow_locations_intro();
 						if ( $contact_location ) {
-							echo '<li>' . esc_html( $contact_location ) . '</li>';
-						} else {
-							echo '<li>à Ixelles ou en visio</li>';
+							$contact_location = mb_strtoupper( mb_substr( $contact_location, 0, 1 ) ) . mb_substr( $contact_location, 1 );
+							echo '<li>' . $icon_pin . '<span>' . esc_html( $contact_location ) . '</span></li>';
 						}
-						
+
 						// Téléphone
 						$contact_phone = function_exists('get_field') ? get_field('contact_phone') : false;
-						if ( $contact_phone ) {
-							$phone_clean = preg_replace( '/[^0-9+]/', '', $contact_phone );
-							echo '<li><a href="tel:' . esc_attr( $phone_clean ) . '">' . esc_html( $contact_phone ) . '</a></li>';
-						} else {
-							echo '<li><a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ) . '">' . esc_html( $phone ) . '</a></li>';
-						}
-						
+						$contact_phone = $contact_phone ? $contact_phone : $phone;
+						echo '<li><a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $contact_phone ) ) . '">' . $icon_phone . '<span>' . esc_html( $contact_phone ) . '</span></a></li>';
+
 						// Email
 						$contact_email = function_exists('get_field') ? get_field('contact_email') : false;
-						if ( $contact_email ) {
-							echo '<li><a href="mailto:' . esc_attr( $contact_email ) . '">' . esc_html( $contact_email ) . '</a></li>';
-						} else {
-							echo '<li><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></li>';
-						}
+						$contact_email = $contact_email ? $contact_email : $email;
+						echo '<li><a href="mailto:' . esc_attr( $contact_email ) . '">' . $icon_mail . '<span>' . esc_html( $contact_email ) . '</span></a></li>';
 						?>
 					</ul>
 

@@ -9,7 +9,7 @@
 
 if ( ! defined( 'NUTRIFLOW_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'NUTRIFLOW_VERSION', '0.2.0' );
+	define( 'NUTRIFLOW_VERSION', '0.3.0' );
 }
 
 /**
@@ -112,6 +112,13 @@ function nutriflow_scripts() {
 		"document.addEventListener('click',function(e){var l=e.target.closest('a[href*=\"calendly.com\"]');if(!l||typeof Calendly==='undefined')return;e.preventDefault();var u=l.href+(l.href.indexOf('?')>-1?'&':'?')+'hide_gdpr_banner=1';Calendly.initPopupWidget({url:u});});"
 	);
 
+	// Carte des lieux de consultation (Leaflet + OpenStreetMap) sur les pages Contact et Accompagnement.
+	if ( is_page_template( array( 'page-contact.php', 'page-accompagnement.php' ) ) ) {
+		wp_enqueue_style( 'leaflet', 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css', array(), '1.9.4' );
+		wp_enqueue_script( 'leaflet', 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js', array(), '1.9.4', true );
+		wp_enqueue_script( 'nutriflow-consultation-map', get_template_directory_uri() . '/assets/js/consultation-map.js', array( 'leaflet' ), NUTRIFLOW_VERSION, true );
+	}
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -209,6 +216,7 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/pods-config.php';
 require get_template_directory() . '/inc/pods-helpers.php';
 require get_template_directory() . '/inc/pods-migration-data.php';
+require get_template_directory() . '/inc/consultation-locations.php';
 require get_template_directory() . '/inc/seo.php';
 
 /**
@@ -289,6 +297,7 @@ function nutriflow_filter_pods_groups_by_page_template( $groups, $pod_type, $pod
 		// Page Contact
 		$allowed_groups = array(
 			'contact',
+			'contact_lieux',
 		);
 	}
 	
@@ -311,7 +320,7 @@ function nutriflow_filter_pods_groups_by_page_template( $groups, $pod_type, $pod
 		$allowed_field_prefixes = array( 'intro_', 'gallery_', 'story_', 'formations_', 'sport_title', 'sport_content' );
 	} elseif ( $page_template === 'page-contact.php' ) {
 		// Page Contact
-		$allowed_field_prefixes = array( 'contact_image', 'contact_title', 'contact_subtitle', 'contact_location', 'contact_schedule', 'contact_phone', 'contact_email', 'contact_cta_text', 'contact_button_text' );
+		$allowed_field_prefixes = array( 'contact_image', 'contact_title', 'contact_subtitle', 'lieu_', 'visio_', 'contact_phone', 'contact_email', 'contact_cta_text', 'contact_button_text' );
 	}
 	
 	// Si aucun template spécifique n'est détecté, retourner tous les groupes
@@ -415,18 +424,6 @@ function nutriflow_migrate_calendly_url() {
 add_action( 'init', 'nutriflow_migrate_calendly_url' );
 
 /**
- * Horaires de consultation par défaut (lieux par jour), utilisés comme fallback
- * du champ éditable "consultation_schedule" sur les pages Accompagnement et Contact.
- */
-function nutriflow_default_schedule_html() {
-	return '<ul class="nf-schedule">'
-		. '<li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li>'
-		. '<li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li>'
-		. '<li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li>'
-		. '</ul>';
-}
-
-/**
  * Replace "sportif" with "sportif·ve" for inclusive content on Contenu page
  */
 function nutriflow_replace_sportif_inclusive( $content ) {
@@ -466,7 +463,7 @@ function nutriflow_init_pricing_defaults( $post_id ) {
 	// Check if pricing fields are empty and initialize defaults
 	if ( ! nutriflow_get_field( 'pricing_card_1_title', $post_id ) ) {
 		update_field( 'pricing_card_1_title', 'Première consultation de 1h15', $post_id );
-		update_field( 'pricing_card_1_price', '- 90 euros -', $post_id );
+		update_field( 'pricing_card_1_price', '- 80 euros -', $post_id );
 		update_field( 'pricing_card_1_items', '<ul><li><strong>Questionnaire</strong> préparatoire</li><li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li><li>Etablissement des <strong>objectifs</strong></li><li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li></ul>', $post_id );
 	}
 	
@@ -478,7 +475,7 @@ function nutriflow_init_pricing_defaults( $post_id ) {
 	
 	if ( ! nutriflow_get_field( 'pricing_card_3_title', $post_id ) ) {
 		update_field( 'pricing_card_3_title', 'Pack \'Accompagnement sur 3 mois\'', $post_id );
-		update_field( 'pricing_card_3_price', '<del>-255</del> 235 euros -', $post_id );
+		update_field( 'pricing_card_3_price', '<del>-245</del> 230 euros -', $post_id );
 		update_field( 'pricing_card_3_items', '<ul><li>Total de <strong>4 consultations</strong></li><li>Pour un <strong>changement ancré</strong> sur du long terme</li><li>Payable en plusieurs fois</li><li>Echanges sur whatsapp entre les consultations</li></ul>', $post_id );
 	}
 }

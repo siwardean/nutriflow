@@ -224,7 +224,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 				else : ?>
 					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-1">
 						<h3 class="nf-pricing-card__title">Première consultation de 1h15</h3>
-						<p class="nf-pricing-card__price">- 90 euros -</p>
+						<p class="nf-pricing-card__price">- 80 euros -</p>
 						<ul class="nf-pricing-card__list">
 							<li><strong>Questionnaire</strong> préparatoire</li>
 							<li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li>
@@ -242,7 +242,7 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 					</article>
 					<article class="nf-pricing-card nf-animate-on-scroll nf-slide-in-up nf-animate-delay-3 nf-pricing-card--flip-reverse">
 						<h3 class="nf-pricing-card__title">Pack 'Accompagnement sur 3 mois'</h3>
-						<p class="nf-pricing-card__price"><del>-255</del> 235 euros -</p>
+						<p class="nf-pricing-card__price"><del>-245</del> 230 euros -</p>
 						<ul class="nf-pricing-card__list">
 							<li>Total de <strong>4 consultations</strong></li>
 							<li>Pour un <strong>changement ancré</strong> sur du long terme</li>
@@ -314,7 +314,14 @@ $has_content = get_the_content() && trim( get_the_content() ) !== '';
 						?>
 					</h2>
 					<div class="nf-location__info nf-animate-on-scroll nf-fade-in nf-animate-delay-1">
-						<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p>
+						<?php
+						$nf_locations_summary = nutriflow_locations_summary();
+						$nf_has_visio         = ! empty( nutriflow_get_visio_schedule() );
+						if ( $nf_locations_summary ) : ?>
+							<p>A <strong><?php echo esc_html( $nf_locations_summary ); ?></strong><?php echo $nf_has_visio ? ' ou en visio' : ''; ?></p>
+						<?php elseif ( $nf_has_visio ) : ?>
+							<p>En <strong>visio</strong></p>
+						<?php endif; ?>
 						<?php get_template_part( 'template-parts/consultation-locations', null, array( 'show' => 'schedule' ) ); ?>
 						<p><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></p>
 						<p><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></p>

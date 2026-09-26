@@ -294,7 +294,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 		$data_to_save['pricing_card_1_title'] = 'Première consultation de 1h15';
 	}
 	if ( ! $pod->field( 'pricing_card_1_price' ) ) {
-		$data_to_save['pricing_card_1_price'] = '- 90 euros -';
+		$data_to_save['pricing_card_1_price'] = '- 80 euros -';
 	}
 	if ( ! $pod->field( 'pricing_card_1_items' ) ) {
 		$data_to_save['pricing_card_1_items'] = '<ul><li><strong>Questionnaire</strong> préparatoire</li><li><strong>Analyse</strong> des 3 piliers : alimentation, hygiène de vie et supplémentation</li><li>Etablissement des <strong>objectifs</strong></li><li><strong>Premier bilan</strong> nutritionnel et conseils adaptés</li></ul>';
@@ -316,7 +316,7 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 		$data_to_save['pricing_card_3_title'] = 'Pack \'Accompagnement sur 3 mois\'';
 	}
 	if ( ! $pod->field( 'pricing_card_3_price' ) ) {
-		$data_to_save['pricing_card_3_price'] = '<del>-255</del> 235 euros -';
+		$data_to_save['pricing_card_3_price'] = '<del>-245</del> 230 euros -';
 	}
 	if ( ! $pod->field( 'pricing_card_3_items' ) ) {
 		$data_to_save['pricing_card_3_items'] = '<ul><li>Total de <strong>4 consultations</strong></li><li>Pour un <strong>changement ancré</strong> sur du long terme</li><li>Payable en plusieurs fois</li><li>Echanges sur whatsapp entre les consultations</li></ul>';
@@ -422,7 +422,7 @@ function nutriflow_prefill_apropos_fields( $page_id ) {
 		$data_to_save['sport_title'] = 'Le sport comme source de bien-être';
 	}
 	if ( ! $pod->field( 'sport_content' ) ) {
-		$data_to_save['sport_content'] = '<p>Le sport fait partie de ma vie depuis toujours. Enfant, j’ai exploré la danse, le tennis, la natation… puis, jeune adulte, la course à pied s’est imposée naturellement. Une pratique dont je ne peux aujourd’hui plus me passer. Avec le temps, j’ai aussi découvert le yoga, le vélo et d’autres formes de mouvement, chacune m’apportant un équilibre différent. En 2023, lors d’une pause professionnelle au Portugal, j’obtiens mon <strong>Yoga Teacher Training Certificate</strong>, renforçant encore ma vision globale du corps en mouvement.</p><p>En 2025, je franchis une nouvelle étape en devenant <strong>triathlète</strong>, avec la réalisation de mon premier triathlon olympique.</p><p>Au fil de ces expériences, une chose s’est imposée à moi : <strong>le sport est un formidable levier de bien-être</strong>, à condition d’être soutenu par une nutrition adaptée. Que l’on débute une activité physique, que l’on s’entraîne régulièrement ou que l’on vise la performance, l’alimentation joue un rôle central dans l’énergie, la récupération, la prévention des blessures et l’équilibre hormonal.</p><p>Sans un apport nutritionnel adéquat, le sport peut parfois devenir contre-productif : fatigue persistante, baisse de performance, troubles digestifs, dérèglements du cycle, blessures à répétition, ou encore une relation compliquée à l’alimentation et au corps. Chez certain·es sportif·ves, on observe également des risques plus sérieux comme le <strong>RED-S</strong> (syndrome de déficit énergétique relatif) ou des <strong>troubles du comportement alimentaire</strong>, souvent liés à une méconnaissance des besoins réels du corps.</p><p>C’est là que la nutrithérapie prend tout son sens. Mon approche en nutrition sportive vise à <strong>accompagner le corps</strong>, pas à le contraindre. Donner les bons apports au bon moment, comprendre ses besoins spécifiques, soutenir la récupération et préserver la santé sur le long terme.</p>';
+		$data_to_save['sport_content'] = '<p>Le sport fait partie de ma vie depuis toujours. Enfant, j’ai exploré la danse, le tennis, la natation… puis, jeune adulte, la course à pied s’est imposée naturellement. Une pratique dont je ne peux aujourd’hui plus me passer. Avec le temps, j’ai aussi découvert le yoga, le vélo et d’autres formes de mouvement, chacune m’apportant un équilibre différent. En 2023, lors d’une pause professionnelle au Portugal, j’obtiens mon <strong>Yoga Teacher Training Certificate</strong>, renforçant encore ma vision globale du corps en mouvement.<br>En 2025, je franchis une nouvelle étape en devenant <strong>triathlète</strong>, avec la réalisation de mon premier triathlon olympique.</p><p>Au fil de ces expériences, une chose s’est imposée à moi : <strong>le sport est un formidable levier de bien-être</strong>, à condition d’être soutenu par une nutrition adaptée. Que l’on débute une activité physique, que l’on s’entraîne régulièrement ou que l’on vise la performance, l’alimentation joue un rôle central dans l’énergie, la récupération, la prévention des blessures et l’équilibre hormonal.</p><p>Sans un apport nutritionnel adéquat, le sport peut parfois devenir contre-productif : fatigue persistante, baisse de performance, troubles digestifs, dérèglements du cycle, blessures à répétition, ou encore une relation compliquée à l’alimentation et au corps. Chez certain·es sportif·ves, on observe également des risques plus sérieux comme le <strong>RED-S</strong> (syndrome de déficit énergétique relatif) ou des <strong>troubles du comportement alimentaire</strong>, souvent liés à une méconnaissance des besoins réels du corps.</p><p>C’est là que la nutrithérapie prend tout son sens. Mon approche en nutrition sportive vise à <strong>accompagner le corps</strong>, pas à le contraindre. Donner les bons apports au bon moment, comprendre ses besoins spécifiques, soutenir la récupération et préserver la santé sur le long terme.</p>';
 	}
 	
 	if ( ! empty( $data_to_save ) ) {
@@ -460,18 +460,15 @@ function nutriflow_prefill_contact_fields( $page_id ) {
 	}
 	
 	// Contact Information - Pré-remplir avec les valeurs par défaut
-	if ( ! $pod->field( 'contact_location' ) ) {
-		$pod->save( array( 'contact_location' => 'à Ixelles ou en visio' ) );
-	}
-	if ( ! $pod->field( 'contact_schedule' ) ) {
-		$pod->save( array( 'contact_schedule' => 'Le mercredi de 8h30 à 18h30 à la Clinica Vital près de la place Jourdan à Ixelles et les jeudi et vendredi en visio' ) );
-	}
 	if ( ! $pod->field( 'contact_phone' ) ) {
 		$pod->save( array( 'contact_phone' => '+32 486 920 962' ) );
 	}
 	if ( ! $pod->field( 'contact_email' ) ) {
 		$pod->save( array( 'contact_email' => 'fl.vanhecke@gmail.com' ) );
 	}
+
+	// Lieux de consultation (liste des horaires + carte)
+	nutriflow_seed_location_fields();
 }
 
 // Hook pour exécuter la migration automatiquement (décommenter pour l'activer)

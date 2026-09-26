@@ -12,6 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Version de la configuration des champs Pods.
+ * À incrémenter à chaque ajout/renommage de champ pour relancer nutriflow_setup_pods_fields().
+ */
+define( 'NUTRIFLOW_PODS_FIELDS_VERSION', '4' );
+
+/**
  * Check if a field name is reserved
  */
 function nutriflow_is_reserved_field_name( $name ) {
@@ -32,6 +38,42 @@ function nutriflow_is_reserved_field_name( $name ) {
 }
 
 /**
+ * Supprime les définitions de champs en double (même nom sur le pod "page", on garde la plus ancienne)
+ * et les champs obsolètes qui ne sont plus affichés par les templates, ainsi que les valeurs
+ * devenues orphelines de ces champs obsolètes.
+ */
+function nutriflow_cleanup_pods_fields( $pod_id ) {
+	// Horaires en HTML libre, remplacés par les champs structurés "Lieux de consultation"
+	// de la page Contact (voir inc/consultation-locations.php)
+	// "contact_location" ("à Ixelles ou en visio") est désormais généré depuis ces mêmes champs.
+	$obsolete_fields = array( 'contact_schedule', 'consultation_schedule', 'contact_consultation_schedule', 'contact_location' );
+
+	$field_posts = get_posts( array(
+		'post_type'      => '_pods_field',
+		'post_parent'    => $pod_id,
+		'post_status'    => 'any',
+		'posts_per_page' => -1,
+		'orderby'        => 'ID',
+		'order'          => 'ASC',
+	) );
+	
+	$seen = array();
+	foreach ( $field_posts as $field_post ) {
+		if ( isset( $seen[ $field_post->post_name ] ) || in_array( $field_post->post_name, $obsolete_fields, true ) ) {
+			wp_delete_post( $field_post->ID, true );
+			continue;
+		}
+		$seen[ $field_post->post_name ] = true;
+	}
+
+	// Les valeurs des champs obsolètes ne sont plus lues par aucun template ni affichées
+	// dans l'admin : on les retire pour ne pas laisser de contenu mort en base.
+	foreach ( $obsolete_fields as $obsolete_field ) {
+		delete_post_meta_by_key( $obsolete_field );
+	}
+}
+
+/**
  * Register Pods fields for pages
  */
 function nutriflow_setup_pods_fields() {
@@ -43,7 +85,12 @@ function nutriflow_setup_pods_fields() {
 	if ( ! is_admin() ) {
 		return;
 	}
-	
+
+	// Ne s'exécute qu'une fois par version de la configuration (et non à chaque requête admin)
+	if ( get_option( 'nutriflow_pods_fields_version' ) === NUTRIFLOW_PODS_FIELDS_VERSION ) {
+		return;
+	}
+
 	try {
 		$api = pods_api();
 		
@@ -81,7 +128,16 @@ function nutriflow_setup_pods_fields() {
 	if ( empty( $pod_id ) ) {
 		return;
 	}
-	
+
+	// Nettoyer les doublons / champs obsolètes, puis recharger le pod sans le cache Pods
+	// (un cache périmé masque les champs existants et provoque la création de doublons)
+	nutriflow_cleanup_pods_fields( $pod_id );
+	$api->cache_flush_pods( $pod );
+	$pod = $api->load_pod( array( 'name' => 'page', 'bypass_cache' => true ) );
+	if ( empty( $pod ) || is_wp_error( $pod ) ) {
+		return;
+	}
+
 	// Définir tous les champs à créer
 	$fields = nutriflow_get_pods_fields_config();
 	
@@ -112,6 +168,7 @@ function nutriflow_setup_pods_fields() {
 						'pod_data' => $pod,
 						'name' => $group_name,
 						'label' => $group_data['group']['label'],
+						'description' => isset( $group_data['group']['description'] ) ? $group_data['group']['description'] : '',
 						'weight' => isset( $group_data['group']['weight'] ) ? $group_data['group']['weight'] : 0,
 					);
 					
@@ -143,19 +200,11 @@ function nutriflow_setup_pods_fields() {
 					'name' => $field_config['name'],
 				) );
 				
-				// Si le champ existe déjà, on récupère son ID pour la mise à jour
-				$existing_field_id = null;
+				// Si le champ existe déjà, on n'y touche pas (il a pu être ajusté dans l'admin Pods)
 				if ( ! empty( $existing_field ) ) {
-					if ( is_array( $existing_field ) && isset( $existing_field['id'] ) ) {
-						$existing_field_id = $existing_field['id'];
-					} elseif ( is_object( $existing_field ) && method_exists( $existing_field, 'get_id' ) ) {
-						$existing_field_id = $existing_field->get_id();
-					}
-					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-						error_log( 'Pods Field Already Exists: ' . $field_config['name'] . ' (ID: ' . $existing_field_id . ') - Will update' );
-					}
+					continue;
 				}
-				
+
 				$field_params = array(
 					'pod_data' => $pod,
 					'name' => $field_config['name'],
@@ -175,6 +224,11 @@ function nutriflow_setup_pods_fields() {
 					$field_params['options']['default_value'] = $field_config['default_value'];
 				}
 				
+				// Texte d'aide affiché sous le champ dans l'admin
+				if ( ! empty( $field_config['description'] ) ) {
+					$field_params['description'] = $field_config['description'];
+				}
+
 				// Assigner au groupe si spécifié
 				if ( $group_obj ) {
 					$field_params['group'] = $group_obj;
@@ -230,12 +284,7 @@ function nutriflow_setup_pods_fields() {
 					}
 				}
 				
-				// Ajouter l'ID si le champ existe déjà (pour mise à jour)
-				if ( $existing_field_id ) {
-					$field_params['id'] = $existing_field_id;
-				}
-				
-				// Sauvegarder le champ (création ou mise à jour)
+				// Créer le champ
 				try {
 					$result = $api->save_field( $field_params, true, false, true );
 					if ( is_wp_error( $result ) ) {
@@ -243,8 +292,7 @@ function nutriflow_setup_pods_fields() {
 						error_log( 'Pods Field Error: ' . $field_config['name'] . ' - ' . $result->get_error_message() );
 					} elseif ( $result ) {
 						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-							$action = $existing_field_id ? 'Updated' : 'Created';
-							error_log( 'Pods Field ' . $action . ' Successfully: ' . $field_config['name'] );
+							error_log( 'Pods Field Created Successfully: ' . $field_config['name'] );
 						}
 					}
 				} catch ( Exception $e ) {
@@ -258,6 +306,10 @@ function nutriflow_setup_pods_fields() {
 			continue; // Continuer avec le groupe suivant
 		}
 	}
+	
+	$api->cache_flush_pods( $pod );
+	nutriflow_seed_location_fields();
+	update_option( 'nutriflow_pods_fields_version', NUTRIFLOW_PODS_FIELDS_VERSION );
 }
 // Activation de la création automatique des champs Pods
 // Cette fonction s'exécute lorsque Pods est initialisé
@@ -623,7 +675,7 @@ function nutriflow_get_pods_fields_config() {
 					'name' => 'pricing_card_1_price',
 					'label' => 'Carte Tarif 1 - Prix',
 					'type' => 'wysiwyg',
-					'default_value' => '- 90 euros -',
+					'default_value' => '- 80 euros -',
 					'weight' => 11,
 				),
 				array(
@@ -667,7 +719,7 @@ function nutriflow_get_pods_fields_config() {
 					'name' => 'pricing_card_3_price',
 					'label' => 'Carte Tarif 3 - Prix',
 					'type' => 'wysiwyg',
-					'default_value' => '<del>-255</del> 235 euros -',
+					'default_value' => '<del>-245</del> 230 euros -',
 					'weight' => 31,
 				),
 				array(
@@ -741,13 +793,6 @@ function nutriflow_get_pods_fields_config() {
 					'file_format_type' => 'single',
 					'file_type' => 'images',
 					'weight' => 2,
-				),
-				array(
-					'name' => 'consultation_schedule',
-					'label' => 'Horaires par jour',
-					'type' => 'wysiwyg',
-					'default_value' => '<ul class="nf-schedule"><li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li><li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li><li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li></ul>',
-					'weight' => 3,
 				),
 			),
 		),
@@ -825,7 +870,7 @@ function nutriflow_get_pods_fields_config() {
 					'name' => 'sport_content',
 					'label' => 'Contenu Sport',
 					'type' => 'wysiwyg',
-					'default_value' => '<p>Le sport fait partie de ma vie depuis toujours. Enfant, j’ai exploré la danse, le tennis, la natation… puis, jeune adulte, la course à pied s’est imposée naturellement. Une pratique dont je ne peux aujourd’hui plus me passer. Avec le temps, j’ai aussi découvert le yoga, le vélo et d’autres formes de mouvement, chacune m’apportant un équilibre différent. En 2023, lors d’une pause professionnelle au Portugal, j’obtiens mon <strong>Yoga Teacher Training Certificate</strong>, renforçant encore ma vision globale du corps en mouvement.</p><p>En 2025, je franchis une nouvelle étape en devenant <strong>triathlète</strong>, avec la réalisation de mon premier triathlon olympique.</p><p>Au fil de ces expériences, une chose s’est imposée à moi : <strong>le sport est un formidable levier de bien-être</strong>, à condition d’être soutenu par une nutrition adaptée. Que l’on débute une activité physique, que l’on s’entraîne régulièrement ou que l’on vise la performance, l’alimentation joue un rôle central dans l’énergie, la récupération, la prévention des blessures et l’équilibre hormonal.</p><p>Sans un apport nutritionnel adéquat, le sport peut parfois devenir contre-productif : fatigue persistante, baisse de performance, troubles digestifs, dérèglements du cycle, blessures à répétition, ou encore une relation compliquée à l’alimentation et au corps. Chez certain·es sportif·ves, on observe également des risques plus sérieux comme le <strong>RED-S</strong> (syndrome de déficit énergétique relatif) ou des <strong>troubles du comportement alimentaire</strong>, souvent liés à une méconnaissance des besoins réels du corps.</p><p>C’est là que la nutrithérapie prend tout son sens. Mon approche en nutrition sportive vise à <strong>accompagner le corps</strong>, pas à le contraindre. Donner les bons apports au bon moment, comprendre ses besoins spécifiques, soutenir la récupération et préserver la santé sur le long terme.</p>',
+					'default_value' => '<p>Le sport fait partie de ma vie depuis toujours. Enfant, j’ai exploré la danse, le tennis, la natation… puis, jeune adulte, la course à pied s’est imposée naturellement. Une pratique dont je ne peux aujourd’hui plus me passer. Avec le temps, j’ai aussi découvert le yoga, le vélo et d’autres formes de mouvement, chacune m’apportant un équilibre différent. En 2023, lors d’une pause professionnelle au Portugal, j’obtiens mon <strong>Yoga Teacher Training Certificate</strong>, renforçant encore ma vision globale du corps en mouvement.<br>En 2025, je franchis une nouvelle étape en devenant <strong>triathlète</strong>, avec la réalisation de mon premier triathlon olympique.</p><p>Au fil de ces expériences, une chose s’est imposée à moi : <strong>le sport est un formidable levier de bien-être</strong>, à condition d’être soutenu par une nutrition adaptée. Que l’on débute une activité physique, que l’on s’entraîne régulièrement ou que l’on vise la performance, l’alimentation joue un rôle central dans l’énergie, la récupération, la prévention des blessures et l’équilibre hormonal.</p><p>Sans un apport nutritionnel adéquat, le sport peut parfois devenir contre-productif : fatigue persistante, baisse de performance, troubles digestifs, dérèglements du cycle, blessures à répétition, ou encore une relation compliquée à l’alimentation et au corps. Chez certain·es sportif·ves, on observe également des risques plus sérieux comme le <strong>RED-S</strong> (syndrome de déficit énergétique relatif) ou des <strong>troubles du comportement alimentaire</strong>, souvent liés à une méconnaissance des besoins réels du corps.</p><p>C’est là que la nutrithérapie prend tout son sens. Mon approche en nutrition sportive vise à <strong>accompagner le corps</strong>, pas à le contraindre. Donner les bons apports au bon moment, comprendre ses besoins spécifiques, soutenir la récupération et préserver la santé sur le long terme.</p>',
 					'weight' => 4,
 				),
 			),
@@ -862,20 +907,6 @@ function nutriflow_get_pods_fields_config() {
 					'weight' => 2,
 				),
 				array(
-					'name' => 'contact_location',
-					'label' => 'Lieu',
-					'type' => 'text',
-					'default_value' => 'à Ixelles ou en visio',
-					'weight' => 3,
-				),
-				array(
-					'name' => 'consultation_schedule',
-					'label' => 'Horaires par jour',
-					'type' => 'wysiwyg',
-					'default_value' => '<ul class="nf-schedule"><li><span class="nf-schedule__day">Mercredi</span> <span class="nf-schedule__time">8h30 – 18h30</span> — <a href="https://www.clinicavital.be" target="_blank" rel="noopener">Clinica Vital</a>, Chaussée de Wavre 133, 1050 Ixelles</li><li><span class="nf-schedule__day">Jeudi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li><li><span class="nf-schedule__day">Vendredi</span> <span class="nf-schedule__time">8h30 – 19h</span> — En visio</li></ul>',
-					'weight' => 4,
-				),
-				array(
 					'name' => 'contact_phone',
 					'label' => 'Numéro de téléphone',
 					'type' => 'text',
@@ -904,6 +935,17 @@ function nutriflow_get_pods_fields_config() {
 					'weight' => 8,
 				),
 			),
+		),
+
+		// Page Contact - Lieux de consultation (horaires par jour + carte, affichés aussi sur la page Accompagnement)
+		'contact_lieux' => array(
+			'group' => array(
+				'name' => 'contact_lieux',
+				'label' => 'Lieux de consultation (Page Contact)',
+				'description' => 'Alimente, sur les pages Contact et Accompagnement, les cartes des lieux (triées automatiquement par jour de la semaine), la carte géographique (repère par adresse, cadrage automatique) et la phrase « à Ixelles ou en visio ». Un lieu ou la visio laissés vides disparaissent de l\'affichage.',
+				'weight' => 310,
+			),
+			'fields' => nutriflow_location_pods_fields(),
 		),
 	);
 }

@@ -3,7 +3,7 @@ Theme Name: Nutriflow
 Author: SDM Digital Forge
 Author URI: https://github.com/siwardean
 Description: Nutriflow WordPress theme - Replicated from Canva design
-Version: 0.2.0
+Version: 0.3.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: nutriflow
@@ -2344,27 +2344,64 @@ body.mobile-nav-open .menu-toggle__bars span:nth-child(3) {
 	font-weight: 700;
 	color: var(--nf-dark-blue);
 	margin: 2.5rem 0 1.5rem;
+	padding-bottom: 0.6rem;
+	width: fit-content;
+	border-bottom: 3px solid var(--nf-light-green);
 }
 
+/* Infos de contact : lieu, téléphone, email, avec icônes */
 .nf-contact__list {
-	list-style: disc;
+	list-style: none;
 	margin: 0 0 2rem;
-	padding-left: 1.5rem;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
 	color: var(--nf-dark-blue);
 }
 
 .nf-contact__list li {
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
 	font-size: 1.05rem;
-	line-height: 1.8;
-	margin-bottom: 0.25rem;
+	font-weight: 600;
+	line-height: 1.4;
+	margin: 0;
 }
 
 .nf-contact__list a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.65rem;
+	color: var(--nf-dark-blue);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.nf-contact__list a span:last-child {
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s ease;
+}
+
+.nf-contact__list a:hover span:last-child {
+	border-bottom-color: var(--nf-light-green);
+}
+
+.nf-contact__icon {
+	flex: 0 0 auto;
+	display: grid;
+	place-items: center;
+	width: 2.2rem;
+	height: 2.2rem;
+	border-radius: 50%;
+	background: var(--nf-light-green);
 	color: var(--nf-dark-blue);
 }
 
-.nf-contact__list a:hover {
-	color: var(--nf-light-green);
+.nf-contact__icon svg {
+	width: 1.05rem;
+	height: 1.05rem;
 }
 
 .nf-contact__cta-text {
@@ -2593,31 +2630,134 @@ img.nf-slide-in-up {
 /* ==========================================================================
    Lieux de consultation : horaires par jour + carte Google Maps
    ========================================================================== */
-.nf-schedule {
+/* Lieux de consultation : une carte par lieu + une carte "En visio" */
+.nf-lieux {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	gap: 1.25rem;
+	margin: 0 0 2rem;
+	text-align: left;
+}
+
+.nf-lieu {
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+	padding: 1.5rem 1.5rem 1.35rem;
+	background: var(--nf-white);
+	border: 3px solid var(--nf-dark-blue);
+	border-radius: 20px;
+	color: var(--nf-dark-blue);
+}
+
+.nf-lieu__head {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.nf-lieu__icon {
+	flex: 0 0 auto;
+	display: grid;
+	place-items: center;
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 50%;
+	background: var(--nf-light-green);
+	color: var(--nf-dark-blue);
+}
+
+.nf-lieu__icon svg {
+	width: 1.3rem;
+	height: 1.3rem;
+}
+
+.nf-lieu__name {
+	margin: 0;
+	font-family: var(--font-title);
+	font-size: 1.35rem;
+	line-height: 1.2;
+	color: var(--nf-dark-blue);
+}
+
+.nf-lieu__name a {
+	color: inherit;
+	text-decoration: none;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s ease;
+}
+
+.nf-lieu__name a:hover {
+	border-bottom-color: var(--nf-light-green);
+}
+
+.nf-lieu__slots li {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	gap: 0.4rem 0.6rem;
+	margin: 0;
+}
+
+.nf-lieu__slots {
 	list-style: none;
-	margin: 0 0 1rem;
+	margin: 0;
 	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
 
-.nf-schedule li {
-	color: var(--nf-dark-blue);
-	font-size: 1rem;
-	line-height: 1.6;
-	margin: 0 0 0.75rem;
-}
-
-.nf-schedule__day {
+.nf-lieu__day {
+	flex: 0 0 auto;
+	display: inline-block;
+	white-space: nowrap;
+	padding: 0.2rem 0.65rem;
+	border-radius: 999px;
+	background: var(--nf-dark-blue);
+	color: var(--nf-white);
+	font-size: 0.78rem;
 	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
 }
 
-.nf-schedule a {
+.nf-lieu__time {
+	min-width: 0;
+	padding-top: 0.1rem;
+	font-size: 1.02rem;
+	font-weight: 600;
+}
+
+.nf-lieu__address {
+	margin: 0;
+	font-size: 0.98rem;
+	line-height: 1.55;
+	color: var(--nf-dark-blue);
+	opacity: 0.85;
+}
+
+.nf-lieu__link {
+	margin-top: auto;
+	align-self: flex-start;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding-bottom: 0.1rem;
+	border-bottom: 2px solid var(--nf-light-green);
 	color: var(--nf-dark-blue);
 	font-weight: 700;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
-.nf-schedule a:hover {
-	color: var(--nf-light-green);
+.nf-lieu__link svg {
+	width: 1rem;
+	height: 1rem;
+	transition: transform 0.2s ease;
+}
+
+.nf-lieu__link:hover svg {
+	transform: translate(2px, -2px);
 }
 
 .nf-map {
@@ -2631,6 +2771,24 @@ img.nf-slide-in-up {
 	border: 0;
 	border-radius: 20px;
 	display: block;
+}
+
+.nf-map__canvas {
+	position: relative;
+	z-index: 0;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	max-height: 480px;
+	border: 3px solid var(--nf-dark-blue);
+	border-radius: 20px;
+	overflow: hidden;
+	background: #e9e6df;
+}
+
+.nf-map .leaflet-popup-content {
+	font-family: inherit;
+	font-size: 0.95rem;
+	line-height: 1.5;
 }
 
 /* Accompagnement : la carte remplace l'image de la section location */
@@ -2655,7 +2813,8 @@ img.nf-slide-in-up {
 	margin: 2.5rem 0 0;
 }
 
-.nf-contact__map iframe {
+.nf-contact__map iframe,
+.nf-contact__map .nf-map__canvas {
 	aspect-ratio: 16 / 9;
 	max-height: 360px;
 }
@@ -2665,7 +2824,72 @@ img.nf-slide-in-up {
 		padding: 1.5rem;
 	}
 
-	.nf-map iframe {
+	.nf-map iframe,
+	.nf-map .nf-map__canvas {
 		aspect-ratio: 4 / 3;
 	}
+
+	.nf-lieux {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.nf-lieu {
+		padding: 1.25rem 1.25rem 1.1rem;
+	}
+}
+
+/* Accompagnement : les règles génériques de .nf-location (couleur, taille, marges sur tous
+   les descendants, contenu centré) sont neutralisées pour les cartes des lieux */
+.nf-location .nf-location__content .nf-location__info {
+	width: 100%;
+}
+
+.nf-location .nf-location__info .nf-lieux {
+	width: 100%;
+	margin: 0 0 1.5rem;
+	text-align: left;
+}
+
+.nf-location .nf-lieu .nf-lieu__head,
+.nf-location .nf-lieu .nf-lieu__slots,
+.nf-location .nf-lieu .nf-lieu__slots li,
+.nf-location .nf-lieu .nf-lieu__address,
+.nf-location .nf-lieu .nf-lieu__name,
+.nf-location .nf-lieu .nf-lieu__icon,
+.nf-location .nf-lieu .nf-lieu__icon svg,
+.nf-location .nf-lieu .nf-lieu__day,
+.nf-location .nf-lieu .nf-lieu__time,
+.nf-location .nf-lieu .nf-lieu__link svg {
+	margin: 0;
+}
+
+.nf-location .nf-lieu .nf-lieu__name {
+	font-size: 1.35rem;
+	line-height: 1.2;
+}
+
+.nf-location .nf-lieu .nf-lieu__day {
+	color: var(--nf-white);
+	font-size: 0.78rem;
+	line-height: 1.5;
+}
+
+.nf-location .nf-lieu .nf-lieu__time {
+	font-size: 1.02rem;
+	line-height: 1.4;
+}
+
+.nf-location .nf-lieu .nf-lieu__address {
+	font-size: 0.98rem;
+	line-height: 1.55;
+}
+
+.nf-location .nf-lieu .nf-lieu__link {
+	margin: auto 0 0;
+	line-height: 1.4;
+}
+
+.nf-location .nf-lieu .nf-lieu__link:hover {
+	color: var(--nf-dark-blue);
 }
