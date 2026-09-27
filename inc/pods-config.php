@@ -783,7 +783,7 @@ function nutriflow_get_pods_fields_config() {
 					'name' => 'location_info',
 					'label' => 'Informations Localisation',
 					'type' => 'wysiwyg',
-					'default_value' => '<p style="text-align: center;">A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p style="text-align: center;">Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p style="text-align: center;">Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p><p style="text-align: center;">Téléphone : +32 486 920 962</p><p style="text-align: center;">Email : fl.vanhecke@gmail.com</p>',
+					'default_value' => '<p style="text-align: center;">A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p style="text-align: center;">Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p style="text-align: center;">Le <strong>jeudi</strong> de 8h30 à 19h en visio</p><p style="text-align: center;">Téléphone : +32 486 920 962</p><p style="text-align: center;">Email : fl.vanhecke@gmail.com</p>',
 					'weight' => 1,
 				),
 				array(

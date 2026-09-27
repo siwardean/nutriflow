@@ -45,7 +45,7 @@ function nutriflow_default_locations() {
 
 /** Horaires en visio par défaut : une ligne par jour. */
 function nutriflow_default_visio_schedule() {
-	return "Jeudi 8h30 – 19h\nVendredi 8h30 – 19h";
+	return "Jeudi 8h30 – 19h";
 }
 
 /**

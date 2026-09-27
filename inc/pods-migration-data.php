@@ -358,13 +358,13 @@ function nutriflow_prefill_accompagnement_fields( $page_id ) {
 	
 	// Location Info (WYSIWYG) - Pré-remplir avec les valeurs par défaut
 	if ( ! $pod->field( 'location_info' ) ) {
-		$location_info = '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p>Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p>';
+		$location_info = '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p>Le <strong>jeudi</strong> de 8h30 à 19h en visio</p>';
 		$pod->save( array( 'location_info' => $location_info ) );
 	}
 	
 	// Location Info (WYSIWYG) - Pré-remplir avec les valeurs par défaut
 	if ( ! $pod->field( 'location_info' ) ) {
-		$location_info = '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p>Les <strong>jeudi</strong> et <strong>vendredi</strong> de 8h30 à 19h en visio</p>';
+		$location_info = '<p>A <strong>Ixelles (Clinica Vital)</strong> ou en visio</p><p>Le <strong>mercredi</strong> de 8h30 à 18h30 à la <strong>Clinica Vital</strong></p><p>Le <strong>jeudi</strong> de 8h30 à 19h en visio</p>';
 		$pod->save( array( 'location_info' => $location_info ) );
 	}
 }

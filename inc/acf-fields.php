@@ -305,7 +305,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				'name' => 'visio_horaires',
 				'type' => 'textarea',
 				'instructions' => 'Une ligne par jour, ex. : Jeudi 8h30 – 19h',
-				'default_value' => "Jeudi 8h30 – 19h\nVendredi 8h30 – 19h",
+				'default_value' => "Jeudi 8h30 – 19h",
 			),
 			array(
 				'key' => 'field_contact_cta_text',
